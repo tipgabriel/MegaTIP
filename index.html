@@ -3,232 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MegaTIP
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trello">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm0-4H9V7h2v6zm4 0h-2V7h2v6z"/>
-            <circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="none"/>
-            <line x1="12" y1="17" x2="12" y2="7" stroke="#fff" stroke-width="2"/>
-            <line x1="9" y1="10" x2="15" y2="10" stroke="#fff" stroke-width="2"/>
-            <line x1="9" y1="14" x2="15" y2="14" stroke="#fff" stroke-width="2"/>
-            <circle cx="12" cy="12" r="3" fill="#fff"/>
-        </svg>
-    </title>
+    <title>MegaTIP</title>
     <style>
-        /* --- Paleta de Cores --- */
-        :root {
-            --bg-dark: #171717;           /* Fundo Principal (Cor Solicitada) */
-            --bg-light: #242424;          /* Fundo de Conteúdo (Um pouco mais claro) */
-            --primary-color: #00A651;     /* Verde da Mega Sena (Destaque Principal) */
-            --accent-color: #FFC300;      /* Amarelo/Ouro (Destaque Secundário/Contraste) */
-            --error-color: #E74C3C;       /* Cor de Preço/Alerta */
-            --text-light: #f4f4f4;        /* Texto Claro para Fundo Escuro */
-            --text-dark: #cccccc;         /* Texto Secundário */
-            --border-color: #333333;      /* Borda escura sutil */
-        }
-
-        /* Reset Básico e Fundo Escuro */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-dark);
-            color: var(--text-dark);
-            transition: background-color 0.3s, color 0.3s;
+            background-color: #f4f4f4;
+            color: #333;
         }
 
-        /* --- Layout Geral --- */
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px 0;
-        }
-
-        .main-content, .numbers-section, .gallery-section {
-            background: var(--bg-light);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            margin-top: 30px;
-        }
-
-        /* --- Header --- */
+        /* HEADER */
         header {
-            background-color: var(--primary-color); /* Fundo Verde Destaque */
-            color: var(--text-light);
-            padding: 1rem 0;
+            background-color: #171717;
+            color: #fff;
+            padding: 1.5rem 0;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
-
         header h1 {
             margin: 0;
-            font-size: 2.2em;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* Espaçamento entre texto e SVG */
+            font-size: 2rem;
+            letter-spacing: 1px;
         }
-
         header h1 svg {
-            width: 30px;
-            height: 30px;
-            /* Ajusta a cor do SVG para branco para contraste */
-            stroke: var(--text-light);
-            fill: none; /* Garante que o trevo não tenha preenchimento interno */
+            margin-left: 10px;
         }
-
-        header h1 svg path,
-        header h1 svg circle,
-        header h1 svg line {
-            stroke: var(--text-light);
-        }
-
         header p {
-            font-size: 1.1em;
-            margin-top: 5px;
+            margin-top: 8px;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
-        /* --- Títulos --- */
+        /* CONTAINER */
+        .container {
+            width: 85%;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px 0;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
         h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
+            color: #171717;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
             margin-top: 30px;
-            font-size: 1.8em;
+            font-size: 1.5rem;
         }
 
-        /* --- Regras (Lista) --- */
+        /* REGRAS */
         .rules ul {
             list-style: none;
             padding: 0;
         }
         .rules ul li {
-            background: var(--bg-dark); /* Fundo escuro sutil para os itens */
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            padding: 15px;
-            border-left: 5px solid var(--primary-color);
-            border-radius: 6px;
-            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            background: #f8f9fa;
+            margin-bottom: 12px;
+            padding: 12px;
+            border-left: 5px solid #171717;
+            border-radius: 5px;
+            transition: background 0.3s;
         }
-
         .rules ul li:hover {
-            background: #2a2a2a;
-            transform: translateX(5px);
+            background: #eaeaea;
         }
 
-        /* --- Preço (Destaque) --- */
+        /* PREÇO */
         .price {
-            font-size: 1.8em;
+            font-size: 1.6em;
             font-weight: bold;
-            color: var(--error-color); /* Cor de alerta/diferente para destaque de preço */
+            color: #d9534f;
             text-align: center;
-            margin: 30px 0;
-            padding: 15px;
-            background: var(--accent-color); /* Fundo de alto contraste para o preço */
-            color: var(--bg-dark); /* Texto escuro no fundo claro */
-            border-radius: 8px;
+            margin: 25px 0;
         }
 
-        /* --- Números Sorteados --- */
+        /* NÚMEROS */
+        .numbers-section, .gallery-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
         .numbers-display {
-            font-size: 1.8em;
+            font-size: 2em;
             text-align: center;
             margin-top: 20px;
-            padding: 25px;
-            border: 3px dashed var(--accent-color);
-            background-color: var(--bg-dark);
+            padding: 20px;
+            border: 2px dashed #171717;
             border-radius: 10px;
             min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px; /* Espaço entre os números */
         }
-
         .numbers-display span {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
+            margin: 0 7px;
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            border-radius: 6px;
             font-weight: bold;
-            color: var(--bg-dark);
-            background-color: var(--text-light);
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 166, 81, 0.5); /* Sombra verde */
-            transition: background-color 0.3s;
         }
 
-        /* --- Galeria --- */
+        /* GALERIA */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
+            gap: 18px;
+            margin-top: 20px;
         }
         .gallery img {
             width: 100%;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            object-fit: cover;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .gallery img:hover {
-            transform: scale(1.03);
-            opacity: 0.9;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        /* --- Footer --- */
+        /* FOOTER */
         footer {
             text-align: center;
             padding: 20px;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: #171717;
+            color: #fff;
             margin-top: 40px;
-            border-top: 3px solid var(--primary-color);
+            font-size: 0.95rem;
         }
-
-        /* --- Responsividade --- */
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 10px 0;
-            }
-            header h1 {
-                font-size: 1.8em;
-            }
-            .main-content, .numbers-section, .gallery-section {
-                margin-top: 20px;
-            }
-            .price {
-                font-size: 1.5em;
-                margin: 20px 0;
-            }
-            .numbers-display {
-                font-size: 1.5em;
-                padding: 15px;
-                gap: 10px;
-            }
-            .numbers-display span {
-                width: 40px;
-                height: 40px;
-            }
+        footer p {
+            margin: 0;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>MegaTIP
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trello">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm0-4H9V7h2v6zm4 0h-2V7h2v6z"/>
+        <h1>MegaTIP 
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trello">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 
+                10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 
+                15H9v-2h2v2zm0-4H9V7h2v6zm4 0h-2V7h2v6z"/>
                 <circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="none"/>
                 <line x1="12" y1="17" x2="12" y2="7" stroke="#fff" stroke-width="2"/>
                 <line x1="9" y1="10" x2="15" y2="10" stroke="#fff" stroke-width="2"/>
@@ -280,21 +208,17 @@
                 <img src="https://via.placeholder.com/250x350?text=Bilhete+2" alt="Bilhete de Aposta 2">
                 <img src="https://via.placeholder.com/250x350?text=Bilhete+3" alt="Bilhete de Aposta 3">
                 <img src="https://via.placeholder.com/250x350?text=Bilhete+4" alt="Bilhete de Aposta 4">
-                </div>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; <span id="current-year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
+        <p>&copy; <span id="year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentYearElement = document.getElementById('current-year');
-            if (currentYearElement) {
-                currentYearElement.textContent = new Date().getFullYear();
-            }
-        });
+        // Atualiza automaticamente o ano no rodapé
+        document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
