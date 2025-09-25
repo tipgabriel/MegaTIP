@@ -1,220 +1,221 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MegaTIP</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MegaTIP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
 
-        /* HEADER */
-        header {
-            background-color: #171717;
-            color: #fff;
-            padding: 1.5rem 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            letter-spacing: 1px;
-        }
-        header h1 svg {
-            margin-left: 10px;
-        }
-        header p {
-            margin-top: 8px;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
+    /* HEADER */
+    header {
+      background-color: #171717;
+      color: #fff;
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    header h1 img {
+      margin-left: 10px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%; /* deixa sua logo arredondada */
+      object-fit: cover;  /* garante que a logo se ajuste certinha */
+    }
+    header p {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
 
-        /* CONTAINER */
-        .container {
-            width: 85%;
-            margin: auto;
-            overflow: hidden;
-            padding: 30px 0;
-        }
+    /* CONTAINER */
+    .container {
+      width: 85%;
+      margin: auto;
+      overflow: hidden;
+      padding: 30px 0;
+    }
 
-        /* MAIN CONTENT */
-        .main-content {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #171717;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 8px;
-            margin-top: 30px;
-            font-size: 1.5rem;
-        }
+    /* MAIN CONTENT */
+    .main-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #171717;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+      margin-top: 30px;
+      font-size: 1.5rem;
+    }
 
-        /* REGRAS */
-        .rules ul {
-            list-style: none;
-            padding: 0;
-        }
-        .rules ul li {
-            background: #f8f9fa;
-            margin-bottom: 12px;
-            padding: 12px;
-            border-left: 5px solid #171717;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .rules ul li:hover {
-            background: #eaeaea;
-        }
+    /* REGRAS */
+    .rules ul {
+      list-style: none;
+      padding: 0;
+    }
+    .rules ul li {
+      background: #f8f9fa;
+      margin-bottom: 12px;
+      padding: 12px;
+      border-left: 5px solid #171717;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .rules ul li:hover {
+      background: #eaeaea;
+    }
 
-        /* PREÇO */
-        .price {
-            font-size: 1.6em;
-            font-weight: bold;
-            color: #d9534f;
-            text-align: center;
-            margin: 25px 0;
-        }
+    /* PREÇO */
+    .price {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #d9534f;
+      text-align: center;
+      margin: 25px 0;
+    }
 
-        /* NÚMEROS */
-        .numbers-section, .gallery-section {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 30px;
-        }
-        .numbers-display {
-            font-size: 2em;
-            text-align: center;
-            margin-top: 20px;
-            padding: 20px;
-            border: 2px dashed #171717;
-            border-radius: 10px;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .numbers-display span {
-            margin: 0 7px;
-            padding: 8px 12px;
-            background-color: #f0f0f0;
-            border-radius: 6px;
-            font-weight: bold;
-        }
+    /* NÚMEROS */
+    .numbers-section, .gallery-section {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+    .numbers-display {
+      font-size: 2em;
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #171717;
+      border-radius: 10px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px; /* separa os números */
+    }
+    .numbers-display span {
+      padding: 10px 15px;
+      background-color: #f0f0f0;
+      border-radius: 6px;
+      font-weight: bold;
+      min-width: 45px;
+      text-align: center;
+    }
 
-        /* GALERIA */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 18px;
-            margin-top: 20px;
-        }
-        .gallery img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
+    /* GALERIA */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #171717;
-            color: #fff;
-            margin-top: 40px;
-            font-size: 0.95rem;
-        }
-        footer p {
-            margin: 0;
-        }
-    </style>
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #171717;
+      color: #fff;
+      margin-top: 40px;
+      font-size: 0.95rem;
+    }
+    footer p {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>MegaTIP 
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M32 8 C24 8, 16 16, 16 24 C16 32, 32 40, 32 40 C32 40, 48 32, 48 24 C48 16, 40 8, 32 8 Z"/>
-                <path d="M8 32 C8 24, 16 16, 24 16 C32 16, 40 32, 40 32 C40 32, 32 48, 24 48 C16 48, 8 40, 8 32 Z"/>
-                <path d="M32 56 C32 48, 16 40, 16 40 C16 40, 24 24, 24 24 C24 24, 32 8, 32 8 C40 8, 48 16, 48 24 C48 32, 32 40, 32 40 Z"/>
-                <path d="M56 32 C56 24, 48 16, 40 16 C32 16, 24 32, 24 32 C24 32, 32 48, 32 48 C40 48, 48 40, 48 32 Z"/>
-                <path d="M32 40 L32 60" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-        </h1>
-        <p>Sua chance de ser um milionário na Mega Sena da Virada 2025!</p>
-    </header>
+  <header>
+    <h1>
+      MegaTIP 
+      <img src="sua-logo.png" alt="Logo MegaTIP">
+    </h1>
+    <p>Sua chance de ser um milionário na Mega Sena da Virada 2025!</p>
+  </header>
 
-    <div class="container">
-        <div class="main-content">
-            <h2>Sobre a Mega Sena da Virada 2025 - MegaTIP</h2>
-            <p>Prepare-se para a maior premiação do ano com a MegaTIP! Junte-se ao nosso grupo e aumente suas chances de levar o grande prêmio da Mega Sena da Virada 2025.</p>
+  <div class="container">
+    <div class="main-content">
+      <h2>Sobre a Mega Sena da Virada 2025 - MegaTIP</h2>
+      <p>Prepare-se para a maior premiação do ano com a MegaTIP! Junte-se ao nosso grupo e aumente suas chances de levar o grande prêmio da Mega Sena da Virada 2025.</p>
 
-            <div class="price">
-                Valor Único para Participar: R$ 5,00
-            </div>
+      <div class="price">
+        Valor Único para Participar: R$ 5,00
+      </div>
 
-            <h2>Como Funciona (Nossas Regras)</h2>
-            <div class="rules">
-                <ul>
-                    <li>O dinheiro de todos os participantes ficará reunido e guardado por mim (o organizador).</li>
-                    <li>Serão realizadas diversas apostas únicas no valor de R$ 5,00 cada. O número de apostas dependerá do total arrecadado.</li>
-                    <li>Se vencermos em qualquer um dos jogos do grupo, seja qual for a cartela sortuda, o valor total do prêmio será dividido igualmente entre todos os participantes.</li>
-                    <li>Transparência total: todos os bilhetes de aposta serão disponibilizados para conferência na nossa galeria.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="numbers-section">
-            <h2>Números Sorteados da Mega Sena da Virada 2025</h2>
-            <p>Assim que o sorteio for realizado, os números vencedores serão exibidos aqui. Boa sorte a todos!</p>
-            <div class="numbers-display">
-                <span>??</span>
-                <span>??</span>
-                <span>??</span>
-                <span>??</span>
-                <span>??</span>
-                <span>??</span>
-            </div>
-        </div>
-
-        <div class="gallery-section">
-            <h2>Galeria de Bilhetes de Aposta</h2>
-            <p>Confira todos os bilhetes de aposta que foram realizados pelo nosso grupo. A transparência é a nossa prioridade!</p>
-            <div class="gallery">
-                <img src="https://via.placeholder.com/250x350?text=Bilhete+1" alt="Bilhete de Aposta 1">
-                <img src="https://via.placeholder.com/250x350?text=Bilhete+2" alt="Bilhete de Aposta 2">
-                <img src="https://via.placeholder.com/250x350?text=Bilhete+3" alt="Bilhete de Aposta 3">
-                <img src="https://via.placeholder.com/250x350?text=Bilhete+4" alt="Bilhete de Aposta 4">
-            </div>
-        </div>
+      <h2>Como Funciona (Nossas Regras)</h2>
+      <div class="rules">
+        <ul>
+          <li>O dinheiro de todos os participantes ficará reunido e guardado por mim (o organizador).</li>
+          <li>Serão realizadas diversas apostas únicas no valor de R$ 5,00 cada. O número de apostas dependerá do total arrecadado.</li>
+          <li>Se vencermos em qualquer um dos jogos do grupo, seja qual for a cartela sortuda, o valor total do prêmio será dividido igualmente entre todos os participantes.</li>
+          <li>Transparência total: todos os bilhetes de aposta serão disponibilizados para conferência na nossa galeria.</li>
+        </ul>
+      </div>
     </div>
 
-    <footer>
-        <p>&copy; <span id="year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
-    </footer>
+    <div class="numbers-section">
+      <h2>Números Sorteados da Mega Sena da Virada 2025</h2>
+      <p>Assim que o sorteio for realizado, os números vencedores serão exibidos aqui. Boa sorte a todos!</p>
+      <div class="numbers-display">
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+      </div>
+    </div>
 
-    <script>
-        // Atualiza automaticamente o ano no rodapé
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+    <div class="gallery-section">
+      <h2>Galeria de Bilhetes de Aposta</h2>
+      <p>Confira todos os bilhetes de aposta que foram realizados pelo nosso grupo. A transparência é a nossa prioridade!</p>
+      <div class="gallery">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+1" alt="Bilhete de Aposta 1">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+2" alt="Bilhete de Aposta 2">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+3" alt="Bilhete de Aposta 3">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+4" alt="Bilhete de Aposta 4">
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; <span id="year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
+  </footer>
+
+  <script>
+    // Atualiza automaticamente o ano no rodapé
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
