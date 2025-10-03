@@ -140,23 +140,61 @@
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
     .gallery img:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #007A32;
-      color: #fff;
-      margin-top: 40px;
-      font-size: 0.95rem;
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
-    footer p {
-      margin: 0;
+    .modal-content {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .close, .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      padding: 10px;
+    }
+    .close {
+      top: 20px;
+      right: 30px;
+      transform: none;
+      font-size: 2rem;
+    }
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    /* CONTADOR */
+    .counter {
+      margin-top: 15px;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -215,13 +253,75 @@
     </div>
   </div>
 
+  <!-- MODAL -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <span class="prev">&#10094;</span>
+    <img class="modal-content" id="modalImage">
+    <span class="next">&#10095;</span>
+    <div class="counter" id="counter"></div>
+  </div>
+
   <footer>
     <p>&copy; <span id="year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
   </footer>
 
   <script>
-    // Atualiza automaticamente o ano no rodapé
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.querySelector(".close");
+    const nextBtn = document.querySelector(".next");
+    const prevBtn = document.querySelector(".prev");
+    const counter = document.getElementById("counter");
+    const galleryImages = document.querySelectorAll(".gallery img");
+    let currentIndex = 0;
+
+    function updateModal() {
+      modalImg.src = galleryImages[currentIndex].src;
+      counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+    }
+
+    function openModal(index) {
+      currentIndex = index;
+      modal.style.display = "flex";
+      updateModal();
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      updateModal();
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      updateModal();
+    }
+
+    galleryImages.forEach((img, i) => {
+      img.addEventListener("click", () => openModal(i));
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    nextBtn.addEventListener("click", showNext);
+    prevBtn.addEventListener("click", showPrev);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (modal.style.display === "flex") {
+        if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowRight") showNext();
+        if (e.key === "ArrowLeft") showPrev();
+      }
+    });
   </script>
 </body>
 </html>
