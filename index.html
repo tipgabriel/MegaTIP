@@ -1,421 +1,227 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MegaTIP</title>
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="MegaTIP" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MegaTIP</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="MegaTIP" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
 
-    /* HEADER */
-    header {
-      background-color: #007A32;
-      color: #fff;
-      padding: 1.5rem 0;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      letter-spacing: 1px;
-    }
-    header h1 img {
-      margin-left: 10px;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%; /* deixa sua logo arredondada */
-      object-fit: cover;  /* garante que a logo se ajuste certinha */
-    }
-    header p {
-      margin-top: 8px;
-      font-size: 1.1rem;
-      color: #f5f5f5;
-    }
+    /* HEADER */
+    header {
+      background-color: #007A32;
+      color: #fff;
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    header h1 img {
+      margin-left: 10px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    header p {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      color: #f5f5f5;
+    }
 
-    /* CONTAINER */
-    .container {
-      width: 85%;
-      margin: auto;
-      overflow: hidden;
-      padding: 30px 0;
-    }
+    /* CONTAINER */
+    .container {
+      width: 85%;
+      margin: auto;
+      overflow: hidden;
+      padding: 30px 0;
+    }
 
-    /* MAIN CONTENT */
-    .main-content {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #171717;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 8px;
-      margin-top: 30px;
-      font-size: 1.5rem;
-    }
+    /* MAIN CONTENT */
+    .main-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #171717;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+      margin-top: 30px;
+      font-size: 1.5rem;
+    }
 
-    /* REGRAS */
-    .rules ul {
-      list-style: none;
-      padding: 0;
-    }
-    .rules ul li {
-      background: #f8f9fa;
-      margin-bottom: 12px;
-      padding: 12px;
-      border-left: 5px solid #171717;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .rules ul li:hover {
-      background: #eaeaea;
-    }
+    /* REGRAS */
+    .rules ul {
+      list-style: none;
+      padding: 0;
+    }
+    .rules ul li {
+      background: #f8f9fa;
+      margin-bottom: 12px;
+      padding: 12px;
+      border-left: 5px solid #171717;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .rules ul li:hover {
+      background: #eaeaea;
+    }
 
-    /* PREÇO */
-    .price {
-      font-size: 1.6em;
-      font-weight: bold;
-      color: #d9534f;
-      text-align: center;
-      margin: 25px 0;
-    }
+    /* PREÇO */
+    .price {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #d9534f;
+      text-align: center;
+      margin: 25px 0;
+    }
 
-    /* NÚMEROS */
-    .numbers-section, .gallery-section {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      margin-top: 30px;
-    }
-    .numbers-display {
-      font-size: 2em;
-      text-align: center;
-      margin-top: 20px;
-      padding: 20px;
-      border: 2px dashed #171717;
-      border-radius: 10px;
-      min-height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px; /* separa os números */
-    }
-    .numbers-display span {
-      padding: 10px 15px;
-      background-color: #f0f0f0;
-      border-radius: 6px;
-      font-weight: bold;
-      min-width: 45px;
-      text-align: center;
-    }
+    /* NÚMEROS */
+    .numbers-section, .gallery-section {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+    .numbers-display {
+      font-size: 2em;
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #171717;
+      border-radius: 10px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .numbers-display span {
+      padding: 10px 15px;
+      background-color: #f0f0f0;
+      border-radius: 6px;
+      font-weight: bold;
+      min-width: 45px;
+      text-align: center;
+    }
 
-    /* GALERIA */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-    .gallery img {
-      cursor: pointer;
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    /* REMOÇÃO DO 'transform: scale(1.05)' QUE CAUSAVA O PROBLEMA DE LAYOUT */
-    .gallery img:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Mantendo apenas o efeito de sombra */
-    }
+    /* GALERIA */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #007A32;
-      color: #fff;
-      margin-top: 40px;
-      font-size: 0.95rem;
-    }
-    footer p {
-      margin: 0;
-    }
-
-    /* --- LIGHTBOX (Modal da Galeria) --- */
-
-    /* Container principal, cobre a tela toda */
-    .lightbox {
-      display: none; /* Escondido por padrão */
-      position: fixed;
-      z-index: 1000; /* Garante que fique acima de tudo */
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro transparente */
-      overflow: auto;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    /* Imagem dentro do lightbox */
-    .lightbox-content {
-      position: relative;
-      max-width: 90%; /* Responsividade */
-      max-height: 90%; /* Responsividade */
-      margin: auto;
-      display: block;
-      transition: transform 0.3s ease;
-      /* Ocupa a altura máxima disponível para a imagem */
-    }
-    .lightbox-content img {
-        width: auto; /* Permite que a imagem se ajuste */
-        max-width: 100%;
-        max-height: 100vh; /* Ocupa a altura da tela (viewport height) */
-        display: block;
-        margin: auto;
-        border-radius: 8px;
-    }
-
-    /* Botão de Fechar (X) */
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #fff;
-      font-size: 40px;
-      font-weight: bold;
-      transition: 0.3s;
-      cursor: pointer;
-      z-index: 1001; /* Fica acima de tudo, inclusive da imagem */
-    }
-    .close:hover,
-    .close:focus {
-      color: #bbb;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    /* Botões de Avançar/Voltar (setas) */
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      margin-top: -50px;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-      background-color: rgba(0, 0, 0, 0.5); /* Fundo sutil */
-    }
-    .prev {
-      left: 0;
-      border-radius: 3px 0 0 3px;
-    }
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
-    .prev:hover, .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Opcional: Estilo para telas menores (mobile) */
-    @media only screen and (max-width: 700px) {
-        /* Ajusta o tamanho da imagem no mobile para não ser grande demais */
-        .lightbox-content img {
-            max-height: 90vh; /* Ajusta para mobile */
-            max-width: 95%; /* Garante margem */
-        }
-        /* Diminui o tamanho e posição dos botões no mobile */
-        .prev, .next, .close {
-            font-size: 28px;
-            padding: 10px;
-            top: 15px;
-        }
-        .close {
-             right: 10px;
-        }
-        .prev {
-            left: 5px;
-            top: 50%; /* Volta para o meio da altura */
-        }
-        .next {
-            right: 5px;
-            top: 50%; /* Volta para o meio da altura */
-        }
-    }
-  </style>
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #007A32;
+      color: #fff;
+      margin-top: 40px;
+      font-size: 0.95rem;
+    }
+    footer p {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>
-      MegaTIP 
-      <img src="MegaTIP.png" alt="Logo MegaTIP">
-    </h1>
-    <p>Sua chance de ser um milionário na Mega Sena da Virada 2025!</p>
-  </header>
+  <header>
+    <h1>
+      MegaTIP 
+      <img src="MegaTIP.png" alt="Logo MegaTIP">
+    </h1>
+    <p>Sua chance de ser um milionário na Mega Sena da Virada 2025!</p>
+  </header>
 
-  <div class="container">
-    <div class="main-content">
-      <h2>Sobre a MegaTIP — Mega Sena da Virada 2025</h2>
-      <p>Prepare-se para a maior premiação do ano. Participe do MegaTIP por R$ 5,00 e concorra à Mega da Virada 2025. Vagas limitadas — cada participante pode indicar apenas 1 pessoa.</p>
+  <div class="container">
+    <div class="main-content">
+      <h2>Sobre a MegaTIP — Mega Sena da Virada 2025</h2>
+      <p>Prepare-se para a maior premiação do ano. Participe do MegaTIP por R$ 5,00 e concorra à Mega da Virada 2025. Vagas limitadas — cada participante pode indicar apenas 1 pessoa.</p>
 
-      <div class="price">
-        Cota única: R$ 5,00 · 1 cota = 1 jogo (6 números)
-      </div>
+      <div class="price">
+        Cota única: R$ 5,00 · 1 cota = 1 jogo (6 números)
+      </div>
 
-      <h2><b></b>Como funciona (Regras)</b></h2>
-      <div class="rules">
-        <ul>
-          <li><b>Recolhimento:</b> o organizador reúne os valores e compra os bilhetes em apostas simples de 6 números.</li>
-          <li><b>Apostas:</b> cada cota corresponde a um bilhete (R$ 5,00). O número final de bilhetes dependerá do total arrecadado.</li>
-          <li><b>Divisão do prêmio:</b> se algum bilhete do grupo for premiado, o valor será dividido igualmente entre todas as cotas pagas.</li>
-          <li><b>Transparência:</b> todos os bilhetes serão fotografados e disponibilizados na galeria do grupo/site para conferência pública.</li>
-          <li><b>Indicação:</b> cada participante pode indicar apenas 1 pessoa de confiança. Vagas limitadas — confirme sua cota.</li>
-        </ul>
-      </div>
-    </div>
+      <h2><b></b>Como funciona (Regras)</b></h2>
+      <div class="rules">
+        <ul>
+          <li><b>Recolhimento:</b> o organizador reúne os valores e compra os bilhetes em apostas simples de 6 números.</li>
+          <li><b>Apostas:</b> cada cota corresponde a um bilhete (R$ 5,00). O número final de bilhetes dependerá do total arrecadado.</li>
+          <li><b>Divisão do prêmio:</b> se algum bilhete do grupo for premiado, o valor será dividido igualmente entre todas as cotas pagas.</li>
+          <li><b>Transparência:</b> todos os bilhetes serão fotografados e disponibilizados na galeria do grupo/site para conferência pública.</li>
+          <li><b>Indicação:</b> cada participante pode indicar apenas 1 pessoa de confiança. Vagas limitadas — confirme sua cota.</li>
+        </ul>
+      </div>
+    </div>
 
-    <div class="numbers-section">
-      <h2>Números Sorteados da Mega Sena da Virada 2025</h2>
-      <p>Assim que o sorteio acontecer, os números vencedores serão exibidos aqui. 🍀 Boa sorte a todos os participantes do <b>MegaTIP!</b></p>
-      <div class="numbers-display">
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-      </div>
-    </div>
+    <div class="numbers-section">
+      <h2>Números Sorteados da Mega Sena da Virada 2025</h2>
+      <p>Assim que o sorteio acontecer, os números vencedores serão exibidos aqui. 🍀 Boa sorte a todos os participantes do <b>MegaTIP!</b></p>
+      <div class="numbers-display">
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+        <span>??</span>
+      </div>
+    </div>
 
-    <div class="gallery-section">
-      <h2>Galeria de Bilhetes de Aposta</h2>
-      <p>Aqui ficam todos os bilhetes registrados pelo grupo. 📸 Transparência total: cada aposta feita será publicada nesta galeria para conferência pública.</p>
-      <div class="gallery">
-        <img class="gallery-img" src="https://via.placeholder.com/250x350?text=Bilhete+1" alt="Bilhete de Aposta 1">
-        <img class="gallery-img" src="https://via.placeholder.com/250x350?text=Bilhete+2" alt="Bilhete de Aposta 2">
-        <img class="gallery-img" src="https://via.placeholder.com/250x350?text=Bilhete+3" alt="Bilhete de Aposta 3">
-        <img class="gallery-img" src="https://via.placeholder.com/250x350?text=Bilhete+4" alt="Bilhete de Aposta 4">
-      </div>
-    </div>
-  </div>
+    <div class="gallery-section">
+      <h2>Galeria de Bilhetes de Aposta</h2>
+      <p>Aqui ficam todos os bilhetes registrados pelo grupo. 📸 Transparência total: cada aposta feita será publicada nesta galeria para conferência pública.</p>
+      <div class="gallery">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+1" alt="Bilhete de Aposta 1">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+2" alt="Bilhete de Aposta 2">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+3" alt="Bilhete de Aposta 3">
+        <img src="https://via.placeholder.com/250x350?text=Bilhete+4" alt="Bilhete de Aposta 4">
+      </div>
+    </div>
+  </div>
 
-    <div id="myLightbox" class="lightbox">
-    <span class="close" onclick="closeLightbox()">&times;</span>
-    
-    <div class="lightbox-content">
-      <img id="lightboxImage" src="" alt="Imagem Ampliada">
-    </div>
+  <footer>
+    <p>&copy; <span id="year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
+  </footer>
 
-    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>    
-    <a class="next" onclick="changeSlide(1)">&#10095;</a>  
-  </div>
-    <footer>
-    <p>&copy; <span id="year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
-  </footer>
-
-  <script>
-    // Atualiza automaticamente o ano no rodapé
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // --- LÓGICA DO LIGHTBOX EM JAVASCRIPT ---
-
-    let currentImageIndex;
-    const lightbox = document.getElementById('myLightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const galleryImages = document.querySelectorAll('.gallery-img'); // Seleciona todas as imagens da galeria
-
-    // 1. Abrir o Lightbox
-    function openLightbox(index) {
-        currentImageIndex = index;
-        lightbox.style.display = "flex"; // Usa 'flex' para centralizar
-        showSlide(currentImageIndex);
-        // Desativa o scroll do body (melhora usabilidade no modal)
-        document.body.style.overflow = 'hidden'; 
-    }
-
-    // 2. Fechar o Lightbox
-    function closeLightbox() {
-        lightbox.style.display = "none";
-        document.body.style.overflow = ''; // Restaura o scroll do body
-    }
-
-    // 3. Mostrar a imagem selecionada
-    function showSlide(index) {
-        if (index >= galleryImages.length) {
-            currentImageIndex = 0; // Vai para a primeira imagem
-        } else if (index < 0) {
-            currentImageIndex = galleryImages.length - 1; // Vai para a última imagem
-        } else {
-            currentImageIndex = index;
-        }
-
-        const src = galleryImages[currentImageIndex].src;
-        lightboxImage.src = src;
-        lightboxImage.alt = galleryImages[currentImageIndex].alt;
-    }
-
-    // 4. Mudar de slide (próxima/anterior)
-    function changeSlide(n) {
-        showSlide(currentImageIndex + n);
-    }
-
-    // 5. Adicionar listener de clique a todas as imagens da galeria
-    galleryImages.forEach((img, index) => {
-        img.addEventListener('click', () => {
-            openLightbox(index);
-        });
-    });
-
-    // 6. Fechar o lightbox ao clicar fora da imagem
-    lightbox.addEventListener('click', function(event) {
-        // Se o clique for no elemento lightbox em si (no fundo escuro) e não nos filhos (imagem/botões)
-        if (event.target === lightbox) {
-            closeLightbox();
-        }
-    });
-
-    // 7. Navegação pelo teclado (Setas e ESC)
-    document.addEventListener('keydown', function(event) {
-        if (lightbox.style.display === 'flex') {
-            switch (event.key) {
-                case 'ArrowLeft': // Seta para a esquerda
-                    changeSlide(-1);
-                    break;
-                case 'ArrowRight': // Seta para a direita
-                    changeSlide(1);
-                    break;
-                case 'Escape': // Tecla ESC
-                    closeLightbox();
-                    break;
-            }
-        }
-    });
-  </script>
+  <script>
+    // Atualiza automaticamente o ano no rodapé
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
