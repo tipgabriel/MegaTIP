@@ -305,89 +305,99 @@
     }
     </script>
 
-    <script>
-        // Atualizar copyright automaticamente
-        document.addEventListener('DOMContentLoaded', function() {
-            const year = new Date().getFullYear();
-            document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Todos os direitos reservados.`;
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Atualizar copyright automaticamente
+    const year = new Date().getFullYear();
+    document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Todos os direitos reservados.`;
+
+    // Galeria de bilhetes
+    const ticketsGallery = document.getElementById('tickets-gallery');
+    const loadMoreButton = document.getElementById('load-more');
+
+    // Lista de nomes para simular participantes do bolão
+    const participantNames = [
+        "Gabriel Santos", "Melissa Rocha", "Lucas Almeida", "Beatriz Costa", "Rafael Moreira",
+        "Juliana Prado", "Vinícius Oliveira", "Camila Duarte", "Pedro Martins", "Larissa Nunes",
+        "Felipe Andrade", "Isabela Ramos", "Tiago Melo", "Carla Freitas", "Eduardo Lima",
+        "Patrícia Souza", "Anderson Ribeiro", "Marina Lopes", "Rodrigo Teixeira", "Aline Castro"
+    ];
+
+    // Dados dos bilhetes
+    const sampleTickets = [
+        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+    ];
+
+    let displayedTickets = 3;
+
+    function displayTickets() {
+        ticketsGallery.innerHTML = '';
+
+        for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
+            const ticket = sampleTickets[i];
             
-            // Galeria de bilhetes
-            const ticketsGallery = document.getElementById('tickets-gallery');
-            const loadMoreButton = document.getElementById('load-more');
+            // Nome aleatório
+            const randomName = participantNames[Math.floor(Math.random() * participantNames.length)];
+
+            const ticketElement = document.createElement('div');
+            ticketElement.className = 'ticket card-hover';
+            ticketElement.innerHTML = `
+                <div class="ticket-stripes"></div>
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-bold text-lg">${ticket.event}</h3>
+                    <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
+                </div>
+                <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
+                <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
+                    <p class="text-sm mb-1">Números:</p>
+                    <p class="font-bold text-green-300">${ticket.numbers}</p>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span><i class="fas fa-user mr-1"></i>${randomName}</span>
+                    <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
+                </div>
+            `;
             
-            // Dados de exemplo para os bilhetes
-            const sampleTickets = [
-                { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 2, event: event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-            ];
-            
-            let displayedTickets = 3;
-            
-            function displayTickets() {
-                ticketsGallery.innerHTML = '';
-                
-                for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
-                    const ticket = sampleTickets[i];
-                    
-                    const ticketElement = document.createElement('div');
-                    ticketElement.className = 'ticket card-hover';
-                    ticketElement.innerHTML = `
-                        <div class="ticket-stripes"></div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="font-bold text-lg">${ticket.event}</h3>
-                            <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
-                        </div>
-                        <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
-                        <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
-                            <p class="text-sm mb-1">Números:</p>
-                            <p class="font-bold text-green-300">${ticket.numbers}</p>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span><i class="fas fa-user mr-1"></i>João Silva</span>
-                            <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
-                        </div>
-                    `;
-                    
-                    ticketsGallery.appendChild(ticketElement);
-                }
-                
-                // Esconder o botão se todos os bilhetes estiverem sendo exibidos
-                if (displayedTickets >= sampleTickets.length) {
-                    loadMoreButton.style.display = 'none';
-                }
-            }
-            
-            // Carregar mais bilhetes
-            loadMoreButton.addEventListener('click', function() {
-                displayedTickets += 3;
-                displayTickets();
-            });
-            
-            // Exibir bilhetes iniciais
-            displayTickets();
-            
-            // Smooth scroll para links de navegação
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
+            ticketsGallery.appendChild(ticketElement);
+        }
+
+        // Esconder o botão se todos os bilhetes estiverem sendo exibidos
+        if (displayedTickets >= sampleTickets.length) {
+            loadMoreButton.style.display = 'none';
+        }
+    }
+
+    // Carregar mais bilhetes
+    loadMoreButton.addEventListener('click', function() {
+        displayedTickets += 3;
+        displayTickets();
+    });
+
+    // Exibir bilhetes iniciais
+    displayTickets();
+
+    // Smooth scroll para links de navegação
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
                 });
-            });
+            }
         });
-    </script>
+    });
+});
+</script>
+
 </body>
 </html>
