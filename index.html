@@ -315,13 +315,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const ticketsGallery = document.getElementById('tickets-gallery');
     const loadMoreButton = document.getElementById('load-more');
 
-    // Lista de nomes para simular participantes do bolão
+    // Lista de nomes participantes do bolão
     const participantNames = [
-        "Gabriel Santos", "Melissa Rocha", "Lucas Almeida", "Beatriz Costa", "Rafael Moreira",
-        "Juliana Prado", "Vinícius Oliveira", "Camila Duarte", "Pedro Martins", "Larissa Nunes",
-        "Felipe Andrade", "Isabela Ramos", "Tiago Melo", "Carla Freitas", "Eduardo Lima",
-        "Patrícia Souza", "Anderson Ribeiro", "Marina Lopes", "Rodrigo Teixeira", "Aline Castro"
-    ];
+    "Gabriel", "Melissa", "Beatriz", "Bryan", "Guedes",
+    "John", "Kimyo", "Léo", "Olivier", "Paloma",
+    "Willian"
+];
+
+participantNames.sort();
+console.log(participantNames);
 
     // Dados dos bilhetes
     const sampleTickets = [
