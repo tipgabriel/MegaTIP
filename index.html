@@ -1,346 +1,399 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MegaTIP</title>
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="MegaTIP" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    /* HEADER */
-    header {
-      background-color: #007A32;
-      color: #fff;
-      padding: 1.5rem 0;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      letter-spacing: 1px;
-    }
-    header h1 img {
-      margin-left: 10px;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    header p {
-      margin-top: 8px;
-      font-size: 1.1rem;
-      color: #f5f5f5;
-    }
-
-    /* CONTAINER */
-    .container {
-      width: 85%;
-      margin: auto;
-      overflow: hidden;
-      padding: 30px 0;
-    }
-
-    /* MAIN CONTENT */
-    .main-content {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #171717;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 8px;
-      margin-top: 30px;
-      font-size: 1.5rem;
-    }
-
-    /* REGRAS */
-    .rules ul {
-      list-style: none;
-      padding: 0;
-    }
-    .rules ul li {
-      background: #f8f9fa;
-      margin-bottom: 12px;
-      padding: 12px;
-      border-left: 5px solid #171717;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .rules ul li:hover {
-      background: #eaeaea;
-    }
-
-    /* PREÇO */
-    .price {
-      font-size: 1.6em;
-      font-weight: bold;
-      color: #d9534f;
-      text-align: center;
-      margin: 25px 0;
-    }
-
-    /* NÚMEROS */
-    .numbers-section, .gallery-section {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      margin-top: 30px;
-    }
-    .numbers-display {
-      font-size: 2em;
-      text-align: center;
-      margin-top: 20px;
-      padding: 20px;
-      border: 2px dashed #171717;
-      border-radius: 10px;
-      min-height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .numbers-display span {
-      padding: 10px 15px;
-      background-color: #f0f0f0;
-      border-radius: 6px;
-      font-weight: bold;
-      min-width: 45px;
-      text-align: center;
-    }
-
-    /* GALERIA */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-    .gallery img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    .modal-content {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
-.close, .prev, .next {
-  position: absolute;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  background: rgba(0,0,0,0.5);
-  border-radius: 50%;          /* círculo perfeito */
-  display: flex;               /* centraliza o conteúdo */
-  align-items: center;
-  justify-content: center;
-  width: 50px;                 /* tamanho fixo do círculo */
-  height: 50px;
-  font-size: 2rem;             /* tamanho do X ou seta */
-  z-index: 1001;
-  transition: background 0.3s, transform 0.2s;
-}
-
-.close:hover {
-  background: rgba(0,0,0,0.8);
-  transform: scale(1.1);       /* leve efeito de zoom */
-}
-
-/* POSIÇÃO DOS BOTÕES */
-.close {
-  top: 20px;
-  right: 30px;
-}
-
-.prev {
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.next {
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-    /* CONTADOR */
-    .counter {
-      margin-top: 15px;
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaTIP - Apostas e Bolão</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ticket {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ticket::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: rgba(255,255,255,0.5);
+        }
+        
+        .ticket-stripes {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        
+        .hero-section {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+        }
+        
+        .glow {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>
-      MegaTIP 
-      <img src="MegaTIP.png" alt="Logo MegaTIP">
-    </h1>
-    <p>Sua chance de ser um milionário na Mega Sena da Virada 2025!</p>
-  </header>
+<body class="text-white">
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 bg-black bg-opacity-90 py-4 px-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-trophy text-yellow-400 text-2xl mr-2"></i>
+                <h1 class="text-2xl font-bold">Mega<span class="text-yellow-400">TIP</span></h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-6">
+                <a href="#inicio" class="hover:text-yellow-400 transition">Início</a>
+                <a href="#regras" class="hover:text-yellow-400 transition">Regras</a>
+                <a href="#galeria" class="hover:text-yellow-400 transition">Galeria</a>
+                <a href="#contato" class="hover:text-yellow-400 transition">Contato</a>
+            </nav>
+            
+            <button class="md:hidden text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
-  <div class="container">
-    <div class="main-content">
-      <h2>Sobre a MegaTIP — Mega Sena da Virada 2025</h2>
-      <p>Prepare-se para a maior premiação do ano. Participe do MegaTIP por R$ 5,00 e concorra à Mega da Virada 2025. Vagas limitadas — cada participante pode indicar apenas 1 pessoa.</p>
+    <!-- Hero Section -->
+    <section id="inicio" class="py-16 px-4">
+        <div class="container mx-auto max-w-4xl hero-section p-8">
+            <div class="text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Bolão Mega<span class="text-yellow-400">TIP</span></h2>
+                <p class="text-xl mb-8">Participe do nosso bolão de apostas com cotas a partir de <span class="text-yellow-400 font-bold">R$ 5,00</span></p>
+                
+                <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-10">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <i class="fas fa-users text-yellow-400 text-2xl mb-2"></i>
+                        <h3 class="font-bold">Comunidade</h3>
+                        <p>Junte-se a outros apostadores</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <i class="fas fa-trophy text-yellow-400 text-2xl mb-2"></i>
+                        <h3 class="font-bold">Premiações</h3>
+                        <p>Grandes chances de ganhar</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <i class="fas fa-shield-alt text-yellow-400 text-2xl mb-2"></i>
+                        <h3 class="font-bold">Segurança</h3>
+                        <p>Transações seguras</p>
+                    </div>
+                </div>
+                
+                <a href="#regras" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
+                    Participar Agora
+                </a>
+            </div>
+        </div>
+    </section>
 
-      <div class="price">
-        Cota única: R$ 5,00 · 1 cota = 1 jogo (6 números)
-      </div>
+    <!-- Rules Section -->
+    <section id="regras" class="py-16 px-4 bg-black bg-opacity-70">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Regras do Bolão</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Valor da Cota</h3>
+                    </div>
+                    <p>Cada cota tem o valor fixo de <span class="text-yellow-400 font-bold">R$ 5,00</span>. Cada participante pode adquirir quantas cotas desejar.</p>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Pagamento</h3>
+                    </div>
+                    <p>Os pagamentos devem ser realizados até 24 horas antes do início do evento esportivo. Após esse prazo, as cotas não pagas serão disponibilizadas para outros participantes.</p>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Premiação</h3>
+                    </div>
+                    <p>O valor total arrecadado será distribuído da seguinte forma: 70% para o primeiro lugar, 20% para o segundo e 10% para o terceiro colocado.</p>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Restrições</h3>
+                    </div>
+                    <p>É proibida a participação de menores de 18 anos. Em caso de cancelamento do evento, o valor das apostas será devolvido integralmente.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <h3 class="text-2xl font-bold mb-6">Como Participar</h3>
+                <ol class="list-decimal list-inside text-left max-w-2xl mx-auto space-y-4 bg-gray-800 p-6 rounded-lg">
+                    <li>Entre em contato com nosso administrador pelo WhatsApp</li>
+                    <li>Informe quantas cotas deseja adquirir</li>
+                    <li>Realize o pagamento via PIX</li>
+                    <li>Receba a confirmação e seu bilhete de participação</li>
+                    <li>Acompanhe os resultados em nosso grupo</li>
+                </ol>
+            </div>
+        </div>
+    </section>
 
-      <h2><b></b>Como funciona (Regras)</b></h2>
-      <div class="rules">
-        <ul>
-          <li><b>Recolhimento:</b> o organizador reúne os valores e compra os bilhetes em apostas simples de 6 números.</li>
-          <li><b>Apostas:</b> cada cota corresponde a um bilhete (R$ 5,00). O número final de bilhetes dependerá do total arrecadado.</li>
-          <li><b>Divisão do prêmio:</b> se algum bilhete do grupo for premiado, o valor será dividido igualmente entre todas as cotas pagas.</li>
-          <li><b>Transparência:</b> todos os bilhetes serão fotografados e disponibilizados na galeria do grupo/site para conferência pública.</li>
-          <li><b>Indicação:</b> cada participante pode indicar apenas 1 pessoa de confiança. Vagas limitadas — confirme sua cota.</li>
-        </ul>
-      </div>
-    </div>
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Galeria de Bilhetes</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tickets-gallery">
+                <!-- Os bilhetes serão carregados via JavaScript -->
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="load-more" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded transition">
+                    Carregar Mais Bilhetes
+                </button>
+            </div>
+        </div>
+    </section>
 
-    <div class="numbers-section">
-      <h2>Números Sorteados da Mega Sena da Virada 2025</h2>
-      <p>Assim que o sorteio acontecer, os números vencedores serão exibidos aqui. 🍀 Boa sorte a todos os participantes do <b>MegaTIP!</b></p>
-      <div class="numbers-display">
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-        <span>??</span>
-      </div>
-    </div>
+    <!-- Contact Section -->
+    <section id="contato" class="py-16 px-4 bg-black bg-opacity-70">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Entre em Contato</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Informações de Contato</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fab fa-whatsapp text-green-500 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-bold">WhatsApp</p>
+                                <p>(11) 99999-9999</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-yellow-400 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-bold">E-mail</p>
+                                <p>contato@megatip.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <i class="fab fa-telegram text-blue-400 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-bold">Telegram</p>
+                                <p>@MegaTIP_Oficial</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Formas de Pagamento</h3>
+                    <div class="flex flex-wrap gap-4 mb-4">
+                        <div class="bg-white p-2 rounded">
+                            <i class="fas fa-mobile-alt text-green-600 text-2xl"></i>
+                        </div>
+                        <div class="bg-white p-2 rounded">
+                            <i class="fas fa-university text-blue-600 text-2xl"></i>
+                        </div>
+                        <div class="bg-white p-2 rounded">
+                            <i class="fas fa-credit-card text-purple-600 text-2xl"></i>
+                        </div>
+                    </div>
+                    <p>Aceitamos PIX, transferência bancária e cartão de crédito (com acréscimo).</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="gallery-section">
-      <h2>Galeria de Bilhetes de Aposta</h2>
-      <p>Aqui ficam todos os bilhetes registrados pelo grupo. 📸 Transparência total: cada aposta feita será publicada nesta galeria para conferência pública.</p>
-      <div class="gallery">
-        <img src="https://via.placeholder.com/250x350?text=Bilhete+1" alt="Bilhete de Aposta 1">
-        <img src="https://via.placeholder.com/250x350?text=Bilhete+2" alt="Bilhete de Aposta 2">
-        <img src="https://via.placeholder.com/250x350?text=Bilhete+3" alt="Bilhete de Aposta 3">
-        <img src="https://via.placeholder.com/250x350?text=Bilhete+4" alt="Bilhete de Aposta 4">
-      </div>
-    </div>
-  </div>
+    <!-- Footer -->
+    <footer class="footer py-8 px-4">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-white hover:text-yellow-400 transition">
+                    <i class="fab fa-facebook text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-yellow-400 transition">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-yellow-400 transition">
+                    <i class="fab fa-telegram text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-yellow-400 transition">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                </a>
+            </div>
+            
+            <p class="mb-2">MegaTIP - Apostas e Bolão</p>
+            <p class="text-sm opacity-75" id="copyright">
+                <!-- O copyright será preenchido via JavaScript -->
+            </p>
+        </div>
+    </footer>
 
-  <!-- MODAL -->
-  <div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <span class="prev">&#10094;</span>
-    <img class="modal-content" id="modalImage">
-    <span class="next">&#10095;</span>
-    <div class="counter" id="counter"></div>
-  </div>
-
-  <footer>
-    <p>&copy; <span id="year"></span> MegaTIP. Todos os direitos reservados. Jogue com responsabilidade.</p>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImage");
-    const closeBtn = document.querySelector(".close");
-    const nextBtn = document.querySelector(".next");
-    const prevBtn = document.querySelector(".prev");
-    const counter = document.getElementById("counter");
-    const galleryImages = document.querySelectorAll(".gallery img");
-    let currentIndex = 0;
-
-    function updateModal() {
-      modalImg.src = galleryImages[currentIndex].src;
-      counter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "MegaTIP",
+        "description": "Site de apostas e bolão esportivo",
+        "url": "https://www.megatip.com",
+        "logo": "https://www.megatip.com/logo.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55-11-99999-9999",
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": "Portuguese"
+        },
+        "sameAs": [
+            "https://www.facebook.com/megatip",
+            "https://www.instagram.com/megatip",
+            "https://t.me/MegaTIP_Oficial"
+        ]
     }
+    </script>
 
-    function openModal(index) {
-      currentIndex = index;
-      modal.style.display = "flex";
-      updateModal();
-    }
-
-    function closeModal() {
-      modal.style.display = "none";
-    }
-
-    function showNext() {
-      currentIndex = (currentIndex + 1) % galleryImages.length;
-      updateModal();
-    }
-
-    function showPrev() {
-      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-      updateModal();
-    }
-
-    galleryImages.forEach((img, i) => {
-      img.addEventListener("click", () => openModal(i));
-    });
-
-    closeBtn.addEventListener("click", closeModal);
-    nextBtn.addEventListener("click", showNext);
-    prevBtn.addEventListener("click", showPrev);
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (modal.style.display === "flex") {
-        if (e.key === "Escape") closeModal();
-        if (e.key === "ArrowRight") showNext();
-        if (e.key === "ArrowLeft") showPrev();
-      }
-    });
-  </script>
+    <script>
+        // Atualizar copyright automaticamente
+        document.addEventListener('DOMContentLoaded', function() {
+            const year = new Date().getFullYear();
+            document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Todos os direitos reservados.`;
+            
+            // Galeria de bilhetes
+            const ticketsGallery = document.getElementById('tickets-gallery');
+            const loadMoreButton = document.getElementById('load-more');
+            
+            // Dados de exemplo para os bilhetes
+            const sampleTickets = [
+                { id: 1, event: "Campeonato Brasileiro", date: "15/08/2023", numbers: "12, 25, 33, 41, 58" },
+                { id: 2, event: "Copa do Brasil", date: "18/08/2023", numbers: "05, 19, 27, 36, 49" },
+                { id: 3, event: "Libertadores", date: "22/08/2023", numbers: "03, 14, 28, 39, 52" },
+                { id: 4, event: "Premier League", date: "25/08/2023", numbers: "08, 17, 31, 44, 56" },
+                { id: 5, event: "La Liga", date: "28/08/2023", numbers: "11, 22, 35, 47, 59" },
+                { id: 6, event: "Serie A", date: "01/09/2023", numbers: "07, 16, 29, 38, 51" }
+            ];
+            
+            let displayedTickets = 3;
+            
+            function displayTickets() {
+                ticketsGallery.innerHTML = '';
+                
+                for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
+                    const ticket = sampleTickets[i];
+                    
+                    const ticketElement = document.createElement('div');
+                    ticketElement.className = 'ticket card-hover';
+                    ticketElement.innerHTML = `
+                        <div class="ticket-stripes"></div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg">${ticket.event}</h3>
+                            <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
+                        </div>
+                        <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
+                        <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
+                            <p class="text-sm mb-1">Números:</p>
+                            <p class="font-bold text-yellow-300">${ticket.numbers}</p>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span><i class="fas fa-user mr-1"></i>João Silva</span>
+                            <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
+                        </div>
+                    `;
+                    
+                    ticketsGallery.appendChild(ticketElement);
+                }
+                
+                // Esconder o botão se todos os bilhetes estiverem sendo exibidos
+                if (displayedTickets >= sampleTickets.length) {
+                    loadMoreButton.style.display = 'none';
+                }
+            }
+            
+            // Carregar mais bilhetes
+            loadMoreButton.addEventListener('click', function() {
+                displayedTickets += 3;
+                displayTickets();
+            });
+            
+            // Exibir bilhetes iniciais
+            displayTickets();
+            
+            // Smooth scroll para links de navegação
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
