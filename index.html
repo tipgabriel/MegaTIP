@@ -11,7 +11,6 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            /* Fundo com cores vibrantes e transição suave */
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
         }
@@ -25,7 +24,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Estilo do Bilhete */
         .ticket {
             background: linear-gradient(to right, #ff9966, #ff5e62);
             border-radius: 10px;
@@ -75,6 +73,18 @@
         .footer {
             background: rgba(0, 0, 0, 0.8);
         }
+
+        /* Estilos para o menu mobile */
+        .mobile-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="text-white">
@@ -85,6 +95,7 @@
                 <h1 class="text-2xl font-bold">Mega<span class="text-green-400">TIP</span></h1>
             </div>
 
+            <!-- Menu Desktop -->
             <nav class="hidden md:flex space-x-6">
                 <a href="#inicio" class="hover:text-green-400 transition">Início</a>
                 <a href="#regras" class="hover:text-green-400 transition">Regras</a>
@@ -92,9 +103,20 @@
                 <a href="#contato" class="hover:text-green-400 transition">Contato</a>
             </nav>
 
-            <button class="md:hidden text-xl">
+            <!-- Botão Menu Mobile -->
+            <button id="mobile-menu-button" class="md:hidden text-xl">
                 <i class="fas fa-bars"></i>
             </button>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-black bg-opacity-95 py-4 px-6 md:hidden">
+            <nav class="flex flex-col space-y-4">
+                <a href="#inicio" class="hover:text-green-400 transition py-2">Início</a>
+                <a href="#regras" class="hover:text-green-400 transition py-2">Regras</a>
+                <a href="#galeria" class="hover:text-green-400 transition py-2">Galeria</a>
+                <a href="#contato" class="hover:text-green-400 transition py-2">Contato</a>
+            </nav>
         </div>
     </header>
 
@@ -302,49 +324,64 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Atualizar copyright automaticamente
+    // ========== MENU MOBILE ==========
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isMenuOpen = false;
+
+    // Função para abrir/fechar o menu mobile
+    function toggleMobileMenu() {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            mobileMenu.classList.add('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            mobileMenu.classList.remove('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    }
+
+    // Event listener para o botão do menu
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+    // Fechar menu ao clicar em um link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+            isMenuOpen = false;
+        });
+    });
+
+    // ========== COPYRIGHT ==========
     const year = new Date().getFullYear();
     document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Não somos filiados à Caixa Econômica Federal.`;
 
-    // Galeria de bilhetes
+    // ========== GALERIA DE BILHETES ==========
     const ticketsGallery = document.getElementById('tickets-gallery');
     const loadMoreButton = document.getElementById('load-more');
 
-    // Lista de nomes participantes do bolão
     const participantNames = [
-    "Gabriel", "Melissa", "Beatriz", "Bryan", "Guedes",
-    "John", "Kimyo", "Léo", "Olivier", "Paloma",
-    "Willian"
+        "Gabriel", "Melissa", "Beatriz", "Bryan", "Guedes",
+        "John", "Kimyo", "Léo", "Olivier", "Paloma",
+        "Willian"
     ];
 
-    /**
-     * Função para embaralhar um array (Algoritmo de Fisher-Yates)
-     * Garante que a ordem seja aleatória e que todos os itens sejam utilizados.
-     * @param {Array} array - O array a ser embaralhado.
-     * @returns {Array} O array embaralhado.
-     */
     function shuffleArray(array) {
         let currentIndex = array.length, randomIndex;
-
-        // Enquanto houver elementos a embaralhar.
         while (currentIndex != 0) {
-            // Escolhe um elemento restante...
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
-
-            // E o troca com o elemento atual (troca na posição).
             [array[currentIndex], array[randomIndex]] = [
                 array[randomIndex], array[currentIndex]];
         }
         return array;
     }
 
-    // Cria e embaralha a lista de nomes que será usada. 
-    // Isso garante que os nomes sejam únicos até que o array seja percorrido por completo.
     const uniqueRandomNames = shuffleArray([...participantNames]);
-    console.log("Nomes embaralhados:", uniqueRandomNames);
 
-    // Dados dos bilhetes de exemplo
     const sampleTickets = [
         { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
         { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
@@ -359,18 +396,14 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
     ];
 
-    let displayedTickets = 3; // Mostrar 3 bilhetes inicialmente
+    let displayedTickets = 3;
 
     function displayTickets() {
-        ticketsGallery.innerHTML = ''; // Limpa a galeria
+        ticketsGallery.innerHTML = '';
 
         for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
             const ticket = sampleTickets[i];
-
-            // Atribui o nome da lista embaralhada usando o índice 'i'.
-            // O uso do módulo (%) garante que se houver mais bilhetes do que nomes, 
-            // a lista embaralhada se repita (voltando ao início).
-            const assignedName = uniqueRandomNames[i % uniqueRandomNames.length]; 
+            const assignedName = uniqueRandomNames[i % uniqueRandomNames.length];
 
             const ticketElement = document.createElement('div');
             ticketElement.className = 'ticket card-hover';
@@ -394,24 +427,21 @@ document.addEventListener('DOMContentLoaded', function() {
             ticketsGallery.appendChild(ticketElement);
         }
 
-        // Esconder o botão se todos os bilhetes estiverem sendo exibidos
         if (displayedTickets >= sampleTickets.length) {
             loadMoreButton.style.display = 'none';
         } else {
-            loadMoreButton.style.display = 'block'; // Garante que ele apareça se não todos estiverem sendo exibidos
+            loadMoreButton.style.display = 'block';
         }
     }
 
-    // Carregar mais bilhetes (neste caso, carrega todos)
     loadMoreButton.addEventListener('click', function() {
         displayedTickets = sampleTickets.length;
         displayTickets();
     });
 
-    // Exibir bilhetes iniciais
     displayTickets();
 
-    // Smooth scroll para links de navegação
+    // ========== SCROLL SUAVE ==========
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -420,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80, // Ajuste para o tamanho do header fixo
+                    top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
                 });
             }
