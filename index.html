@@ -77,12 +77,13 @@
         /* Estilos para o menu mobile */
         .mobile-menu {
             transition: all 0.3s ease-in-out;
-            transform: translateY(-100%);
+            max-height: 0;
+            overflow: hidden;
             opacity: 0;
         }
 
         .mobile-menu.active {
-            transform: translateY(0);
+            max-height: 300px;
             opacity: 1;
         }
     </style>
@@ -104,7 +105,7 @@
             </nav>
 
             <!-- Botão Menu Mobile -->
-            <button id="mobile-menu-button" class="md:hidden text-xl">
+            <button id="mobile-menu-button" class="md:hidden text-xl z-50">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -112,9 +113,9 @@
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-black bg-opacity-95 py-4 px-6 md:hidden">
             <nav class="flex flex-col space-y-4">
-                <a href="#inicio" class="hover:text-green-400 transition py-2">Início</a>
-                <a href="#regras" class="hover:text-green-400 transition py-2">Regras</a>
-                <a href="#galeria" class="hover:text-green-400 transition py-2">Galeria</a>
+                <a href="#inicio" class="hover:text-green-400 transition py-2 border-b border-gray-700">Início</a>
+                <a href="#regras" class="hover:text-green-400 transition py-2 border-b border-gray-700">Regras</a>
+                <a href="#galeria" class="hover:text-green-400 transition py-2 border-b border-gray-700">Galeria</a>
                 <a href="#contato" class="hover:text-green-400 transition py-2">Contato</a>
             </nav>
         </div>
@@ -342,10 +343,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event listener para o botão do menu
-    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+    // Event listener para o botão do menu - CORREÇÃO AQUI
+    mobileMenuButton.addEventListener('click', function(e) {
+        e.preventDefault(); // Previne qualquer comportamento padrão
+        e.stopPropagation(); // Previne propagação do evento
+        toggleMobileMenu();
+    });
 
-    // Fechar menu ao clicar em um link
+    // Fechar menu ao clicar em um link do menu mobile
     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -353,6 +358,15 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
             isMenuOpen = false;
         });
+    });
+
+    // Fechar menu ao clicar fora dele
+    document.addEventListener('click', function(e) {
+        if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+            isMenuOpen = false;
+        }
     });
 
     // ========== COPYRIGHT ==========
@@ -444,6 +458,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== SCROLL SUAVE ==========
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            // Não aplicar scroll suave para o botão do menu mobile
+            if (this.id === 'mobile-menu-button') return;
+            
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
