@@ -4,31 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MegaTIP - Apostas e Bolão</title>
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="MegaTIP" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-        
+
         body {
             font-family: 'Montserrat', sans-serif;
+            /* Fundo com cores vibrantes e transição suave */
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
         }
-        
+
         .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
+        /* Estilo do Bilhete */
         .ticket {
             background: linear-gradient(to right, #ff9966, #ff5e62);
             border-radius: 10px;
@@ -39,7 +36,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .ticket::before {
             content: "";
             position: absolute;
@@ -49,7 +46,7 @@
             height: 5px;
             background: rgba(255,255,255,0.5);
         }
-        
+
         .ticket-stripes {
             background: repeating-linear-gradient(
                 45deg,
@@ -65,70 +62,68 @@
             bottom: 0;
             pointer-events: none;
         }
-        
+
         .hero-section {
             background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
         }
-        
+
         .glow {
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
-        
+
         .footer {
             background: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
 <body class="text-white">
-    <!-- Header/Navigation -->
     <header class="sticky top-0 z-50 bg-black bg-opacity-90 py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
                 <i class="fas fa-clover text-green-400 text-2xl mr-2"></i>
                 <h1 class="text-2xl font-bold">Mega<span class="text-green-400">TIP</span></h1>
             </div>
-            
+
             <nav class="hidden md:flex space-x-6">
                 <a href="#inicio" class="hover:text-green-400 transition">Início</a>
                 <a href="#regras" class="hover:text-green-400 transition">Regras</a>
                 <a href="#galeria" class="hover:text-green-400 transition">Galeria</a>
                 <a href="#contato" class="hover:text-green-400 transition">Contato</a>
             </nav>
-            
+
             <button class="md:hidden text-xl">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="inicio" class="py-16 px-4">
         <div class="container mx-auto max-w-4xl hero-section p-8">
             <div class="text-center">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">Bolão Mega<span class="text-green-400">TIP</span></h2>
                 <p class="text-xl mb-8">Participe do nosso bolão exclusivo com cotas a partir de <span class="text-green-400 font-bold">R$ 5,00</span></p>
-                
+
                 <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-10">
                     <div class="bg-gray-800 p-4 rounded-lg">
                         <i class="fas fa-users text-yellow-400 text-2xl mb-2"></i>
                         <h3 class="font-bold">Comunidade</h3>
                         <p>Jogue lado a lado com outros apostadores e faça parte da equipe MegaTIP.</p>
                     </div>
-                    
+
                     <div class="bg-gray-800 p-4 rounded-lg">
                         <i class="fas fa-trophy text-yellow-400 text-2xl mb-2"></i>
                         <h3 class="font-bold">Premiação Compartilhada</h3>
                         <p>Ganhou? Todo mundo ganha junto — a vitória é do grupo!</p>
                     </div>
-                    
+
                     <div class="bg-gray-800 p-4 rounded-lg">
                         <i class="fas fa-shield-alt text-yellow-400 text-2xl mb-2"></i>
                         <h3 class="font-bold">Segurança</h3>
                         <p>Transações seguras e confiáveis, tudo sob controle MegaTIP.</p>
                     </div>
                 </div>
-                
+
                 <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
                     Participar Agora
                 </a>
@@ -136,31 +131,10 @@
         </div>
     </section>
 
-    <!-- Números Sorteados -->
-<section id="numeros" class="py-16 px-4 bg-black bg-opacity-80">
-    <div class="container mx-auto max-w-4xl text-center">
-        <h2 class="text-3xl font-bold mb-6"> Números Sorteados</h2>
-        <p class="mb-6 text-gray-300">Confira os números oficiais do último sorteio da <span class="text-green-400 font-bold">Mega da Virada</span>.</p>
-        
-        <div class="bg-gray-900 p-6 rounded-lg inline-block shadow-lg glow">
-            <div class="flex justify-center space-x-3 text-2xl font-bold">
-                <span class="bg-green-500 text-black px-4 py-2 rounded-full">00</span>
-                <span class="bg-green-500 text-black px-4 py-2 rounded-full">00</span>
-                <span class="bg-green-500 text-black px-4 py-2 rounded-full">00</span>
-                <span class="bg-green-500 text-black px-4 py-2 rounded-full">00</span>
-                <span class="bg-green-500 text-black px-4 py-2 rounded-full">00</span>
-                <span class="bg-green-500 text-black px-4 py-2 rounded-full">00</span>
-            </div>
-            <p class="text-sm text-gray-400 mt-4">Aguardando o sorteio em <strong>31/12/2025</strong></p>
-        </div>
-    </div>
-</section>
-
-    <!-- Rules Section -->
     <section id="regras" class="py-16 px-4 bg-black bg-opacity-70">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Regras do Bolão MegaTIP</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-gray-800 p-6 rounded-lg card-hover">
                     <div class="flex items-center mb-4">
@@ -171,7 +145,7 @@
                     </div>
                     <p>Cada cota tem valor fixo de <span class="text-green-400 font-bold">R$ 5,00</span>. Cada participante pode adquirir apenas 1 bilhete, garantindo igualdade entre todos os membros do grupo.</p>
                 </div>
-                
+
                 <div class="bg-gray-800 p-6 rounded-lg card-hover">
                     <div class="flex items-center mb-4">
                         <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
@@ -181,7 +155,7 @@
                     </div>
                    <p><strong>Atenção:</strong> o prazo final para pagamento é até às <strong>23h59 do dia 25/12/2025</strong>. Participantes que não realizarem o pagamento dentro do prazo serão automaticamente <strong>desclassificados e removidos do grupo.</strong></p>
                 </div>
-                
+
                 <div class="bg-gray-800 p-6 rounded-lg card-hover">
                     <div class="flex items-center mb-4">
                         <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
@@ -191,7 +165,7 @@
                     </div>
                     <p>O valor total arrecadado será dividido igualmente entre todos os participantes.</p>
                 </div>
-                
+
                 <div class="bg-gray-800 p-6 rounded-lg card-hover">
                     <div class="flex items-center mb-4">
                         <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
@@ -202,7 +176,7 @@
                     <p>É proibida a participação de menores de 18 anos. Em caso de cancelamento do evento, o valor das apostas será devolvido integralmente para cada participante.</p>
                 </div>
             </div>
-            
+
             <div class="mt-12 text-center">
                 <h3 class="text-2xl font-bold mb-6">Como Participar</h3>
                 <ol class="list-decimal list-inside text-left max-w-2xl mx-auto space-y-4 bg-gray-800 p-6 rounded-lg">
@@ -216,15 +190,13 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
     <section id="galeria" class="py-16 px-4">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-12">Nossos jogos</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tickets-gallery">
-                <!-- Os bilhetes serão carregados via JavaScript -->
-            </div>
-            
+                </div>
+
             <div class="text-center mt-12">
                 <button id="load-more" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-md transition">
                     Carregar Mais Bilhetes
@@ -233,11 +205,10 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contato" class="py-16 px-4 bg-black bg-opacity-70">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Entre em Contato</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-bold mb-4">Informações de Contato</h3>
@@ -249,7 +220,7 @@
                                 <p>(31) 98204-2552</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-center">
                             <i class="fas fa-envelope text-green-400 text-xl mr-4"></i>
                             <div>
@@ -257,9 +228,17 @@
                                 <p>gpazsant@proton.me</p>
                             </div>
                         </div>
+
+                        <div class="flex items-center">
+                            <i class="fab fa-telegram text-blue-400 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-bold">Telegram</p>
+                                <p>@tipgabriel</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+
                 <div class="bg-gray-800 p-6 rounded-lg">
                     <h3 class="text-xl font-bold mb-4">Formas de Pagamento</h3>
                     <div class="flex flex-wrap gap-4 mb-4">
@@ -278,26 +257,26 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer py-8 px-4">
         <div class="container mx-auto text-center">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.instagram.com/tipgabriel/" class="text-white hover:text-green-400 transition">
+                <a href="#" class="text-white hover:text-green-400 transition">
                     <i class="fab fa-instagram text-2xl"></i>
                 </a>
-                <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="text-white hover:text-green-400 transition">
+                <a href="#" class="text-white hover:text-green-400 transition">
+                    <i class="fab fa-telegram text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-green-400 transition">
                     <i class="fab fa-whatsapp text-2xl"></i>
                 </a>
             </div>
-            
+
             <p class="mb-2">MegaTIP - Apostas e Bolão</p>
             <p class="text-sm opacity-75" id="copyright">
-                <!-- O copyright será preenchido via JavaScript -->
-            </p>
+                </p>
         </div>
     </footer>
 
-    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -321,91 +300,108 @@
     }
     </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Atualizar copyright automaticamente
+    const year = new Date().getFullYear();
+    document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Não somos filiados à Caixa Econômica Federal.`;
 
-    <script>
-        // Atualizar copyright automaticamente
-        document.addEventListener('DOMContentLoaded', function() {
-            const year = new Date().getFullYear();
-            document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Todos os direitos reservados.`;
-            
-            // Galeria de bilhetes
-            const ticketsGallery = document.getElementById('tickets-gallery');
-            const loadMoreButton = document.getElementById('load-more');
-            
-            // Dados de exemplo para os bilhetes
-            const sampleTickets = [
-                { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 2, event: event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-                { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-            ];
-            
-            let displayedTickets = 3;
-            
-            function displayTickets() {
-                ticketsGallery.innerHTML = '';
-                
-                for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
-                    const ticket = sampleTickets[i];
-                    
-                    const ticketElement = document.createElement('div');
-                    ticketElement.className = 'ticket card-hover';
-                    ticketElement.innerHTML = `
-                        <div class="ticket-stripes"></div>
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="font-bold text-lg">${ticket.event}</h3>
-                            <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
-                        </div>
-                        <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
-                        <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
-                            <p class="text-sm mb-1">Números:</p>
-                            <p class="font-bold text-green-300">${ticket.numbers}</p>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span><i class="fas fa-user mr-1"></i>João Silva</span>
-                            <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
-                        </div>
-                    `;
-                    
-                    ticketsGallery.appendChild(ticketElement);
-                }
-                
-                // Esconder o botão se todos os bilhetes estiverem sendo exibidos
-                if (displayedTickets >= sampleTickets.length) {
-                    loadMoreButton.style.display = 'none';
-                }
-            }
-            
-            // Carregar mais bilhetes
-            loadMoreButton.addEventListener('click', function() {
-                displayedTickets += 3;
-                displayTickets();
-            });
-            
-            // Exibir bilhetes iniciais
-            displayTickets();
-            
-            // Smooth scroll para links de navegação
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
+    // Galeria de bilhetes
+    const ticketsGallery = document.getElementById('tickets-gallery');
+    const loadMoreButton = document.getElementById('load-more');
+
+    // Lista de nomes participantes do bolão
+    const participantNames = [
+    "Gabriel", "Melissa", "Beatriz", "Bryan", "Guedes",
+    "John", "Kimyo", "Léo", "Olivier", "Paloma",
+    "Willian"
+    ];
+
+    participantNames.sort(); // Opcional, para deixar os nomes em ordem alfabética
+    console.log(participantNames);
+
+    // Dados dos bilhetes de exemplo
+    const sampleTickets = [
+        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+    ];
+
+    let displayedTickets = 3; // Mostrar 3 bilhetes inicialmente
+
+    function displayTickets() {
+        ticketsGallery.innerHTML = ''; // Limpa a galeria
+
+        for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
+            const ticket = sampleTickets[i];
+
+            // Nome aleatório
+            const randomName = participantNames[Math.floor(Math.random() * participantNames.length)];
+
+            const ticketElement = document.createElement('div');
+            ticketElement.className = 'ticket card-hover';
+            ticketElement.innerHTML = `
+                <div class="ticket-stripes"></div>
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-bold text-lg">${ticket.event}</h3>
+                    <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
+                </div>
+                <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
+                <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
+                    <p class="text-sm mb-1">Números:</p>
+                    <p class="font-bold text-green-300">${ticket.numbers}</p>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span><i class="fas fa-user mr-1"></i>${randomName}</span>
+                    <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
+                </div>
+            `;
+
+            ticketsGallery.appendChild(ticketElement);
+        }
+
+        // Esconder o botão se todos os bilhetes estiverem sendo exibidos
+        if (displayedTickets >= sampleTickets.length) {
+            loadMoreButton.style.display = 'none';
+        } else {
+            loadMoreButton.style.display = 'block'; // Garante que ele apareça se não todos estiverem sendo exibidos
+        }
+    }
+
+    // Carregar mais bilhetes (neste caso, carrega todos)
+    loadMoreButton.addEventListener('click', function() {
+        displayedTickets = sampleTickets.length;
+        displayTickets();
+    });
+
+    // Exibir bilhetes iniciais
+    displayTickets();
+
+    // Smooth scroll para links de navegação
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Ajuste para o tamanho do header fixo
+                    behavior: 'smooth'
                 });
-            });
+            }
         });
-    </script>
+    });
+});
+</script>
 
 </body>
 </html>
