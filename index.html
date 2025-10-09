@@ -317,8 +317,32 @@ document.addEventListener('DOMContentLoaded', function() {
     "Willian"
     ];
 
-    participantNames.sort(); // Opcional, para deixar os nomes em ordem alfabética
-    console.log(participantNames);
+    /**
+     * Função para embaralhar um array (Algoritmo de Fisher-Yates)
+     * Garante que a ordem seja aleatória e que todos os itens sejam utilizados.
+     * @param {Array} array - O array a ser embaralhado.
+     * @returns {Array} O array embaralhado.
+     */
+    function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+
+        // Enquanto houver elementos a embaralhar.
+        while (currentIndex != 0) {
+            // Escolhe um elemento restante...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // E o troca com o elemento atual (troca na posição).
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
+    // Cria e embaralha a lista de nomes que será usada. 
+    // Isso garante que os nomes sejam únicos até que o array seja percorrido por completo.
+    const uniqueRandomNames = shuffleArray([...participantNames]);
+    console.log("Nomes embaralhados:", uniqueRandomNames);
 
     // Dados dos bilhetes de exemplo
     const sampleTickets = [
@@ -343,8 +367,10 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
             const ticket = sampleTickets[i];
 
-            // Nome aleatório
-            const randomName = participantNames[Math.floor(Math.random() * participantNames.length)];
+            // Atribui o nome da lista embaralhada usando o índice 'i'.
+            // O uso do módulo (%) garante que se houver mais bilhetes do que nomes, 
+            // a lista embaralhada se repita (voltando ao início).
+            const assignedName = uniqueRandomNames[i % uniqueRandomNames.length]; 
 
             const ticketElement = document.createElement('div');
             ticketElement.className = 'ticket card-hover';
@@ -360,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="font-bold text-green-300">${ticket.numbers}</p>
                 </div>
                 <div class="flex justify-between text-sm">
-                    <span><i class="fas fa-user mr-1"></i>${randomName}</span>
+                    <span><i class="fas fa-user mr-1"></i>${assignedName}</span>
                     <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
                 </div>
             `;
@@ -402,6 +428,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
 </body>
 </html>
