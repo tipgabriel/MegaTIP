@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ticketsGallery = document.getElementById('tickets-gallery');
     const loadMoreButton = document.getElementById('load-more');
 
-    // Lista de nomes participantes do bolão
+// Lista de nomes participantes do bolão
 const participantNames = [
     "Gabriel", "Melissa", "Beatriz", "Bryan", "Guedes",
     "John", "Kimyo", "Léo", "Olivier", "Paloma", "Willian"
@@ -357,7 +357,15 @@ const sampleTickets = [
 
 let displayedTickets = 3;
 
+// ⚠️ Garante que o elemento existe
+const ticketsGallery = document.getElementById('tickets-gallery');
+
 function displayTickets() {
+    if (!ticketsGallery) {
+        console.error("Elemento 'tickets-gallery' não encontrado!");
+        return;
+    }
+
     ticketsGallery.innerHTML = '';
 
     // Cria uma cópia da lista de nomes (pra não alterar o original)
@@ -397,6 +405,10 @@ function displayTickets() {
         ticketsGallery.appendChild(ticketElement);
     }
 }
+
+// 🚀 Chama a função pra exibir assim que o JS carregar
+document.addEventListener('DOMContentLoaded', displayTickets);
+    
         // Esconder o botão se todos os bilhetes estiverem sendo exibidos
         if (displayedTickets >= sampleTickets.length) {
             loadMoreButton.style.display = 'none';
