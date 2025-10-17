@@ -100,15 +100,37 @@
 
         .numero-sorteio {
             display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
             text-align: center;
             background: linear-gradient(135deg, #ff9966, #ff5e62);
             border-radius: 50%;
+            margin: 2px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .numero-input {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
             margin: 5px;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            font-size: 16px;
+            color: #1a202c;
+        }
+
+        .numero-input:focus {
+            border-color: #48bb78;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.3);
         }
 
         .numero-acerto {
@@ -134,6 +156,15 @@
             font-size: 12px;
             transform: rotate(5deg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .numeros-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            max-width: 300px;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -205,29 +236,33 @@
         </div>
     </section>
 
-    <!-- Nova Seção: Resultado da Mega da Virada -->
+    <!-- Seção: Resultado da Mega da Virada -->
     <section id="resultado" class="py-16 px-4 bg-black bg-opacity-70">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Resultado Mega da Virada 2025</h2>
             
             <div class="bg-gray-800 rounded-lg p-8 mb-8">
                 <div class="text-center mb-6">
-                    <h3 class="text-2xl font-bold mb-4">Números Sorteados</h3>
-                    <div id="numeros-sorteados" class="flex justify-center flex-wrap mb-6">
-                        <!-- Os números sorteados serão inseridos aqui via JavaScript -->
+                    <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
+                    
+                    <!-- Inputs para os números oficiais -->
+                    <div class="flex justify-center flex-wrap gap-3 mb-6" id="inputs-numeros">
+                        <input type="number" min="1" max="60" class="numero-input" placeholder="01">
+                        <input type="number" min="1" max="60" class="numero-input" placeholder="02">
+                        <input type="number" min="1" max="60" class="numero-input" placeholder="03">
+                        <input type="number" min="1" max="60" class="numero-input" placeholder="04">
+                        <input type="number" min="1" max="60" class="numero-input" placeholder="05">
+                        <input type="number" min="1" max="60" class="numero-input" placeholder="06">
                     </div>
                     
-                    <div class="flex justify-center space-x-4 mb-6">
-                        <button id="btn-simular-sorteio" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded transition">
-                            Simular Sorteio
-                        </button>
-                        <button id="btn-verificar-bilhetes" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded transition">
-                            Verificar Bilhetes
+                    <div class="flex justify-center mb-6">
+                        <button id="btn-verificar-bilhetes" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
+                            <i class="fas fa-search mr-2"></i>Verificar Bilhetes
                         </button>
                     </div>
                     
                     <div id="status-sorteio" class="text-lg">
-                        <p class="text-yellow-400"><i class="fas fa-clock mr-2"></i>Aguardando sorteio...</p>
+                        <p class="text-yellow-400"><i class="fas fa-info-circle mr-2"></i>Insira os números oficiais da Caixa</p>
                     </div>
                 </div>
                 
@@ -469,49 +504,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const year = new Date().getFullYear();
     document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Não somos filiados à Caixa Econômica Federal.`;
 
-    // ========== SISTEMA DE SORTEIO E VERIFICAÇÃO ==========
-    const btnSimularSorteio = document.getElementById('btn-simular-sorteio');
+    // ========== SISTEMA DE VERIFICAÇÃO ==========
     const btnVerificarBilhetes = document.getElementById('btn-verificar-bilhetes');
-    const numerosSorteadosContainer = document.getElementById('numeros-sorteados');
+    const numeroInputs = document.querySelectorAll('.numero-input');
     const statusSorteio = document.getElementById('status-sorteio');
     const resultadoVerificacao = document.getElementById('resultado-verificacao');
     const totalPremiados = document.getElementById('total-premiados');
     const valorPremio = document.getElementById('valor-premio');
 
-    // Função para gerar números aleatórios únicos
-    function gerarNumerosSorteados() {
+    // Função para obter números dos inputs
+    function obterNumerosSorteados() {
         const numeros = [];
-        while (numeros.length < 6) {
-            const numero = Math.floor(Math.random() * 60) + 1;
-            if (!numeros.includes(numero)) {
-                numeros.push(numero);
+        numeroInputs.forEach(input => {
+            if (input.value && input.value >= 1 && input.value <= 60) {
+                numeros.push(parseInt(input.value));
             }
-        }
+        });
         return numeros.sort((a, b) => a - b);
     }
-
-    // Função para exibir números sorteados
-    function exibirNumerosSorteados(numeros) {
-        numerosSorteadosContainer.innerHTML = '';
-        numeros.forEach(numero => {
-            const span = document.createElement('span');
-            span.className = 'numero-sorteio';
-            span.textContent = numero.toString().padStart(2, '0');
-            numerosSorteadosContainer.appendChild(span);
-        });
-    }
-
-    // Função para simular sorteio
-    btnSimularSorteio.addEventListener('click', function() {
-        numerosSorteados = gerarNumerosSorteados();
-        exibirNumerosSorteados(numerosSorteados);
-        statusSorteio.innerHTML = '<p class="text-green-400"><i class="fas fa-check mr-2"></i>Sorteio realizado!</p>';
-        resultadoVerificacao.classList.add('hidden');
-        
-        // Resetar bilhetes premiados
-        bilhetesPremiados = [];
-        atualizarBilhetes();
-    });
 
     // Função para verificar acertos em um bilhete
     function verificarAcertos(bilheteNumeros) {
@@ -523,8 +533,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para verificar todos os bilhetes
     btnVerificarBilhetes.addEventListener('click', function() {
-        if (numerosSorteados.length === 0) {
-            statusSorteio.innerHTML = '<p class="text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Realize o sorteio primeiro!</p>';
+        numerosSorteados = obterNumerosSorteados();
+        
+        if (numerosSorteados.length !== 6) {
+            statusSorteio.innerHTML = '<p class="text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Preencha todos os 6 números!</p>';
             return;
         }
 
@@ -577,30 +589,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const uniqueRandomNames = shuffleArray([...participantNames]);
 
-    // Gerar números aleatórios para os bilhetes
-    function gerarNumerosBilhete() {
-        const numeros = [];
-        while (numeros.length < 6) {
-            const numero = Math.floor(Math.random() * 60) + 1;
-            if (!numeros.includes(numero)) {
-                numeros.push(numero);
-            }
-        }
-        return numeros.sort((a, b) => a - b).join(', ');
-    }
-
     const sampleTickets = [
-        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
     ];
 
     // Atribuir nomes aos bilhetes
@@ -621,12 +621,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const ticketElement = document.createElement('div');
             ticketElement.className = `ticket card-hover ${acertos > 0 ? 'premiado' : ''}`;
             
-            // Formatar números com destaque para acertos
-            const numerosFormatados = ticket.numbers.split(', ').map(num => {
-                const numero = parseInt(num);
-                const isAcerto = numerosSorteados.includes(numero);
-                return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
-            }).join('');
+            let numerosHTML = '';
+            
+            if (ticket.numbers === "Aguardando números.") {
+                numerosHTML = `<p class="text-center text-yellow-300 italic">Aguardando números...</p>`;
+            } else {
+                const numerosArray = ticket.numbers.split(', ');
+                numerosHTML = numerosArray.map(num => {
+                    const numero = parseInt(num);
+                    const isAcerto = numerosSorteados.includes(numero);
+                    return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
+                }).join('');
+            }
 
             ticketElement.innerHTML = `
                 <div class="ticket-stripes"></div>
@@ -637,9 +643,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
                 <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
-                    <p class="text-sm mb-2">Números:</p>
-                    <div class="flex flex-wrap justify-center">
-                        ${numerosFormatados}
+                    <p class="text-sm mb-2 text-center">Números:</p>
+                    <div class="numeros-container">
+                        ${numerosHTML}
                     </div>
                     ${acertos > 0 ? `<p class="text-center mt-2 text-green-300 font-bold">${acertos} acerto(s)</p>` : ''}
                 </div>
