@@ -100,15 +100,15 @@
 
         .numero-sorteio {
             display: inline-block;
-            width: 35px;
-            height: 35px;
-            line-height: 35px;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
             text-align: center;
             background: linear-gradient(135deg, #ff9966, #ff5e62);
             border-radius: 50%;
-            margin: 2px;
+            margin: 1px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
@@ -175,9 +175,9 @@
         .numeros-container {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
-            max-width: 300px;
+            flex-wrap: nowrap;
+            gap: 2px;
+            max-width: 240px;
             margin: 0 auto;
         }
     </style>
@@ -405,10 +405,10 @@
                         </div>
 
                         <div class="flex items-center">
-                            <i class="fab fa-telegram text-blue-400 text-xl mr-4"></i>
+                            <i class="fab fa-instagram text-pink-500 text-xl mr-4"></i>
                             <div>
-                                <p class="font-bold">Telegram</p>
-                                <p>@tipgabriel</p>
+                                <p class="font-bold">Instagram</p>
+                                <p>@megatip_oficial</p>
                             </div>
                         </div>
                     </div>
@@ -439,9 +439,6 @@
                     <i class="fab fa-instagram text-2xl"></i>
                 </a>
                 <a href="#" class="text-white hover:text-green-400 transition">
-                    <i class="fab fa-telegram text-2xl"></i>
-                </a>
-                <a href="#" class="text-white hover:text-green-400 transition">
                     <i class="fab fa-whatsapp text-2xl"></i>
                 </a>
             </div>
@@ -469,9 +466,7 @@
             "availableLanguage": "Portuguese"
         },
         "sameAs": [
-            "https://www.facebook.com/tipgabriel",
-            "https://www.instagram.com/tipgabriel",
-            "https://t.me/tipgabriel"
+            "https://www.instagram.com/megatip_oficial"
         ]
     }
     </script>
@@ -536,6 +531,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalAcertosElement = document.getElementById('total-acertos');
     const statusGrupoElement = document.getElementById('status-grupo');
 
+    // Função para verificar se há números válidos (acima de 0)
+    function temNumerosValidos(numeros) {
+        return numeros.some(num => num > 0);
+    }
+
     // Função para atualizar números oficiais (será chamada após o sorteio)
     function atualizarNumerosOficiais(novosNumeros) {
         numerosSorteados = novosNumeros;
@@ -544,16 +544,26 @@ document.addEventListener('DOMContentLoaded', function() {
         numerosElementos.forEach((elemento, index) => {
             if (index < novosNumeros.length) {
                 elemento.textContent = novosNumeros[index].toString().padStart(2, '0');
-                elemento.classList.add('sorteado');
+                // Só adiciona a classe "sorteado" se o número for maior que 0
+                if (novosNumeros[index] > 0) {
+                    elemento.classList.add('sorteado');
+                } else {
+                    elemento.classList.remove('sorteado');
+                }
             }
         });
         
-        statusSorteio.innerHTML = '<p class="text-green-400"><i class="fas fa-check mr-2"></i>Sorteio oficial realizado!</p>';
+        // Atualiza mensagem de status baseado nos números
+        if (temNumerosValidos(novosNumeros)) {
+            statusSorteio.innerHTML = '<p class="text-green-400"><i class="fas fa-check mr-2"></i>Sorteio oficial realizado!</p>';
+        } else {
+            statusSorteio.innerHTML = '<p class="text-yellow-400"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>';
+        }
     }
 
     // Função para verificar se um bilhete é vencedor (6 acertos)
     function verificarVencedor(bilheteNumeros) {
-        if (numerosSorteados.length === 0 || numerosSorteados[0] === 0) return 0;
+        if (!temNumerosValidos(numerosSorteados)) return 0;
         
         const numerosBilhete = bilheteNumeros.split(',').map(num => parseInt(num.trim()));
         return numerosBilhete.filter(num => numerosSorteados.includes(num)).length;
@@ -561,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para verificar todos os bilhetes
     btnVerificarBilhetes.addEventListener('click', function() {
-        if (numerosSorteados[0] === 0) {
+        if (!temNumerosValidos(numerosSorteados)) {
             statusSorteio.innerHTML = '<p class="text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando sorteio oficial da Caixa!</p>';
             return;
         }
@@ -670,7 +680,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const numerosArray = ticket.numbers.split(', ');
             const numerosHTML = numerosArray.map(num => {
                 const numero = parseInt(num);
-                const isAcerto = numerosSorteados.includes(numero);
+                const isAcerto = temNumerosValidos(numerosSorteados) && numerosSorteados.includes(numero);
                 return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
             }).join('');
 
@@ -733,9 +743,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Após sorteio oficial, atualize com números reais:
-atualizarNumerosOficiais([0, 00, 00, 00, 00, 00]);
+    // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
+    // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
+    // atualizarNumerosOficiais([5, 12, 23, 34, 45, 56]);
 });
 </script>
 </body>
-</html>
+    </html> 
