@@ -112,7 +112,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        .numero-input {
+        .numero-oficial {
             display: inline-block;
             width: 45px;
             height: 45px;
@@ -127,10 +127,10 @@
             color: #1a202c;
         }
 
-        .numero-input:focus {
-            border-color: #48bb78;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.3);
+        .numero-oficial.sorteado {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            color: white;
+            border-color: #00b09b;
         }
 
         .numero-acerto {
@@ -155,6 +155,20 @@
             font-weight: bold;
             font-size: 12px;
             transform: rotate(5deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .badge-vencedor {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #ff0000, #ff6b6b);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 12px;
+            transform: rotate(-5deg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
@@ -219,7 +233,7 @@
                     <div class="bg-gray-800 p-4 rounded-lg">
                         <i class="fas fa-trophy text-yellow-400 text-2xl mb-2"></i>
                         <h3 class="font-bold">Premiação Compartilhada</h3>
-                        <p>Ganhou? Todo mundo ganha junto — a vitória é do grupo!</p>
+                        <p>Uma aposta ganha? Todos ganham! A vitória é do grupo inteiro!</p>
                     </div>
 
                     <div class="bg-gray-800 p-4 rounded-lg">
@@ -245,14 +259,14 @@
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
                     
-                    <!-- Inputs para os números oficiais -->
-                    <div class="flex justify-center flex-wrap gap-3 mb-6" id="inputs-numeros">
-                        <input type="number" min="1" max="60" class="numero-input" placeholder="01">
-                        <input type="number" min="1" max="60" class="numero-input" placeholder="02">
-                        <input type="number" min="1" max="60" class="numero-input" placeholder="03">
-                        <input type="number" min="1" max="60" class="numero-input" placeholder="04">
-                        <input type="number" min="1" max="60" class="numero-input" placeholder="05">
-                        <input type="number" min="1" max="60" class="numero-input" placeholder="06">
+                    <!-- Números oficiais fixos -->
+                    <div class="flex justify-center flex-wrap gap-3 mb-6" id="numeros-oficiais">
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
                     </div>
                     
                     <div class="flex justify-center mb-6">
@@ -262,21 +276,29 @@
                     </div>
                     
                     <div id="status-sorteio" class="text-lg">
-                        <p class="text-yellow-400"><i class="fas fa-info-circle mr-2"></i>Insira os números oficiais da Caixa</p>
+                        <p class="text-yellow-400"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>
                     </div>
                 </div>
                 
                 <div id="resultado-verificacao" class="mt-6 hidden">
-                    <h4 class="text-xl font-bold mb-4 text-center">Resultado da Verificação</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <h4 class="text-xl font-bold mb-4 text-center">🎉 Resultado da Verificação 🎉</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-gray-700 p-4 rounded">
-                            <p class="font-bold">Bilhetes Premiados:</p>
-                            <p id="total-premiados" class="text-2xl text-green-400">0</p>
+                            <p class="font-bold">Bilhete Vencedor:</p>
+                            <p id="bilhete-vencedor" class="text-2xl text-green-400">Não identificado</p>
                         </div>
                         <div class="bg-gray-700 p-4 rounded">
-                            <p class="font-bold">Valor do Prêmio:</p>
-                            <p id="valor-premio" class="text-2xl text-yellow-400">R$ 0,00</p>
+                            <p class="font-bold">Total de Acertos:</p>
+                            <p id="total-acertos" class="text-2xl text-yellow-400">0 acertos</p>
                         </div>
+                        <div class="bg-gray-700 p-4 rounded">
+                            <p class="font-bold">Status do Grupo:</p>
+                            <p id="status-grupo" class="text-2xl text-blue-400">Aguardando</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-green-900 bg-opacity-30 p-4 rounded">
+                        <p class="text-center font-bold text-lg">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
+                        <p class="text-center mt-2">Um bilhete ganhou? O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
                     </div>
                 </div>
             </div>
@@ -295,7 +317,7 @@
                         </div>
                         <h3 class="text-xl font-bold">Valor da Cota</h3>
                     </div>
-                    <p>Cada cota tem valor fixo de <span class="text-green-400 font-bold">R$ 5,00</span>. Cada participante pode adquirir apenas 1 bilhete, garantindo igualdade entre todos os membros do grupo.</p>
+                    <p>Cada cota tem valor fixo de <span class="text-green-400 font-bold">R$ 5,00</span>. Cada participante adquire seu bilhete individual.</p>
                 </div>
 
                 <div class="bg-gray-800 p-6 rounded-lg card-hover">
@@ -305,7 +327,7 @@
                         </div>
                         <h3 class="text-xl font-bold">Pagamento</h3>
                     </div>
-                   <p><strong>Atenção:</strong> o prazo final para pagamento é até às <strong>23h59 do dia 25/12/2025</strong>. Participantes que não realizarem o pagamento dentro do prazo serão automaticamente <strong>desclassificados e removidos do grupo.</strong></p>
+                   <p><strong>Atenção:</strong> o prazo final para pagamento é até às <strong>23h59 do dia 25/12/2025</strong>. Participantes que não realizarem o pagamento dentro do prazo serão automaticamente <strong>desclassificados.</strong></p>
                 </div>
 
                 <div class="bg-gray-800 p-6 rounded-lg card-hover">
@@ -315,28 +337,28 @@
                         </div>
                         <h3 class="text-xl font-bold">Premiação</h3>
                     </div>
-                    <p>O valor total arrecadado será dividido igualmente entre todos os participantes.</p>
+                    <p><strong>UM GANHA, TODOS GANHAM!</strong> Se qualquer bilhete do grupo for premiado, todos os participantes recebem seu prêmio individual completo. Multiplicamos as chances!</p>
                 </div>
 
                 <div class="bg-gray-800 p-6 rounded-lg card-hover">
                     <div class="flex items-center mb-4">
                         <div class="bg-yellow-500 text-black rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                            <i class="fas fa-ban"></i>
+                            <i class="fas fa-users"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Restrições</h3>
+                        <h3 class="text-xl font-bold">Estratégia do Grupo</h3>
                     </div>
-                    <p>É proibida a participação de menores de 18 anos. Em caso de cancelamento do evento, o valor das apostas será devolvido integralmente para cada participante.</p>
+                    <p>Cada bilhete é uma aposta individual. Com vários bilhetes diferentes, aumentamos exponencialmente nossas chances de acertar os números sorteados!</p>
                 </div>
             </div>
 
             <div class="mt-12 text-center">
-                <h3 class="text-2xl font-bold mb-6">Como Participar</h3>
+                <h3 class="text-2xl font-bold mb-6">Como Funciona</h3>
                 <ol class="list-decimal list-inside text-left max-w-2xl mx-auto space-y-4 bg-gray-800 p-6 rounded-lg">
-                    <li>Entre em contato com nosso administrador pelo WhatsApp.</li>
-                    <li>Informe seu nome completo para registrar a participação.</li>
-                    <li>Realize o pagamento via PIX.</li>
-                    <li>Receba sua confirmação e bilhete digital.</li>
-                    <li>Acompanhe os resultados e atualizações no grupo MegaTIP.</li>
+                    <li><strong>Cada participante</strong> adquire seu bilhete individual por R$ 5,00</li>
+                    <li><strong>Cada bilhete</strong> tem números diferentes dos demais</li>
+                    <li><strong>Se UM bilhete ganhar</strong>, TODOS os participantes ganham</li>
+                    <li><strong>Cada um recebe</strong> o prêmio integral da sua aposta</li>
+                    <li><strong>Mais bilhetes</strong> = Mais chances de alguém acertar!</li>
                 </ol>
             </div>
         </div>
@@ -457,8 +479,10 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // ========== VARIÁVEIS GLOBAIS ==========
-    let numerosSorteados = [];
-    let bilhetesPremiados = [];
+    // Números oficiais da Mega da Virada - serão atualizados após o sorteio
+    let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
+    let bilheteVencedor = null;
+    let grupoGanhou = false;
 
     // ========== MENU MOBILE ==========
     const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -506,26 +530,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========== SISTEMA DE VERIFICAÇÃO ==========
     const btnVerificarBilhetes = document.getElementById('btn-verificar-bilhetes');
-    const numeroInputs = document.querySelectorAll('.numero-input');
     const statusSorteio = document.getElementById('status-sorteio');
     const resultadoVerificacao = document.getElementById('resultado-verificacao');
-    const totalPremiados = document.getElementById('total-premiados');
-    const valorPremio = document.getElementById('valor-premio');
+    const bilheteVencedorElement = document.getElementById('bilhete-vencedor');
+    const totalAcertosElement = document.getElementById('total-acertos');
+    const statusGrupoElement = document.getElementById('status-grupo');
 
-    // Função para obter números dos inputs
-    function obterNumerosSorteados() {
-        const numeros = [];
-        numeroInputs.forEach(input => {
-            if (input.value && input.value >= 1 && input.value <= 60) {
-                numeros.push(parseInt(input.value));
+    // Função para atualizar números oficiais (será chamada após o sorteio)
+    function atualizarNumerosOficiais(novosNumeros) {
+        numerosSorteados = novosNumeros;
+        const numerosElementos = document.querySelectorAll('.numero-oficial');
+        
+        numerosElementos.forEach((elemento, index) => {
+            if (index < novosNumeros.length) {
+                elemento.textContent = novosNumeros[index].toString().padStart(2, '0');
+                elemento.classList.add('sorteado');
             }
         });
-        return numeros.sort((a, b) => a - b);
+        
+        statusSorteio.innerHTML = '<p class="text-green-400"><i class="fas fa-check mr-2"></i>Sorteio oficial realizado!</p>';
     }
 
-    // Função para verificar acertos em um bilhete
-    function verificarAcertos(bilheteNumeros) {
-        if (numerosSorteados.length === 0) return 0;
+    // Função para verificar se um bilhete é vencedor (6 acertos)
+    function verificarVencedor(bilheteNumeros) {
+        if (numerosSorteados.length === 0 || numerosSorteados[0] === 0) return 0;
         
         const numerosBilhete = bilheteNumeros.split(',').map(num => parseInt(num.trim()));
         return numerosBilhete.filter(num => numerosSorteados.includes(num)).length;
@@ -533,36 +561,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para verificar todos os bilhetes
     btnVerificarBilhetes.addEventListener('click', function() {
-        numerosSorteados = obterNumerosSorteados();
-        
-        if (numerosSorteados.length !== 6) {
-            statusSorteio.innerHTML = '<p class="text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Preencha todos os 6 números!</p>';
+        if (numerosSorteados[0] === 0) {
+            statusSorteio.innerHTML = '<p class="text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando sorteio oficial da Caixa!</p>';
             return;
         }
 
-        bilhetesPremiados = [];
-        let totalAcertos = 0;
+        bilheteVencedor = null;
+        grupoGanhou = false;
+        let maxAcertos = 0;
 
+        // Verificar cada bilhete
         sampleTickets.forEach(ticket => {
-            const acertos = verificarAcertos(ticket.numbers);
-            if (acertos > 0) {
-                bilhetesPremiados.push({
-                    id: ticket.id,
-                    acertos: acertos,
-                    nome: ticket.assignedName
-                });
-                totalAcertos += acertos;
+            const acertos = verificarVencedor(ticket.numbers);
+            if (acertos > maxAcertos) {
+                maxAcertos = acertos;
+            }
+            if (acertos === 6) {
+                bilheteVencedor = ticket;
+                grupoGanhou = true;
             }
         });
 
-        // Atualizar interface
-        totalPremiados.textContent = bilhetesPremiados.length;
-        const valorTotal = bilhetesPremiados.length > 0 ? (sampleTickets.length * 5) / bilhetesPremiados.length : 0;
-        valorPremio.textContent = `R$ ${valorTotal.toFixed(2)}`;
-        
+        // Atualizar interface com resultados
+        if (grupoGanhou && bilheteVencedor) {
+            bilheteVencedorElement.textContent = `#${bilheteVencedor.id.toString().padStart(4, '0')} - ${bilheteVencedor.assignedName}`;
+            totalAcertosElement.textContent = "6 ACERTOS!";
+            statusGrupoElement.textContent = "VENCEDOR!";
+            statusGrupoElement.className = "text-2xl text-green-400";
+        } else {
+            bilheteVencedorElement.textContent = "Nenhum bilhete com 6 acertos";
+            totalAcertosElement.textContent = `${maxAcertos} acertos (máximo)`;
+            statusGrupoElement.textContent = "Aguardando próximo sorteio";
+            statusGrupoElement.className = "text-2xl text-yellow-400";
+        }
+
         resultadoVerificacao.classList.remove('hidden');
-        statusSorteio.innerHTML = `<p class="text-green-400"><i class="fas fa-trophy mr-2"></i>${bilhetesPremiados.length} bilhete(s) premiado(s)!</p>`;
-        
         atualizarBilhetes();
     });
 
@@ -589,18 +622,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const uniqueRandomNames = shuffleArray([...participantNames]);
 
+    // Gerar números aleatórios para os bilhetes
+    function gerarNumerosBilhete() {
+        const numeros = [];
+        while (numeros.length < 6) {
+            const numero = Math.floor(Math.random() * 60) + 1;
+            if (!numeros.includes(numero)) {
+                numeros.push(numero);
+            }
+        }
+        return numeros.sort((a, b) => a - b).join(', ');
+    }
+
     const sampleTickets = [
-        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
-        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando números.", assignedName: "" },
+        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
     ];
 
     // Atribuir nomes aos bilhetes
@@ -615,39 +660,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
             const ticket = sampleTickets[i];
-            const bilhetePremiado = bilhetesPremiados.find(bp => bp.id === ticket.id);
-            const acertos = bilhetePremiado ? bilhetePremiado.acertos : 0;
+            const acertos = verificarVencedor(ticket.numbers);
+            const isVencedor = grupoGanhou && bilheteVencedor && bilheteVencedor.id === ticket.id;
+            const isGrupoVencedor = grupoGanhou;
 
             const ticketElement = document.createElement('div');
-            ticketElement.className = `ticket card-hover ${acertos > 0 ? 'premiado' : ''}`;
+            ticketElement.className = `ticket card-hover ${isGrupoVencedor ? 'premiado' : ''}`;
             
-            let numerosHTML = '';
-            
-            if (ticket.numbers === "Aguardando números.") {
-                numerosHTML = `<p class="text-center text-yellow-300 italic">Aguardando números...</p>`;
-            } else {
-                const numerosArray = ticket.numbers.split(', ');
-                numerosHTML = numerosArray.map(num => {
-                    const numero = parseInt(num);
-                    const isAcerto = numerosSorteados.includes(numero);
-                    return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
-                }).join('');
-            }
+            const numerosArray = ticket.numbers.split(', ');
+            const numerosHTML = numerosArray.map(num => {
+                const numero = parseInt(num);
+                const isAcerto = numerosSorteados.includes(numero);
+                return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
+            }).join('');
 
             ticketElement.innerHTML = `
                 <div class="ticket-stripes"></div>
-                ${acertos > 0 ? '<div class="badge-premiado">🎉 PREMIADO</div>' : ''}
+                ${isVencedor ? '<div class="badge-vencedor">🎯 BILHETE VENCEDOR</div>' : ''}
+                ${isGrupoVencedor && !isVencedor ? '<div class="badge-premiado">🏆 GRUPO VENCEDOR</div>' : ''}
                 <div class="flex justify-between items-center mb-2">
                     <h3 class="font-bold text-lg">${ticket.event}</h3>
                     <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
                 </div>
                 <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
                 <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
-                    <p class="text-sm mb-2 text-center">Números:</p>
+                    <p class="text-sm mb-2 text-center">Números do Bilhete:</p>
                     <div class="numeros-container">
                         ${numerosHTML}
                     </div>
                     ${acertos > 0 ? `<p class="text-center mt-2 text-green-300 font-bold">${acertos} acerto(s)</p>` : ''}
+                    ${isGrupoVencedor ? `<p class="text-center mt-1 text-yellow-300 font-bold">🎉 PRÊMIO GARANTIDO! 🎉</p>` : ''}
                 </div>
                 <div class="flex justify-between text-sm">
                     <span><i class="fas fa-user mr-1"></i>${ticket.assignedName}</span>
@@ -690,6 +732,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Após sorteio oficial, atualize com números reais:
+atualizarNumerosOficiais([0, 00, 00, 00, 00, 00]);
 });
 </script>
 </body>
