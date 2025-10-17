@@ -35,6 +35,17 @@
             overflow: hidden;
         }
 
+        .ticket.premiado {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
         .ticket::before {
             content: "";
             position: absolute;
@@ -86,6 +97,44 @@
             max-height: 300px;
             opacity: 1;
         }
+
+        .numero-sorteio {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            border-radius: 50%;
+            margin: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .numero-acerto {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            80% { transform: translateY(-5px); }
+        }
+
+        .badge-premiado {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: gold;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 12px;
+            transform: rotate(5deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body class="text-white">
@@ -99,6 +148,7 @@
             <!-- Menu Desktop -->
             <nav class="hidden md:flex space-x-6">
                 <a href="#inicio" class="hover:text-green-400 transition">Início</a>
+                <a href="#resultado" class="hover:text-green-400 transition">Resultado</a>
                 <a href="#regras" class="hover:text-green-400 transition">Regras</a>
                 <a href="#galeria" class="hover:text-green-400 transition">Galeria</a>
                 <a href="#contato" class="hover:text-green-400 transition">Contato</a>
@@ -114,6 +164,7 @@
         <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-black bg-opacity-95 py-4 px-6 md:hidden">
             <nav class="flex flex-col space-y-4">
                 <a href="#inicio" class="hover:text-green-400 transition py-2 border-b border-gray-700">Início</a>
+                <a href="#resultado" class="hover:text-green-400 transition py-2 border-b border-gray-700">Resultado</a>
                 <a href="#regras" class="hover:text-green-400 transition py-2 border-b border-gray-700">Regras</a>
                 <a href="#galeria" class="hover:text-green-400 transition py-2 border-b border-gray-700">Galeria</a>
                 <a href="#contato" class="hover:text-green-400 transition py-2">Contato</a>
@@ -150,6 +201,49 @@
                 <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
                     Participar Agora
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova Seção: Resultado da Mega da Virada -->
+    <section id="resultado" class="py-16 px-4 bg-black bg-opacity-70">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Resultado Mega da Virada 2025</h2>
+            
+            <div class="bg-gray-800 rounded-lg p-8 mb-8">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold mb-4">Números Sorteados</h3>
+                    <div id="numeros-sorteados" class="flex justify-center flex-wrap mb-6">
+                        <!-- Os números sorteados serão inseridos aqui via JavaScript -->
+                    </div>
+                    
+                    <div class="flex justify-center space-x-4 mb-6">
+                        <button id="btn-simular-sorteio" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded transition">
+                            Simular Sorteio
+                        </button>
+                        <button id="btn-verificar-bilhetes" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded transition">
+                            Verificar Bilhetes
+                        </button>
+                    </div>
+                    
+                    <div id="status-sorteio" class="text-lg">
+                        <p class="text-yellow-400"><i class="fas fa-clock mr-2"></i>Aguardando sorteio...</p>
+                    </div>
+                </div>
+                
+                <div id="resultado-verificacao" class="mt-6 hidden">
+                    <h4 class="text-xl font-bold mb-4 text-center">Resultado da Verificação</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-700 p-4 rounded">
+                            <p class="font-bold">Bilhetes Premiados:</p>
+                            <p id="total-premiados" class="text-2xl text-green-400">0</p>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded">
+                            <p class="font-bold">Valor do Prêmio:</p>
+                            <p id="valor-premio" class="text-2xl text-yellow-400">R$ 0,00</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -215,16 +309,17 @@
 
     <section id="galeria" class="py-16 px-4">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl font-bold text-center mb-12">Nossos jogos</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tickets-gallery">
-                </div>
+                <!-- Os bilhetes serão carregados aqui -->
+            </div>
 
             <div class="flex justify-center mt-12">
-    <button id="load-more" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-md transition">
-        Carregar Mais Bilhetes
-    </button>
-</div>
+                <button id="load-more" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded-md transition">
+                    Carregar Mais Bilhetes
+                </button>
+            </div>
         </div>
     </section>
 
@@ -296,7 +391,8 @@
 
             <p class="mb-2">MegaTIP - Apostas e Bolão</p>
             <p class="text-sm opacity-75" id="copyright">
-                </p>
+                <!-- Copyright será preenchido via JavaScript -->
+            </p>
         </div>
     </footer>
 
@@ -325,12 +421,15 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // ========== VARIÁVEIS GLOBAIS ==========
+    let numerosSorteados = [];
+    let bilhetesPremiados = [];
+
     // ========== MENU MOBILE ==========
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     let isMenuOpen = false;
 
-    // Função para abrir/fechar o menu mobile
     function toggleMobileMenu() {
         isMenuOpen = !isMenuOpen;
         
@@ -343,14 +442,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event listener para o botão do menu - CORREÇÃO AQUI
     mobileMenuButton.addEventListener('click', function(e) {
-        e.preventDefault(); // Previne qualquer comportamento padrão
-        e.stopPropagation(); // Previne propagação do evento
+        e.preventDefault();
+        e.stopPropagation();
         toggleMobileMenu();
     });
 
-    // Fechar menu ao clicar em um link do menu mobile
     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -360,7 +457,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Fechar menu ao clicar fora dele
     document.addEventListener('click', function(e) {
         if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
             mobileMenu.classList.remove('active');
@@ -372,6 +468,91 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== COPYRIGHT ==========
     const year = new Date().getFullYear();
     document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Não somos filiados à Caixa Econômica Federal.`;
+
+    // ========== SISTEMA DE SORTEIO E VERIFICAÇÃO ==========
+    const btnSimularSorteio = document.getElementById('btn-simular-sorteio');
+    const btnVerificarBilhetes = document.getElementById('btn-verificar-bilhetes');
+    const numerosSorteadosContainer = document.getElementById('numeros-sorteados');
+    const statusSorteio = document.getElementById('status-sorteio');
+    const resultadoVerificacao = document.getElementById('resultado-verificacao');
+    const totalPremiados = document.getElementById('total-premiados');
+    const valorPremio = document.getElementById('valor-premio');
+
+    // Função para gerar números aleatórios únicos
+    function gerarNumerosSorteados() {
+        const numeros = [];
+        while (numeros.length < 6) {
+            const numero = Math.floor(Math.random() * 60) + 1;
+            if (!numeros.includes(numero)) {
+                numeros.push(numero);
+            }
+        }
+        return numeros.sort((a, b) => a - b);
+    }
+
+    // Função para exibir números sorteados
+    function exibirNumerosSorteados(numeros) {
+        numerosSorteadosContainer.innerHTML = '';
+        numeros.forEach(numero => {
+            const span = document.createElement('span');
+            span.className = 'numero-sorteio';
+            span.textContent = numero.toString().padStart(2, '0');
+            numerosSorteadosContainer.appendChild(span);
+        });
+    }
+
+    // Função para simular sorteio
+    btnSimularSorteio.addEventListener('click', function() {
+        numerosSorteados = gerarNumerosSorteados();
+        exibirNumerosSorteados(numerosSorteados);
+        statusSorteio.innerHTML = '<p class="text-green-400"><i class="fas fa-check mr-2"></i>Sorteio realizado!</p>';
+        resultadoVerificacao.classList.add('hidden');
+        
+        // Resetar bilhetes premiados
+        bilhetesPremiados = [];
+        atualizarBilhetes();
+    });
+
+    // Função para verificar acertos em um bilhete
+    function verificarAcertos(bilheteNumeros) {
+        if (numerosSorteados.length === 0) return 0;
+        
+        const numerosBilhete = bilheteNumeros.split(',').map(num => parseInt(num.trim()));
+        return numerosBilhete.filter(num => numerosSorteados.includes(num)).length;
+    }
+
+    // Função para verificar todos os bilhetes
+    btnVerificarBilhetes.addEventListener('click', function() {
+        if (numerosSorteados.length === 0) {
+            statusSorteio.innerHTML = '<p class="text-red-400"><i class="fas fa-exclamation-triangle mr-2"></i>Realize o sorteio primeiro!</p>';
+            return;
+        }
+
+        bilhetesPremiados = [];
+        let totalAcertos = 0;
+
+        sampleTickets.forEach(ticket => {
+            const acertos = verificarAcertos(ticket.numbers);
+            if (acertos > 0) {
+                bilhetesPremiados.push({
+                    id: ticket.id,
+                    acertos: acertos,
+                    nome: ticket.assignedName
+                });
+                totalAcertos += acertos;
+            }
+        });
+
+        // Atualizar interface
+        totalPremiados.textContent = bilhetesPremiados.length;
+        const valorTotal = bilhetesPremiados.length > 0 ? (sampleTickets.length * 5) / bilhetesPremiados.length : 0;
+        valorPremio.textContent = `R$ ${valorTotal.toFixed(2)}`;
+        
+        resultadoVerificacao.classList.remove('hidden');
+        statusSorteio.innerHTML = `<p class="text-green-400"><i class="fas fa-trophy mr-2"></i>${bilhetesPremiados.length} bilhete(s) premiado(s)!</p>`;
+        
+        atualizarBilhetes();
+    });
 
     // ========== GALERIA DE BILHETES ==========
     const ticketsGallery = document.getElementById('tickets-gallery');
@@ -396,44 +577,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const uniqueRandomNames = shuffleArray([...participantNames]);
 
+    // Gerar números aleatórios para os bilhetes
+    function gerarNumerosBilhete() {
+        const numeros = [];
+        while (numeros.length < 6) {
+            const numero = Math.floor(Math.random() * 60) + 1;
+            if (!numeros.includes(numero)) {
+                numeros.push(numero);
+            }
+        }
+        return numeros.sort((a, b) => a - b).join(', ');
+    }
+
     const sampleTickets = [
-        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
-        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: "Aguardando sorteio..." },
+        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
+        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
     ];
+
+    // Atribuir nomes aos bilhetes
+    sampleTickets.forEach((ticket, index) => {
+        ticket.assignedName = uniqueRandomNames[index % uniqueRandomNames.length];
+    });
 
     let displayedTickets = 3;
 
-    function displayTickets() {
+    function atualizarBilhetes() {
         ticketsGallery.innerHTML = '';
 
         for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
             const ticket = sampleTickets[i];
-            const assignedName = uniqueRandomNames[i % uniqueRandomNames.length];
+            const bilhetePremiado = bilhetesPremiados.find(bp => bp.id === ticket.id);
+            const acertos = bilhetePremiado ? bilhetePremiado.acertos : 0;
 
             const ticketElement = document.createElement('div');
-            ticketElement.className = 'ticket card-hover';
+            ticketElement.className = `ticket card-hover ${acertos > 0 ? 'premiado' : ''}`;
+            
+            // Formatar números com destaque para acertos
+            const numerosFormatados = ticket.numbers.split(', ').map(num => {
+                const numero = parseInt(num);
+                const isAcerto = numerosSorteados.includes(numero);
+                return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
+            }).join('');
+
             ticketElement.innerHTML = `
                 <div class="ticket-stripes"></div>
+                ${acertos > 0 ? '<div class="badge-premiado">🎉 PREMIADO</div>' : ''}
                 <div class="flex justify-between items-center mb-2">
                     <h3 class="font-bold text-lg">${ticket.event}</h3>
                     <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
                 </div>
                 <p class="mb-2"><i class="far fa-calendar-alt mr-2"></i>${ticket.date}</p>
                 <div class="bg-black bg-opacity-30 p-3 rounded mb-3">
-                    <p class="text-sm mb-1">Números:</p>
-                    <p class="font-bold text-green-300">${ticket.numbers}</p>
+                    <p class="text-sm mb-2">Números:</p>
+                    <div class="flex flex-wrap justify-center">
+                        ${numerosFormatados}
+                    </div>
+                    ${acertos > 0 ? `<p class="text-center mt-2 text-green-300 font-bold">${acertos} acerto(s)</p>` : ''}
                 </div>
                 <div class="flex justify-between text-sm">
-                    <span><i class="fas fa-user mr-1"></i>${assignedName}</span>
+                    <span><i class="fas fa-user mr-1"></i>${ticket.assignedName}</span>
                     <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
                 </div>
             `;
@@ -450,15 +661,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadMoreButton.addEventListener('click', function() {
         displayedTickets = sampleTickets.length;
-        displayTickets();
+        atualizarBilhetes();
     });
 
-    displayTickets();
+    // Exibir bilhetes iniciais
+    atualizarBilhetes();
 
     // ========== SCROLL SUAVE ==========
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            // Não aplicar scroll suave para o botão do menu mobile
             if (this.id === 'mobile-menu-button') return;
             
             e.preventDefault();
