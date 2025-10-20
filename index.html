@@ -34,43 +34,46 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Estilo de ticket de cinema */
+        /* Estilo de ticket de cinema inspirado na imagem */
         .ticket {
-            background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
-            border-radius: 12px;
-            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            padding: 0;
             margin: 15px;
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
             color: #1e293b;
             position: relative;
             overflow: hidden;
-            border: 2px dashed #cbd5e1;
-            max-width: 320px;
-        }
-
-        .ticket::before, .ticket::after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #1e3a8a;
-            border-radius: 50%;
-            top: 50%;
-        }
-
-        .ticket::before {
-            left: -10px;
-        }
-
-        .ticket::after {
-            right: -10px;
+            border: 1px solid #cbd5e1;
+            max-width: 280px;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
         }
 
         .ticket-header {
-            border-bottom: 2px dashed #cbd5e1;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1e3a8a, #3730a3);
+            color: white;
+            padding: 15px;
             text-align: center;
+            border-bottom: 2px dashed #cbd5e1;
+        }
+
+        .ticket-body {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ticket-footer {
+            background: #f1f5f9;
+            padding: 10px 15px;
+            border-top: 2px dashed #cbd5e1;
+            text-align: center;
+            font-weight: bold;
+            color: #475569;
         }
 
         .ticket.premiado {
@@ -105,6 +108,11 @@
             background: rgba(23, 23, 23, 0.85);
             border-radius: 15px;
             border: 1px solid #374151;
+            /* Background image será adicionada posteriormente */
+            background-image: url('https://images.unsplash.com/photo-1531581147769-2ec2ae9ba937?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
         }
 
         .glow {
@@ -284,13 +292,56 @@
                 font-size: 12px;
             }
         }
+
+        /* Estilo específico para o design de ticket de cinema */
+        .ticket-title {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .ticket-subtitle {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .ticket-code {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: #e2e8f0;
+            padding: 5px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .ticket-perforation {
+            position: relative;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .ticket-perforation::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: transparent;
+            border-top: 2px dashed #cbd5e1;
+            transform: translateY(-50%);
+        }
     </style>
 </head>
 <body class="text-white">
     <header class="sticky top-0 z-50 bg-[#171717] py-4 px-6 border-b border-gray-700">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <i class="fas fa-ticket-alt text-[#f59e0b] text-2xl mr-2"></i>
+                <i class="fas fa-clover text-[#10b981] text-2xl mr-2"></i>
                 <h1 class="text-2xl font-bold">Mega<span class="text-[#f59e0b]">TIP</span></h1>
             </div>
 
@@ -527,14 +578,6 @@
                             <div>
                                 <p class="font-bold">WhatsApp</p>
                                 <p>(31) 98204-2552</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-[#10b981] text-xl mr-4"></i>
-                            <div>
-                                <p class="font-bold">E-mail</p>
-                                <p>gpazsant@proton.me</p>
                             </div>
                         </div>
 
@@ -863,28 +906,43 @@
                         return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
                     }).join('');
 
+                    // Gerar um código aleatório para o ticket (estilo cinema)
+                    const ticketCode = Math.random().toString(36).substring(2, 10).toUpperCase();
+
                     ticketElement.innerHTML = `
                         <div class="ticket-stripes"></div>
                         ${isVencedor ? '<div class="badge-vencedor">🎯 BILHETE VENCEDOR</div>' : ''}
                         ${isGrupoVencedor && !isVencedor ? '<div class="badge-premiado">🏆 GRUPO VENCEDOR</div>' : ''}
+                        
                         <div class="ticket-header">
-                            <h3 class="font-bold text-lg">${ticket.event}</h3>
-                            <p class="text-sm"><i class="far fa-calendar-alt mr-1"></i>${ticket.date}</p>
+                            <div class="ticket-title">T-I-C-K-E-T</div>
+                            <div class="ticket-subtitle">MEGA DA VIRADA</div>
+                            <div class="ticket-subtitle">ADMIT ONE</div>
                         </div>
-                        <div class="bg-white p-3 rounded mb-3 border border-gray-300">
-                            <p class="text-sm mb-2 text-center font-bold text-gray-700">Números do Bilhete</p>
-                            <div class="numeros-container">
-                                ${numerosHTML}
+                        
+                        <div class="ticket-body">
+                            <div class="text-center mb-4">
+                                <p class="font-bold text-lg">${ticket.assignedName}</p>
+                                <p class="text-sm text-gray-600">Bilhete #${ticket.id.toString().padStart(4, '0')}</p>
                             </div>
-                            ${acertos > 0 ? `<p class="text-center mt-2 text-green-600 font-bold">${acertos} acerto(s)</p>` : ''}
-                            ${isGrupoVencedor ? `<p class="text-center mt-1 text-yellow-600 font-bold">🎉 PRÊMIO GARANTIDO! 🎉</p>` : ''}
+                            
+                            <div class="ticket-perforation"></div>
+                            
+                            <div class="bg-gray-100 p-3 rounded mb-3 border border-gray-300">
+                                <p class="text-sm mb-2 text-center font-bold text-gray-700">Números da Sorte</p>
+                                <div class="numeros-container">
+                                    ${numerosHTML}
+                                </div>
+                                ${acertos > 0 ? `<p class="text-center mt-2 text-green-600 font-bold">${acertos} acerto(s)</p>` : ''}
+                            </div>
+                            
+                            <div class="ticket-code">
+                                CÓDIGO: ${ticketCode}
+                            </div>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-700">
-                            <span><i class="fas fa-user mr-1"></i>${ticket.assignedName}</span>
-                            <span><i class="fas fa-hashtag mr-1"></i>${ticket.id.toString().padStart(4, '0')}</span>
-                        </div>
-                        <div class="mt-3 text-center">
-                            <span class="bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded">R$ 5,00</span>
+                        
+                        <div class="ticket-footer">
+                            VALOR: R$ 5,00
                         </div>
                     `;
 
