@@ -180,10 +180,36 @@
             max-width: 240px;
             margin: 0 auto;
         }
+
+        /* Novos estilos para melhorar clareza dos resultados */
+        .resultado-vencedor {
+            background: linear-gradient(135deg, #00b09b, #96c93d);
+            border: 3px solid #00b09b;
+        }
+
+        .resultado-perdedor {
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            border: 3px solid #ff5e62;
+        }
+
+        .mensagem-vencedor {
+            background: rgba(0, 176, 155, 0.2);
+            border-left: 5px solid #00b09b;
+        }
+
+        .mensagem-perdedor {
+            background: rgba(255, 94, 98, 0.2);
+            border-left: 5px solid #ff5e62;
+        }
+
+        .bilhete-acertou {
+            border: 2px solid #00b09b;
+            box-shadow: 0 0 10px rgba(0, 176, 155, 0.5);
+        }
     </style>
 </head>
 <body class="text-white">
-    <header class="sticky top-0 z-50 bg-black bg-opacity-90 py-4 px-6">
+    <header class="sticky top-0 z-50 bg-[#171717] py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
                 <i class="fas fa-clover text-green-400 text-2xl mr-2"></i>
@@ -206,7 +232,7 @@
         </div>
 
         <!-- Menu Mobile -->
-        <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-black bg-opacity-95 py-4 px-6 md:hidden">
+        <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-[#171717] py-4 px-6 md:hidden">
             <nav class="flex flex-col space-y-4">
                 <a href="#inicio" class="hover:text-green-400 transition py-2 border-b border-gray-700">Início</a>
                 <a href="#resultado" class="hover:text-green-400 transition py-2 border-b border-gray-700">Resultado</a>
@@ -224,19 +250,19 @@
                 <p class="text-xl mb-8">Participe do nosso bolão exclusivo com cotas a partir de <span class="text-green-400 font-bold">R$ 5,00</span></p>
 
                 <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-10">
-                    <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="bg-[#171717] p-4 rounded-lg">
                         <i class="fas fa-users text-yellow-400 text-2xl mb-2"></i>
                         <h3 class="font-bold">Comunidade</h3>
                         <p>Jogue lado a lado com outros apostadores e faça parte da equipe MegaTIP.</p>
                     </div>
 
-                    <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="bg-[#171717] p-4 rounded-lg">
                         <i class="fas fa-trophy text-yellow-400 text-2xl mb-2"></i>
                         <h3 class="font-bold">Premiação Compartilhada</h3>
                         <p>Uma aposta ganha? Todos ganham! A vitória é do grupo inteiro!</p>
                     </div>
 
-                    <div class="bg-gray-800 p-4 rounded-lg">
+                    <div class="bg-[#171717] p-4 rounded-lg">
                         <i class="fas fa-shield-alt text-yellow-400 text-2xl mb-2"></i>
                         <h3 class="font-bold">Segurança</h3>
                         <p>Transações seguras e confiáveis, tudo sob controle MegaTIP.</p>
@@ -251,7 +277,7 @@
     </section>
 
     <!-- Seção: Resultado da Mega da Virada -->
-    <section id="resultado" class="py-16 px-4 bg-black bg-opacity-70">
+    <section id="resultado" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Resultado Mega da Virada 2025</h2>
             
@@ -281,31 +307,39 @@
                 </div>
                 
                 <div id="resultado-verificacao" class="mt-6 hidden">
-                    <h4 class="text-xl font-bold mb-4 text-center">🎉 Resultado da Verificação 🎉</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <h4 class="text-xl font-bold mb-4 text-center" id="titulo-resultado">🎉 Resultado da Verificação 🎉</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="resultado-cards">
                         <div class="bg-gray-700 p-4 rounded">
                             <p class="font-bold">Bilhete Vencedor:</p>
                             <p id="bilhete-vencedor" class="text-2xl text-green-400">Não identificado</p>
                         </div>
                         <div class="bg-gray-700 p-4 rounded">
                             <p class="font-bold">Total de Acertos:</p>
-                            <p id="total-acertos" class="text-2xl text-yellow-400">0 acertos</p>
+                            <p id="total-acertos" class="text-2xl text-red-400">0 acertos</p>
                         </div>
                         <div class="bg-gray-700 p-4 rounded">
                             <p class="font-bold">Status do Grupo:</p>
                             <p id="status-grupo" class="text-2xl text-blue-400">Aguardando</p>
                         </div>
                     </div>
-                    <div class="mt-4 bg-green-900 bg-opacity-30 p-4 rounded">
+                    <div id="mensagem-resultado" class="mt-4 bg-green-900 bg-opacity-30 p-4 rounded">
                         <p class="text-center font-bold text-lg">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
                         <p class="text-center mt-2">Um bilhete ganhou? O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
+                    </div>
+                    
+                    <!-- Seção para mostrar detalhes dos acertos -->
+                    <div id="detalhes-acertos" class="mt-6 hidden">
+                        <h5 class="text-lg font-bold mb-3 text-center">📊 Detalhes dos Acertos</h5>
+                        <div id="lista-bilhetes-acertos" class="space-y-3">
+                            <!-- Lista de bilhetes com acertos será preenchida aqui -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="regras" class="py-16 px-4 bg-black bg-opacity-70">
+    <section id="regras" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Regras do Bolão MegaTIP</h2>
 
@@ -364,7 +398,7 @@
         </div>
     </section>
 
-    <section id="galeria" class="py-16 px-4">
+    <section id="galeria" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
 
@@ -380,7 +414,7 @@
         </div>
     </section>
 
-    <section id="contato" class="py-16 px-4 bg-black bg-opacity-70">
+    <section id="contato" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Entre em Contato</h2>
 
@@ -530,6 +564,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const bilheteVencedorElement = document.getElementById('bilhete-vencedor');
     const totalAcertosElement = document.getElementById('total-acertos');
     const statusGrupoElement = document.getElementById('status-grupo');
+    const tituloResultado = document.getElementById('titulo-resultado');
+    const mensagemResultado = document.getElementById('mensagem-resultado');
+    const resultadoCards = document.getElementById('resultado-cards');
+    const detalhesAcertos = document.getElementById('detalhes-acertos');
+    const listaBilhetesAcertos = document.getElementById('lista-bilhetes-acertos');
 
     // Função para verificar se há números válidos (acima de 0)
     function temNumerosValidos(numeros) {
@@ -569,6 +608,84 @@ document.addEventListener('DOMContentLoaded', function() {
         return numerosBilhete.filter(num => numerosSorteados.includes(num)).length;
     }
 
+    // Função para atualizar a interface com os resultados
+    function atualizarInterfaceResultados(grupoGanhou, bilheteVencedor, maxAcertos, bilhetesComAcertos) {
+        // Limpar detalhes anteriores
+        listaBilhetesAcertos.innerHTML = '';
+        
+        if (grupoGanhou && bilheteVencedor) {
+            // Caso de vitória
+            tituloResultado.innerHTML = '🎉 PARABÉNS! VOCÊS GANHARAM! 🎉';
+            tituloResultado.className = 'text-xl font-bold mb-4 text-center text-green-400';
+            
+            bilheteVencedorElement.textContent = `#${bilheteVencedor.id.toString().padStart(4, '0')} - ${bilheteVencedor.assignedName}`;
+            totalAcertosElement.textContent = "6 ACERTOS!";
+            statusGrupoElement.textContent = "VENCEDOR!";
+            statusGrupoElement.className = "text-2xl text-green-400";
+            
+            // Atualizar cards com estilo de vencedor
+            resultadoCards.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 resultado-vencedor p-4 rounded-lg';
+            
+            // Atualizar mensagem
+            mensagemResultado.innerHTML = `
+                <p class="text-center font-bold text-2xl text-green-400">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
+                <p class="text-center mt-4 text-lg">🎯 <strong>${bilheteVencedor.assignedName}</strong> acertou os 6 números!</p>
+                <p class="text-center mt-2">🎉 O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
+                <p class="text-center mt-4 text-yellow-300 font-bold">💰 PRÊMIO GARANTIDO! 💰</p>
+            `;
+            mensagemResultado.className = 'mt-4 p-6 rounded-lg mensagem-vencedor';
+            
+            // Esconder detalhes de acertos parciais
+            detalhesAcertos.classList.add('hidden');
+        } else {
+            // Caso de não vitória
+            tituloResultado.innerHTML = '📊 RESULTADO DA VERIFICAÇÃO';
+            tituloResultado.className = 'text-xl font-bold mb-4 text-center text-yellow-400';
+            
+            bilheteVencedorElement.textContent = "Nenhum bilhete com 6 acertos";
+            totalAcertosElement.textContent = `${maxAcertos} acertos (máximo)`;
+            statusGrupoElement.textContent = "Aguardando próximo sorteio";
+            statusGrupoElement.className = "text-2xl text-yellow-400";
+            
+            // Atualizar cards com estilo de não vencedor
+            resultadoCards.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 resultado-perdedor p-4 rounded-lg';
+            
+            // Atualizar mensagem
+            mensagemResultado.innerHTML = `
+                <p class="text-center font-bold text-xl text-red-400">😔 INFELIZMENTE NÃO FOI DESSA VEZ</p>
+                <p class="text-center mt-2">Nenhum bilhete acertou os 6 números sorteados.</p>
+                <p class="text-center mt-4 text-yellow-300">📈 Continue participando para aumentar suas chances!</p>
+            `;
+            mensagemResultado.className = 'mt-4 p-6 rounded-lg mensagem-perdedor';
+            
+            // Mostrar detalhes de acertos parciais
+            if (bilhetesComAcertos.length > 0) {
+                detalhesAcertos.classList.remove('hidden');
+                
+                // Adicionar bilhetes com acertos à lista
+                bilhetesComAcertos.forEach(bilhete => {
+                    const bilheteItem = document.createElement('div');
+                    bilheteItem.className = 'bg-gray-700 p-3 rounded bilhete-acertou';
+                    bilheteItem.innerHTML = `
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="font-bold">${bilhete.assignedName}</p>
+                                <p class="text-sm">Bilhete #${bilhete.id.toString().padStart(4, '0')}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-green-400 font-bold text-lg">${bilhete.acertos} acerto(s)</p>
+                                <p class="text-xs">Números: ${bilhete.numbers}</p>
+                            </div>
+                        </div>
+                    `;
+                    listaBilhetesAcertos.appendChild(bilheteItem);
+                });
+            } else {
+                detalhesAcertos.classList.add('hidden');
+            }
+        }
+    }
+
     // Função para verificar todos os bilhetes
     btnVerificarBilhetes.addEventListener('click', function() {
         if (!temNumerosValidos(numerosSorteados)) {
@@ -579,6 +696,7 @@ document.addEventListener('DOMContentLoaded', function() {
         bilheteVencedor = null;
         grupoGanhou = false;
         let maxAcertos = 0;
+        let bilhetesComAcertos = [];
 
         // Verificar cada bilhete
         sampleTickets.forEach(ticket => {
@@ -590,20 +708,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 bilheteVencedor = ticket;
                 grupoGanhou = true;
             }
+            if (acertos > 0) {
+                bilhetesComAcertos.push({
+                    ...ticket,
+                    acertos: acertos
+                });
+            }
         });
 
+        // Ordenar bilhetes por número de acertos (maior primeiro)
+        bilhetesComAcertos.sort((a, b) => b.acertos - a.acertos);
+
         // Atualizar interface com resultados
-        if (grupoGanhou && bilheteVencedor) {
-            bilheteVencedorElement.textContent = `#${bilheteVencedor.id.toString().padStart(4, '0')} - ${bilheteVencedor.assignedName}`;
-            totalAcertosElement.textContent = "6 ACERTOS!";
-            statusGrupoElement.textContent = "VENCEDOR!";
-            statusGrupoElement.className = "text-2xl text-green-400";
-        } else {
-            bilheteVencedorElement.textContent = "Nenhum bilhete com 6 acertos";
-            totalAcertosElement.textContent = `${maxAcertos} acertos (máximo)`;
-            statusGrupoElement.textContent = "Aguardando próximo sorteio";
-            statusGrupoElement.className = "text-2xl text-yellow-400";
-        }
+        atualizarInterfaceResultados(grupoGanhou, bilheteVencedor, maxAcertos, bilhetesComAcertos);
 
         resultadoVerificacao.classList.remove('hidden');
         atualizarBilhetes();
@@ -616,7 +733,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const participantNames = [
         "Gabriel", "Melissa", "Beatriz", "Bryan", "Guedes",
         "John", "Kimyo", "Léo", "Olivier", "Paloma",
-        "Willian"
+        "Willian", "Carlos", "Ana", "Roberto" // Adicionados mais nomes para 14 participantes
     ];
 
     function shuffleArray(array) {
@@ -644,26 +761,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return numeros.sort((a, b) => a - b).join(', ');
     }
 
-    const sampleTickets = [
-        { id: 1, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 2, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 3, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 4, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 5, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 6, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 7, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 8, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 9, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 10, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-        { id: 11, event: "Mega da Virada", date: "25/12/2025", numbers: gerarNumerosBilhete(), assignedName: "" },
-    ];
+    // Criar 14 bilhetes (número atual de participantes)
+    const sampleTickets = Array.from({length: 14}, (_, i) => ({
+        id: i + 1,
+        event: "Mega da Virada",
+        date: "25/12/2025",
+        numbers: gerarNumerosBilhete(),
+        assignedName: ""
+    }));
 
     // Atribuir nomes aos bilhetes
     sampleTickets.forEach((ticket, index) => {
         ticket.assignedName = uniqueRandomNames[index % uniqueRandomNames.length];
     });
 
-    let displayedTickets = 3;
+    let displayedTickets = 6;
 
     function atualizarBilhetes() {
         ticketsGallery.innerHTML = '';
@@ -745,8 +857,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
     // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
-  atualizarNumerosOficiais([5, 12, 23, 34, 45, 56]);
+    // atualizarNumerosOficiais([5, 12, 23, 34, 45, 56]);
 });
 </script>
 </body>
-    </html> 
+</html>
