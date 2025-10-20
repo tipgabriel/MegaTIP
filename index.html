@@ -7,11 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
 
         :root {
             --color-primary: #171717;
-            --color-secondary: #f59e0b;
+            --color-secondary: #d4af37;
             --color-accent: #10b981;
             --color-text: #ffffff;
             --color-card: #262626;
@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #1e3a8a, #7c2d12, #15803d);
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
             min-height: 100vh;
             color: var(--color-text);
         }
@@ -31,69 +31,94 @@
 
         .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* NOVO ESTILO DE TICKET MEGA SENA DA VIRADA */
+        /* NOVO ESTILO ELEGANTE DE TICKET */
         .ticket {
-            background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
-            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 16px;
             padding: 0;
-            margin: 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            margin: 20px;
+            box-shadow: 
+                0 10px 25px rgba(0,0,0,0.15),
+                0 5px 10px rgba(0,0,0,0.05),
+                inset 0 1px 0 rgba(255,255,255,0.8);
             color: #1e293b;
             position: relative;
             overflow: hidden;
-            border: 2px solid #1e40af;
-            max-width: 300px;
-            min-height: 420px;
+            border: 1px solid rgba(255,255,255,0.3);
+            max-width: 320px;
+            min-height: 440px;
             display: flex;
             flex-direction: column;
         }
 
+        .ticket::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d4af37, #fbbf24, #d4af37);
+            z-index: 2;
+        }
+
         .ticket-header {
-            background: linear-gradient(135deg, #1e40af, #3730a3);
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             color: white;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            border-bottom: 3px solid #f59e0b;
             position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .ticket-header::after {
             content: "";
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: #f59e0b;
-            border-radius: 50%;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
         }
 
         .ticket-body {
-            padding: 20px;
+            padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(30, 64, 175, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+            position: relative;
+        }
+
+        .ticket-body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
         }
 
         .ticket-footer {
-            background: #1e293b;
-            color: white;
-            padding: 12px 15px;
+            background: #f8fafc;
+            padding: 15px 20px;
             text-align: center;
-            font-weight: bold;
-            border-top: 2px dashed #475569;
+            font-weight: 600;
+            border-top: 1px solid #e2e8f0;
+            color: #475569;
+            font-size: 0.9rem;
         }
 
         .ticket.premiado {
-            background: linear-gradient(to bottom, #d1fae5, #a7f3d0);
+            background: linear-gradient(145deg, #d1fae5, #ecfdf5);
             border-color: #10b981;
             animation: pulse 2s infinite;
         }
@@ -105,24 +130,21 @@
         }
 
         .ticket-stripes {
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(30, 64, 175, 0.05) 10px,
-                rgba(30, 64, 175, 0.05) 20px
-            );
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(212, 175, 55, 0.03) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(16, 185, 129, 0.03) 50%, transparent 52%);
+            background-size: 20px 20px;
             pointer-events: none;
         }
 
         .hero-section {
             background: rgba(23, 23, 23, 0.85);
-            border-radius: 15px;
+            border-radius: 20px;
             border: 1px solid #374151;
             background-image: url('https://images.unsplash.com/photo-1531581147769-2ec2ae9ba937?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
@@ -131,11 +153,11 @@
         }
 
         .glow {
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         .footer {
-            background: rgba(23, 23, 23, 0.9);
+            background: rgba(23, 23, 23, 0.95);
             border-top: 1px solid #374151;
         }
 
@@ -153,48 +175,58 @@
         }
 
         .numero-sorteio {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            background: linear-gradient(135deg, #1e40af, #3730a3);
-            border-radius: 50%;
-            margin: 3px;
+            display: inline-flex;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 12px;
+            margin: 4px;
             font-weight: bold;
             font-size: 16px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            box-shadow: 
+                0 4px 6px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.2);
             color: white;
-            border: 2px solid white;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .numero-sorteio:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
         .numero-oficial {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
+            display: inline-flex;
+            width: 52px;
+            height: 52px;
+            align-items: center;
+            justify-content: center;
             background: white;
             border: 2px solid #e2e8f0;
             border-radius: 50%;
-            margin: 5px;
+            margin: 6px;
             font-weight: bold;
             font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             color: #1e293b;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .numero-oficial.sorteado {
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border-color: #10b981;
+            transform: scale(1.1);
         }
 
         .numero-acerto {
-            background: linear-gradient(135deg, #dc2626, #ef4444);
+            background: linear-gradient(135deg, #d4af37, #fbbf24);
             animation: bounce 0.5s;
-            color: white;
-            border-color: #dc2626;
+            color: #1e293b;
+            border-color: #d4af37;
         }
 
         @keyframes bounce {
@@ -205,71 +237,71 @@
 
         .badge-premiado {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            padding: 5px 10px;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #d4af37, #fbbf24);
+            color: #1e293b;
+            padding: 8px 16px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 12px;
-            transform: rotate(5deg);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
             z-index: 10;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .badge-vencedor {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 15px;
+            left: 15px;
             background: linear-gradient(135deg, #dc2626, #ef4444);
             color: white;
-            padding: 5px 10px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 12px;
-            transform: rotate(-5deg);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
             z-index: 10;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .numeros-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 5px;
-            max-width: 260px;
+            gap: 6px;
+            max-width: 280px;
             margin: 0 auto;
         }
 
         /* Novos estilos para melhorar clareza dos resultados */
         .resultado-vencedor {
             background: linear-gradient(135deg, #10b981, #059669);
-            border: 3px solid #10b981;
+            border: 2px solid #10b981;
             color: white;
         }
 
         .resultado-perdedor {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            border: 3px solid #f59e0b;
-            color: white;
+            background: linear-gradient(135deg, #d4af37, #fbbf24);
+            border: 2px solid #d4af37;
+            color: #1e293b;
         }
 
         .mensagem-vencedor {
-            background: rgba(16, 185, 129, 0.2);
-            border-left: 5px solid #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
             color: white;
         }
 
         .mensagem-perdedor {
-            background: rgba(245, 158, 11, 0.2);
-            border-left: 5px solid #f59e0b;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
             color: white;
         }
 
         .bilhete-acertou {
             border: 2px solid #10b981;
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
 
         /* Estilo para o vídeo */
@@ -278,8 +310,8 @@
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
         }
 
         .video-container iframe {
@@ -295,7 +327,7 @@
         @media (max-width: 768px) {
             .ticket {
                 max-width: 100%;
-                margin: 10px 0;
+                margin: 15px 0;
             }
             
             .numeros-container {
@@ -303,94 +335,117 @@
             }
             
             .numero-sorteio {
-                width: 36px;
-                height: 36px;
-                line-height: 36px;
+                width: 40px;
+                height: 40px;
                 font-size: 14px;
             }
         }
 
-        /* Estilo específico para o design de ticket da Mega Sena */
+        /* Estilo específico para o design elegante de ticket */
         .ticket-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
 
         .ticket-subtitle {
             font-family: 'Montserrat', sans-serif;
             font-size: 14px;
+            opacity: 0.8;
             margin-bottom: 5px;
-            opacity: 0.9;
+            font-weight: 400;
         }
 
         .ticket-logo {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #d4af37;
         }
 
         .ticket-concurso {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 12px;
-            margin-top: 5px;
+            margin-top: 8px;
             display: inline-block;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .ticket-participante {
             background: white;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 15px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
+            border: 1px solid #f1f5f9;
         }
 
         .ticket-numeros-title {
-            font-weight: bold;
+            font-weight: 600;
             text-align: center;
-            margin-bottom: 10px;
-            color: #1e40af;
+            margin-bottom: 16px;
+            color: #1e293b;
             font-size: 16px;
+            letter-spacing: 0.5px;
         }
 
         .ticket-data {
             text-align: center;
-            font-size: 12px;
+            font-size: 13px;
             color: #64748b;
-            margin-top: 10px;
+            margin-top: 16px;
+            line-height: 1.5;
         }
 
         .ticket-valor {
             font-size: 18px;
             font-weight: bold;
-            color: #f59e0b;
+            color: #d4af37;
         }
 
         .ticket-codigo {
             font-family: 'Courier New', monospace;
-            font-size: 10px;
-            background: #e2e8f0;
-            padding: 5px;
-            border-radius: 4px;
-            margin-top: 10px;
+            font-size: 11px;
+            background: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 16px;
             text-align: center;
             color: #475569;
+            border: 1px solid #e2e8f0;
+            letter-spacing: 0.5px;
         }
 
         .ticket-garantia {
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            font-style: italic;
+            margin-top: 12px;
+            line-height: 1.4;
+        }
+
+        .ticket-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 20px 0;
+        }
+
+        .ticket-watermark {
             position: absolute;
             bottom: 60px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 10px;
-            color: #64748b;
-            font-style: italic;
+            right: 20px;
+            font-size: 60px;
+            opacity: 0.03;
+            color: #1e293b;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            transform: rotate(-15deg);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -398,18 +453,18 @@
     <header class="sticky top-0 z-50 bg-[#171717] py-4 px-6 border-b border-gray-700">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <i class="fas fa-clover text-[#10b981] text-2xl mr-2"></i>
-                <h1 class="text-2xl font-bold">Mega<span class="text-[#f59e0b]">TIP</span></h1>
+                <i class="fas fa-clover text-[#d4af37] text-2xl mr-2"></i>
+                <h1 class="text-2xl font-bold">Mega<span class="text-[#d4af37]">TIP</span></h1>
             </div>
 
             <!-- Menu Desktop -->
             <nav class="hidden md:flex space-x-6">
-                <a href="#inicio" class="hover:text-[#f59e0b] transition font-medium">Início</a>
-                <a href="#resultado" class="hover:text-[#f59e0b] transition font-medium">Resultado</a>
-                <a href="#video" class="hover:text-[#f59e0b] transition font-medium">Vídeo</a>
-                <a href="#regras" class="hover:text-[#f59e0b] transition font-medium">Regras</a>
-                <a href="#bilhetes" class="hover:text-[#f59e0b] transition font-medium">Bilhetes</a>
-                <a href="#contato" class="hover:text-[#f59e0b] transition font-medium">Contato</a>
+                <a href="#inicio" class="hover:text-[#d4af37] transition font-medium">Início</a>
+                <a href="#resultado" class="hover:text-[#d4af37] transition font-medium">Resultado</a>
+                <a href="#video" class="hover:text-[#d4af37] transition font-medium">Vídeo</a>
+                <a href="#regras" class="hover:text-[#d4af37] transition font-medium">Regras</a>
+                <a href="#bilhetes" class="hover:text-[#d4af37] transition font-medium">Bilhetes</a>
+                <a href="#contato" class="hover:text-[#d4af37] transition font-medium">Contato</a>
             </nav>
 
             <!-- Botão Menu Mobile -->
@@ -421,12 +476,12 @@
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-[#171717] py-4 px-6 md:hidden border-b border-gray-700">
             <nav class="flex flex-col space-y-4">
-                <a href="#inicio" class="hover:text-[#f59e0b] transition py-2 border-b border-gray-700 font-medium">Início</a>
-                <a href="#resultado" class="hover:text-[#f59e0b] transition py-2 border-b border-gray-700 font-medium">Resultado</a>
-                <a href="#video" class="hover:text-[#f59e0b] transition py-2 border-b border-gray-700 font-medium">Vídeo</a>
-                <a href="#regras" class="hover:text-[#f59e0b] transition py-2 border-b border-gray-700 font-medium">Regras</a>
-                <a href="#bilhetes" class="hover:text-[#f59e0b] transition py-2 border-b border-gray-700 font-medium">Bilhetes</a>
-                <a href="#contato" class="hover:text-[#f59e0b] transition py-2 font-medium">Contato</a>
+                <a href="#inicio" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Início</a>
+                <a href="#resultado" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Resultado</a>
+                <a href="#video" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Vídeo</a>
+                <a href="#regras" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Regras</a>
+                <a href="#bilhetes" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Bilhetes</a>
+                <a href="#contato" class="hover:text-[#d4af37] transition py-2 font-medium">Contato</a>
             </nav>
         </div>
     </header>
@@ -434,30 +489,30 @@
     <section id="inicio" class="py-16 px-4">
         <div class="container mx-auto max-w-4xl hero-section p-8">
             <div class="text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Bolão Mega<span class="text-[#f59e0b]">TIP</span></h2>
-                <p class="text-xl mb-8">Participe do nosso bolão exclusivo com cotas a partir de <span class="text-[#f59e0b] font-bold">R$ 5,00</span></p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Bolão Mega<span class="text-[#d4af37]">TIP</span></h2>
+                <p class="text-xl mb-8">Participe do nosso bolão exclusivo com cotas a partir de <span class="text-[#d4af37] font-bold">R$ 5,00</span></p>
 
                 <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-10">
                     <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
-                        <i class="fas fa-users text-[#f59e0b] text-2xl mb-2"></i>
+                        <i class="fas fa-users text-[#d4af37] text-2xl mb-2"></i>
                         <h3 class="font-bold">Comunidade</h3>
                         <p>Jogue lado a lado com outros apostadores e faça parte da equipe MegaTIP.</p>
                     </div>
 
                     <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
-                        <i class="fas fa-trophy text-[#f59e0b] text-2xl mb-2"></i>
+                        <i class="fas fa-trophy text-[#d4af37] text-2xl mb-2"></i>
                         <h3 class="font-bold">Premiação Compartilhada</h3>
                         <p>Uma aposta ganha? Todos ganham! A vitória é do grupo inteiro!</p>
                     </div>
 
                     <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
-                        <i class="fas fa-shield-alt text-[#f59e0b] text-2xl mb-2"></i>
+                        <i class="fas fa-shield-alt text-[#d4af37] text-2xl mb-2"></i>
                         <h3 class="font-bold">Segurança</h3>
                         <p>Transações seguras e confiáveis, tudo sob controle MegaTIP.</p>
                     </div>
                 </div>
 
-                <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="bg-[#f59e0b] hover:bg-[#d97706] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
+                <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
                     Participar Agora
                 </a>
             </div>
@@ -469,7 +524,7 @@
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Resultado Mega da Virada 2025</h2>
             
-            <div class="bg-[#262626] rounded-lg p-8 mb-8 border border-gray-700">
+            <div class="bg-[#262626] rounded-xl p-8 mb-8 border border-gray-700">
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
                     
@@ -490,27 +545,27 @@
                     </div>
                     
                     <div id="status-sorteio" class="text-lg">
-                        <p class="text-[#f59e0b]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>
+                        <p class="text-[#d4af37]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>
                     </div>
                 </div>
                 
                 <div id="resultado-verificacao" class="mt-6 hidden">
                     <h4 class="text-xl font-bold mb-4 text-center" id="titulo-resultado">🎉 Resultado da Verificação 🎉</h4>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="resultado-cards">
-                        <div class="bg-[#374151] p-4 rounded border border-gray-600">
+                        <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
                             <p class="font-bold">Bilhete Vencedor:</p>
                             <p id="bilhete-vencedor" class="text-2xl text-[#10b981]">Não identificado</p>
                         </div>
-                        <div class="bg-[#374151] p-4 rounded border border-gray-600">
+                        <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
                             <p class="font-bold">Total de Acertos:</p>
-                            <p id="total-acertos" class="text-2xl text-[#f59e0b]">0 acertos</p>
+                            <p id="total-acertos" class="text-2xl text-[#d4af37]">0 acertos</p>
                         </div>
-                        <div class="bg-[#374151] p-4 rounded border border-gray-600">
+                        <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
                             <p class="font-bold">Status do Grupo:</p>
                             <p id="status-grupo" class="text-2xl text-[#3b82f6]">Aguardando</p>
                         </div>
                     </div>
-                    <div id="mensagem-resultado" class="mt-4 bg-[#374151] p-4 rounded border border-gray-600">
+                    <div id="mensagem-resultado" class="mt-4 bg-[#374151] p-6 rounded-lg border border-gray-600">
                         <p class="text-center font-bold text-lg">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
                         <p class="text-center mt-2">Um bilhete ganhou? O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
                     </div>
@@ -532,10 +587,10 @@
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Vídeo do Sorteio</h2>
             
-            <div class="bg-[#262626] rounded-lg p-6 border border-gray-700">
+            <div class="bg-[#262626] rounded-xl p-6 border border-gray-700">
                 <div class="video-container">
                     <!-- Substitua o ID do vídeo pelo ID real do YouTube quando tiver -->
-                    <iframe src="https://www.youtube.com/watch?v=_qGbhF50Di0&list=RD_qGbhF50Di0&start_radio=1&t=2218s" 
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
                             title="Sorteio Mega da Virada" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -547,121 +602,18 @@
         </div>
     </section>
 
-    <section id="regras" class="py-16 px-4 bg-[#171717]">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-12">Regras do Bolão MegaTIP</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-[#262626] p-6 rounded-lg card-hover border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-[#f59e0b] text-[#171717] rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                            <i class="fas fa-money-bill-wave"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Valor da Cota</h3>
-                    </div>
-                    <p>Cada cota tem valor fixo de <span class="text-[#f59e0b] font-bold">R$ 5,00</span>. Cada participante adquire seu bilhete individual.</p>
-                </div>
-
-                <div class="bg-[#262626] p-6 rounded-lg card-hover border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-[#f59e0b] text-[#171717] rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Pagamento</h3>
-                    </div>
-                   <p><strong>Atenção:</strong> o prazo final para pagamento é até às <strong>23h59 do dia 25/12/2025</strong>. Participantes que não realizarem o pagamento dentro do prazo serão automaticamente <strong>desclassificados.</strong></p>
-                </div>
-
-                <div class="bg-[#262626] p-6 rounded-lg card-hover border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-[#f59e0b] text-[#171717] rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Premiação</h3>
-                    </div>
-                    <p><strong>UM GANHA, TODOS GANHAM!</strong> Se qualquer bilhete do grupo for premiado, todos os participantes recebem seu prêmio individual completo. Multiplicamos as chances!</p>
-                </div>
-
-                <div class="bg-[#262626] p-6 rounded-lg card-hover border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-[#f59e0b] text-[#171717] rounded-full w-10 h-10 flex items-center justify-center mr-4">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Estratégia do Grupo</h3>
-                    </div>
-                    <p>Cada bilhete é uma aposta individual. Com vários bilhetes diferentes, aumentamos exponencialmente nossas chances de acertar os números sorteados!</p>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <h3 class="text-2xl font-bold mb-6">Como Funciona</h3>
-                <ol class="list-decimal list-inside text-left max-w-2xl mx-auto space-y-4 bg-[#262626] p-6 rounded-lg border border-gray-700">
-                    <li><strong>Cada participante</strong> adquire seu bilhete individual por R$ 5,00</li>
-                    <li><strong>Cada bilhete</strong> tem números diferentes dos demais</li>
-                    <li><strong>Se UM bilhete ganhar</strong>, TODOS os participantes ganham</li>
-                    <li><strong>Cada um recebe</strong> o prêmio integral da sua aposta</li>
-                    <li><strong>Mais bilhetes</strong> = Mais chances de alguém acertar!</li>
-                </ol>
-            </div>
-        </div>
-    </section>
-
     <section id="bilhetes" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center" id="tickets-gallery">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center" id="tickets-gallery">
                 <!-- Os bilhetes serão carregados aqui -->
             </div>
 
             <div class="flex justify-center mt-12">
-                <button id="load-more" class="bg-[#f59e0b] hover:bg-[#d97706] text-[#171717] font-bold py-2 px-6 rounded-md transition">
+                <button id="load-more" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-lg transition">
                     Carregar Mais Bilhetes
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="contato" class="py-16 px-4 bg-[#171717]">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-12">Entre em Contato</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-[#262626] p-6 rounded-lg border border-gray-700">
-                    <h3 class="text-xl font-bold mb-4">Informações de Contato</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <i class="fab fa-whatsapp text-[#10b981] text-xl mr-4"></i>
-                            <div>
-                                <p class="font-bold">WhatsApp</p>
-                                <p>(31) 98204-2552</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center">
-                            <i class="fab fa-instagram text-[#e11d48] text-xl mr-4"></i>
-                            <div>
-                                <p class="font-bold">Instagram</p>
-                                <p>@megatip_oficial</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-[#262626] p-6 rounded-lg border border-gray-700">
-                    <h3 class="text-xl font-bold mb-4">Formas de Pagamento</h3>
-                    <div class="flex flex-wrap gap-4 mb-4">
-                        <div class="bg-white p-2 rounded">
-                            <i class="fas fa-mobile-alt text-[#10b981] text-2xl"></i>
-                        </div>
-                        <div class="bg-white p-2 rounded">
-                            <i class="fas fa-university text-[#3b82f6] text-2xl"></i>
-                        </div>
-                    </div>
-                    <p>Aceitamos PIX e transferência bancária.</p>
-                    <br>
-                    <p><strong>Chave Pix:</strong> 5ba9125c-f301-48ef-9f7f-d4508777bd83</p>
-                </div>
             </div>
         </div>
     </section>
@@ -669,10 +621,10 @@
     <footer class="footer py-8 px-4">
         <div class="container mx-auto text-center">
             <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" class="text-white hover:text-[#f59e0b] transition">
+                <a href="#" class="text-white hover:text-[#d4af37] transition">
                     <i class="fab fa-instagram text-2xl"></i>
                 </a>
-                <a href="#" class="text-white hover:text-[#f59e0b] transition">
+                <a href="#" class="text-white hover:text-[#d4af37] transition">
                     <i class="fab fa-whatsapp text-2xl"></i>
                 </a>
             </div>
@@ -775,7 +727,7 @@
                 if (temNumerosValidos(novosNumeros)) {
                     statusSorteio.innerHTML = '<p class="text-[#10b981]"><i class="fas fa-check mr-2"></i>Sorteio oficial realizado!</p>';
                 } else {
-                    statusSorteio.innerHTML = '<p class="text-[#f59e0b]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>';
+                    statusSorteio.innerHTML = '<p class="text-[#d4af37]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>';
                 }
             }
 
@@ -810,7 +762,7 @@
                         <p class="text-center font-bold text-2xl text-[#10b981]">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
                         <p class="text-center mt-4 text-lg">🎯 <strong>${bilheteVencedor.assignedName}</strong> acertou os 6 números!</p>
                         <p class="text-center mt-2">🎉 O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
-                        <p class="text-center mt-4 text-[#f59e0b] font-bold">💰 PRÊMIO GARANTIDO! 💰</p>
+                        <p class="text-center mt-4 text-[#d4af37] font-bold">💰 PRÊMIO GARANTIDO! 💰</p>
                     `;
                     mensagemResultado.className = 'mt-4 p-6 rounded-lg mensagem-vencedor';
                     
@@ -819,19 +771,19 @@
                 } else {
                     // Caso de não vitória
                     tituloResultado.innerHTML = '📊 RESULTADO DA VERIFICAÇÃO';
-                    tituloResultado.className = 'text-xl font-bold mb-4 text-center text-[#f59e0b]';
+                    tituloResultado.className = 'text-xl font-bold mb-4 text-center text-[#d4af37]';
                     
                     bilheteVencedorElement.textContent = "Nenhum bilhete com 6 acertos";
                     totalAcertosElement.textContent = `${maxAcertos} acertos (máximo)`;
                     statusGrupoElement.textContent = "Aguardando próximo sorteio";
-                    statusGrupoElement.className = "text-2xl text-[#f59e0b]";
+                    statusGrupoElement.className = "text-2xl text-[#d4af37]";
                     
                     // Atualizar cards com estilo de não vencedor
                     resultadoCards.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 resultado-perdedor p-4 rounded-lg';
                     
                     // Atualizar mensagem
                     mensagemResultado.innerHTML = `
-                        <p class="text-center font-bold text-xl text-[#f59e0b]">😔 INFELIZMENTE NÃO FOI DESSA VEZ</p>
+                        <p class="text-center font-bold text-xl text-[#d4af37]">😔 INFELIZMENTE NÃO FOI DESSA VEZ</p>
                         <p class="text-center mt-2">Nenhum bilhete acertou os 6 números sorteados.</p>
                         <p class="text-center mt-4 text-[#10b981]">📈 Continue participando para aumentar suas chances!</p>
                     `;
@@ -844,7 +796,7 @@
                         // Adicionar bilhetes com acertos à lista
                         bilhetesComAcertos.forEach(bilhete => {
                             const bilheteItem = document.createElement('div');
-                            bilheteItem.className = 'bg-[#374151] p-3 rounded bilhete-acertou border border-gray-600';
+                            bilheteItem.className = 'bg-[#374151] p-4 rounded-lg bilhete-acertou border border-gray-600';
                             bilheteItem.innerHTML = `
                                 <div class="flex justify-between items-center">
                                     <div>
@@ -932,7 +884,7 @@
             const sampleTickets = Array.from({length: 14}, (_, i) => ({
                 id: i + 1,
                 event: "Mega da Virada",
-                date: "25/12/2025",
+                date: "31/12/2025",
                 numbers: "00, 00, 00, 00, 00, 00", // Todos com 00 para serem preenchidos depois
                 assignedName: ""
             }));
@@ -973,42 +925,46 @@
                         
                         <div class="ticket-header">
                             <div class="ticket-logo">
-                                <i class="fas fa-clover text-white"></i>
+                                <i class="fas fa-clover"></i>
                             </div>
-                            <div class="ticket-title">MEGA SENA</div>
-                            <div class="ticket-subtitle">DA VIRADA 2025</div>
-                            <div class="ticket-concurso">CONCURSO 2670</div>
+                            <div class="ticket-title">Mega Sena</div>
+                            <div class="ticket-subtitle">Da Virada 2025</div>
+                            <div class="ticket-concurso">Concurso Especial</div>
                         </div>
                         
                         <div class="ticket-body">
+                            <div class="ticket-watermark">MEGATIP</div>
+                            
                             <div class="ticket-participante">
-                                <p class="font-bold text-lg text-[#1e40af]">${ticket.assignedName}</p>
-                                <p class="text-sm text-gray-600">Bilhete #${ticket.id.toString().padStart(4, '0')}</p>
+                                <p class="font-bold text-lg text-[#1e293b]">${ticket.assignedName}</p>
+                                <p class="text-sm text-gray-600">Participante #${ticket.id.toString().padStart(4, '0')}</p>
                             </div>
                             
-                            <div class="ticket-numeros-title">SEUS NÚMEROS DA SORTE</div>
+                            <div class="ticket-numeros-title">Números da Sorte</div>
                             <div class="numeros-container">
                                 ${numerosHTML}
                             </div>
                             
-                            ${acertos > 0 ? `<p class="text-center mt-3 text-green-600 font-bold text-lg">${acertos} ACERTO(S)!</p>` : ''}
+                            ${acertos > 0 ? `<p class="text-center mt-4 text-green-600 font-bold text-lg">${acertos} ACERTO(S)!</p>` : ''}
+                            
+                            <div class="ticket-divider"></div>
                             
                             <div class="ticket-data">
-                                <p>Data do Sorteio: 31/12/2025</p>
-                                <p>Valor: <span class="ticket-valor">R$ 5,00</span></p>
+                                <p>Sorteio: <strong>31/12/2025</strong></p>
+                                <p class="mt-2">Valor: <span class="ticket-valor">R$ 5,00</span></p>
                             </div>
                             
                             <div class="ticket-codigo">
-                                CÓD: ${ticketCode} | MEGATIP.COM.BR
+                                Código: ${ticketCode}
                             </div>
                             
                             <div class="ticket-garantia">
-                                Este bilhete garante participação no bolão MegaTIP
+                                Participação garantida no bolão coletivo MegaTIP
                             </div>
                         </div>
                         
                         <div class="ticket-footer">
-                            BOLÃO MEGATIP | UM GANHA, TODOS GANHAM!
+                            Bolão Coletivo • MegaTIP
                         </div>
                     `;
 
