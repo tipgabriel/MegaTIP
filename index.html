@@ -339,6 +339,16 @@
                 height: 40px;
                 font-size: 14px;
             }
+            
+            .hero-text {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+            
+            .feature-text {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
         }
 
         /* Estilo específico para o design elegante de ticket */
@@ -447,6 +457,89 @@
             transform: rotate(-15deg);
             pointer-events: none;
         }
+
+        /* Estilos para a seção de pagamento */
+        .pix-container {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #374151;
+        }
+
+        .pix-code {
+            background: #0f172a;
+            border: 2px dashed #d4af37;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pix-code:hover {
+            background: #1e293b;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #d4af37;
+            color: #1e293b;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #fbbf24;
+            transform: scale(1.05);
+        }
+
+        .qrcode-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #d4af37;
+        }
+
+        .payment-steps {
+            counter-reset: step;
+        }
+
+        .payment-step {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 25px;
+        }
+
+        .payment-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: #d4af37;
+            color: #1e293b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body class="text-white">
@@ -462,7 +555,7 @@
                 <a href="#inicio" class="hover:text-[#d4af37] transition font-medium">Início</a>
                 <a href="#resultado" class="hover:text-[#d4af37] transition font-medium">Resultado</a>
                 <a href="#video" class="hover:text-[#d4af37] transition font-medium">Vídeo</a>
-                <a href="#regras" class="hover:text-[#d4af37] transition font-medium">Regras</a>
+                <a href="#pagamento" class="hover:text-[#d4af37] transition font-medium">Pagamento</a>
                 <a href="#bilhetes" class="hover:text-[#d4af37] transition font-medium">Bilhetes</a>
                 <a href="#contato" class="hover:text-[#d4af37] transition font-medium">Contato</a>
             </nav>
@@ -479,7 +572,7 @@
                 <a href="#inicio" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Início</a>
                 <a href="#resultado" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Resultado</a>
                 <a href="#video" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Vídeo</a>
-                <a href="#regras" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Regras</a>
+                <a href="#pagamento" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Pagamento</a>
                 <a href="#bilhetes" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Bilhetes</a>
                 <a href="#contato" class="hover:text-[#d4af37] transition py-2 font-medium">Contato</a>
             </nav>
@@ -490,37 +583,43 @@
         <div class="container mx-auto max-w-4xl hero-section p-8">
             <div class="text-center">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">Bolão Mega<span class="text-[#d4af37]">TIP</span></h2>
-                <p class="text-lg font-bold mb-8">Participe do MegaTIP — o bolão para quem sabe que juntos vamos mais longe.  
-  <span class="text-white">Se um acerta, todo o grupo ganha.</span> 
-  <span class="text-white"> Cada bilhete tem 6 números e custa só </span> <span class="text-[#d4af37] font-bold"> R$ 5.</span>
-</p>
-
+                <p class="text-lg md:text-xl font-bold mb-8 hero-text">
+                    Participe do MegaTIP — o bolão para quem sabe que juntos vamos mais longe.  
+                    <span class="text-white">Se um acerta, todo o grupo ganha.</span> 
+                    <span class="text-white"> Cada bilhete tem 6 números e custa só </span> 
+                    <span class="text-[#d4af37] font-bold">R$ 5.</span>
+                </p>
 
                 <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-10">
                     <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
                         <i class="fas fa-users text-[#d4af37] text-2xl mb-2"></i>
-                        <h3 class="font-bold">Comunidade</h3>
-                        <p> <span class="font-bold">Jogue junto, ganhe junto.</span>
-                        Cada aposta é sua, mas a vitória é de todos. Faça parte da comunidade MegaTIP.</p>
+                        <h3 class="font-bold text-lg mb-2">Comunidade</h3>
+                        <p class="feature-text">
+                            <span class="font-bold">Jogue junto, ganhe junto.</span>
+                            Cada aposta é sua, mas a vitória é de todos. Faça parte da comunidade MegaTIP.
+                        </p>
                     </div>
 
                     <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
                         <i class="fas fa-trophy text-[#d4af37] text-2xl mb-2"></i>
-                        <h3 class="font-bold">Premiação Compartilhada</h3>
-                        <p> <span class="font-bold">Uma aposta premiada? O grupo inteiro comemora!
-                        Aqui não tem divisão de bolão tradicional —
-se um acerta, <span class="font-bold">todo mundo leva.</span></p>
+                        <h3 class="font-bold text-lg mb-2">Premiação Compartilhada</h3>
+                        <p class="feature-text">
+                            <span class="font-bold">Uma aposta premiada? O grupo inteiro comemora!</span>
+                            Aqui não tem divisão de bolão tradicional — se um acerta, <span class="font-bold">todo mundo leva.</span>
+                        </p>
                     </div>
 
                     <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
                         <i class="fas fa-shield-alt text-[#d4af37] text-2xl mb-2"></i>
-                        <h3 class="font-bold">Segurança</h3>
-                        <p><span class="font-bold"> Transparência e confiança sempre.</span> 
-                            Todas as apostas são registradas e conferidas de forma segura pelo sistema MegaTIP.</p>
+                        <h3 class="font-bold text-lg mb-2">Segurança</h3>
+                        <p class="feature-text">
+                            <span class="font-bold">Transparência e confiança sempre.</span> 
+                            Todas as apostas são registradas e conferidas de forma segura pelo sistema MegaTIP.
+                        </p>
                     </div>
                 </div>
 
-                <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
+                <a href="#pagamento" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
                     Participar Agora
                 </a>
             </div>
@@ -532,7 +631,7 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Resultado Mega da Virada 2025</h2>
             
-            <div class="bg-[#262626] rounded-xl p-8 mb-8 border border-gray-700">
+            <div class="bg-[#262626] rounded-xl p-6 md:p-8 mb-8 border border-gray-700">
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
                     
@@ -547,7 +646,7 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
                     </div>
                     
                     <div class="flex justify-center mb-6">
-                        <button id="btn-verificar-bilhetes" class="bg-[#10b981] hover:bg-[#059669] text-white font-bold py-3 px-8 rounded-lg transition text-lg">
+                        <button id="btn-verificar-bilhetes" class="bg-[#10b981] hover:bg-[#059669] text-white font-bold py-3 px-6 md:px-8 rounded-lg transition text-lg">
                             <i class="fas fa-search mr-2"></i>Verificar Bilhetes
                         </button>
                     </div>
@@ -562,15 +661,15 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="resultado-cards">
                         <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
                             <p class="font-bold">Bilhete Vencedor:</p>
-                            <p id="bilhete-vencedor" class="text-2xl text-[#10b981]">Não identificado</p>
+                            <p id="bilhete-vencedor" class="text-xl md:text-2xl text-[#10b981]">Não identificado</p>
                         </div>
                         <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
                             <p class="font-bold">Total de Acertos:</p>
-                            <p id="total-acertos" class="text-2xl text-[#d4af37]">0 acertos</p>
+                            <p id="total-acertos" class="text-xl md:text-2xl text-[#d4af37]">0 acertos</p>
                         </div>
                         <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
                             <p class="font-bold">Status do Grupo:</p>
-                            <p id="status-grupo" class="text-2xl text-[#3b82f6]">Aguardando</p>
+                            <p id="status-grupo" class="text-xl md:text-2xl text-[#3b82f6]">Aguardando</p>
                         </div>
                     </div>
                     <div id="mensagem-resultado" class="mt-4 bg-[#374151] p-6 rounded-lg border border-gray-600">
@@ -597,7 +696,6 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
             
             <div class="bg-[#262626] rounded-xl p-6 border border-gray-700">
                 <div class="video-container">
-                    <!-- Substitua o ID do vídeo pelo ID real do YouTube quando tiver -->
                     <iframe src="https://www.youtube.com/embed/R5XIjk79jos?si=hUfw6bzpklRlpSg3" 
                             title="Sorteio Mega da Virada" 
                             frameborder="0" 
@@ -605,11 +703,76 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
                             allowfullscreen>
                     </iframe>
                 </div>
-<p class="text-center mt-4 text-gray-300">
-    <span class="font-bold">Assista ao sorteio oficial da Mega da Virada 2025.</span><br>
-    Acompanhe o resultado em tempo real e veja se o nosso grupo leva o grande prêmio!
-</p>
+                <p class="text-center mt-4 text-gray-300 text-sm md:text-base">
+                    <span class="font-bold">Assista ao sorteio oficial da Mega da Virada 2025.</span><br class="hidden md:block">
+                    Acompanhe o resultado em tempo real e veja se o nosso grupo leva o grande prêmio!
+                </p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Nova Seção: Pagamento -->
+    <section id="pagamento" class="py-16 px-4 bg-[#171717]">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Pagamento PIX</h2>
+            
+            <div class="pix-container">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- QR Code -->
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Escaneie o QR Code</h3>
+                        <div class="qrcode-container">
+                            <!-- SUBSTITUA pela imagem do QR Code do seu banco -->
+                            <div class="bg-gray-200 w-64 h-64 rounded-lg flex items-center justify-center text-gray-500">
+                                <div class="text-center">
+                                    <i class="fas fa-qrcode text-6xl mb-2"></i>
+                                    <p class="text-sm">QR Code PIX</p>
+                                    <p class="text-xs">(Imagem do banco)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-300 mt-4">
+                            Use o app do seu banco para escanear o código
+                        </p>
+                    </div>
+
+                    <!-- Chave PIX -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Ou copie a chave PIX</h3>
+                        <div class="pix-code mb-6">
+                            <button class="copy-btn" onclick="copiarPix()">
+                                <i class="fas fa-copy mr-1"></i>Copiar
+                            </button>
+                            <p id="pix-key" class="text-white text-sm md:text-base break-all">
+                                5ba9125c-f301-48ef-9f7f-d4508777bd83
+                            </p>
+                        </div>
+
+                        <div class="payment-steps">
+                            <div class="payment-step">
+                                <h4 class="font-bold text-lg mb-2">1. Faça o pagamento</h4>
+                                <p class="text-gray-300 text-sm">Utilize o QR Code ou a chave PIX acima para pagar R$ 5,00</p>
+                            </div>
+                            
+                            <div class="payment-step">
+                                <h4 class="font-bold text-lg mb-2">2. Envie o comprovante</h4>
+                                <p class="text-gray-300 text-sm">Encaminhe o comprovante para o WhatsApp: (31) 98204-2552</p>
+                            </div>
+                            
+                            <div class="payment-step">
+                                <h4 class="font-bold text-lg mb-2">3. Confirmação</h4>
+                                <p class="text-gray-300 text-sm">Seu bilhete será confirmado em até 24 horas</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-yellow-900 bg-opacity-20 rounded-lg border border-yellow-700">
+                            <p class="text-yellow-200 text-sm">
+                                <i class="fas fa-exclamation-circle mr-2"></i>
+                                <strong>Importante:</strong> O prazo final para pagamento é até às 23h59 do dia 25/12/2025
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -618,7 +781,7 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center" id="tickets-gallery">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center" id="tickets-gallery">
                 <!-- Os bilhetes serão carregados aqui -->
             </div>
 
@@ -626,6 +789,50 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
                 <button id="load-more" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-lg transition">
                     Carregar Mais Bilhetes
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-16 px-4 bg-[#171717]">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Entre em Contato</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[#262626] p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4">Informações de Contato</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fab fa-whatsapp text-[#10b981] text-xl mr-4"></i>
+                            <div>
+                                <p class="font-bold">WhatsApp</p>
+                                <p>(31) 98204-2552</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <i class="fab fa-instagram text-[#e11d48] text-xl mr-4"></i>
+                            <div>
+                                <p class="font-bold">Instagram</p>
+                                <p>@megatip_oficial</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#262626] p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4">Formas de Pagamento</h3>
+                    <div class="flex flex-wrap gap-4 mb-4">
+                        <div class="bg-white p-2 rounded">
+                            <i class="fas fa-mobile-alt text-[#10b981] text-2xl"></i>
+                        </div>
+                        <div class="bg-white p-2 rounded">
+                            <i class="fas fa-university text-[#3b82f6] text-2xl"></i>
+                        </div>
+                    </div>
+                    <p>Aceitamos PIX e transferência bancária.</p>
+                    <br>
+                    <p><strong>Chave Pix:</strong> 5ba9125c-f301-48ef-9f7f-d4508777bd83</p>
+                </div>
             </div>
         </div>
     </section>
@@ -649,6 +856,23 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
     </footer>
 
     <script>
+        // Função para copiar chave PIX
+        function copiarPix() {
+            const pixKey = document.getElementById('pix-key').textContent;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                // Feedback visual
+                const btn = event.target.closest('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copiado!';
+                btn.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '#d4af37';
+                }, 2000);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // ========== VARIÁVEIS GLOBAIS ==========
             // Números oficiais da Mega da Virada - serão atualizados após o sorteio
@@ -874,55 +1098,38 @@ se um acerta, <span class="font-bold">todo mundo leva.</span></p>
             const loadMoreButton = document.getElementById('load-more');
 
             const participantNames = [
-    "Gabriel",     // ← Bilhete 1
-    "Melissa",     // ← Bilhete 2  
-    "Beatriz",     // ← Bilhete 3
-    "Bryan",       // ← Bilhete 4
-    "Guedes",      // ← Bilhete 5
-    "John",        // ← Bilhete 6
-    "Kimyo",       // ← Bilhete 7
-    "Mufasa Empório",         // ← Bilhete 8
-    "Olivier",     // ← Bilhete 9
-    "Paloma",      // ← Bilhete 10
-    "Willian",     // ← Bilhete 11
-    "Vitória Mandy",      // ← Bilhete 12
-    "Tiago",         // ← Bilhete 13
-    "TH Romerito"      // ← Bilhete 14
-];
-
-            function shuffleArray(array) {
-                let currentIndex = array.length, randomIndex;
-                while (currentIndex != 0) {
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
-                    [array[currentIndex], array[randomIndex]] = [
-                        array[randomIndex], array[currentIndex]];
-                }
-                return array;
-            }
-
-            const uniqueRandomNames = [...participantNames]; // SEM embaralhar!
+                "Gabriel",     // ← Bilhete 1
+                "Melissa",     // ← Bilhete 2  
+                "Beatriz",     // ← Bilhete 3
+                "Bryan",       // ← Bilhete 4
+                "Guedes",      // ← Bilhete 5
+                "John",        // ← Bilhete 6
+                "Kimyo",       // ← Bilhete 7
+                "Mufasa Empório", // ← Bilhete 8
+                "Olivier",     // ← Bilhete 9
+                "Paloma",      // ← Bilhete 10
+                "Willian",     // ← Bilhete 11
+                "Vitória Mandy", // ← Bilhete 12
+                "Tiago",       // ← Bilhete 13
+                "TH Romerito"  // ← Bilhete 14
+            ];
 
             const sampleTickets = [
-    { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Gabriel" },
-    { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Melissa" },
-    { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Beatriz" },
-    { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Bryan" },
-    { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Guedes" },
-    { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "John" },
-    { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Kimyo" },
-    { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
-    { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
-    { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
-    { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" },
-    { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
-    { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
-    { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "TH Romerito" }
-];
-            // Atribuir nomes aos bilhetes
-            sampleTickets.forEach((ticket, index) => {
-                ticket.assignedName = uniqueRandomNames[index % uniqueRandomNames.length];
-            });
+                { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Gabriel" },
+                { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Melissa" },
+                { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Beatriz" },
+                { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Bryan" },
+                { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Guedes" },
+                { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "John" },
+                { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Kimyo" },
+                { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
+                { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
+                { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
+                { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" },
+                { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
+                { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
+                { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "TH Romerito" }
+            ];
 
             let displayedTickets = 8;
 
