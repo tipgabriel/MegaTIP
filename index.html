@@ -716,21 +716,23 @@
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Pagamento PIX</h2>
             
-            <div class="pix-container">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- QR Code -->
+ <div class="pix-container">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- QR Code -->
+        <div class="text-center">
+            <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Escaneie o QR Code</h3>
+            <div class="qrcode-container">
+                <!-- SUBSTITUA o src pela URL da imagem do QR Code do seu banco -->
+                <img src="qr-Code" alt="QR CODE Pix" class="w-64 h-64 object-contain">
+                <!-- Fallback caso a imagem não carregue -->
+                <div class="bg-gray-200 w-64 h-64 rounded-lg flex items-center justify-center text-gray-500 hidden">
                     <div class="text-center">
-                        <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Escaneie o QR Code</h3>
-                        <div class="qrcode-container">
-                            <!-- SUBSTITUA pela imagem do QR Code do seu banco -->
-                            <div class="bg-gray-200 w-64 h-64 rounded-lg flex items-center justify-center text-gray-500">
-                                <div class="text-center">
-                                    <i class="fas fa-qrcode text-6xl mb-2"></i>
-                                    <p class="text-sm">QR Code PIX</p>
-                                    <p class="text-xs">(Imagem do banco)</p>
-                                </div>
-                            </div>
-                        </div>
+                        <i class="fas fa-qrcode text-6xl mb-2"></i>
+                        <p class="text-sm">QR Code PIX</p>
+                        <p class="text-xs">(Imagem do banco)</p>
+                    </div>
+                </div>
+            </div> 
                         <p class="text-sm text-gray-300 mt-4">
                             Use o app do seu banco para escanear o código
                         </p>
@@ -813,7 +815,7 @@
                             <i class="fab fa-instagram text-[#e11d48] text-xl mr-4"></i>
                             <div>
                                 <p class="font-bold">Instagram</p>
-                                <p>@megatip_oficial</p>
+                                <p>@tipgabriel</p>
                             </div>
                         </div>
                     </div>
