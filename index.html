@@ -34,7 +34,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* ESTILO ELEGANTE DE TICKET */
+        /* NOVO ESTILO ELEGANTE DE TICKET */
         .ticket {
             background: linear-gradient(145deg, #ffffff, #f8fafc);
             border-radius: 16px;
@@ -142,6 +142,38 @@
             pointer-events: none;
         }
 
+        .hero-section {
+            background: rgba(23, 23, 23, 0.85);
+            border-radius: 20px;
+            border: 1px solid #374151;
+            background-image: url('https://images.unsplash.com/photo-1531581147769-2ec2ae9ba937?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+
+        .glow {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .footer {
+            background: rgba(23, 23, 23, 0.95);
+            border-top: 1px solid #374151;
+        }
+
+        /* Estilos para o menu mobile */
+        .mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .mobile-menu.active {
+            max-height: 300px;
+            opacity: 1;
+        }
+
         .numero-sorteio {
             display: inline-flex;
             width: 44px;
@@ -164,6 +196,30 @@
         .numero-sorteio:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .numero-oficial {
+            display: inline-flex;
+            width: 52px;
+            height: 52px;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            margin: 6px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+
+        .numero-oficial.sorteado {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #10b981;
+            transform: scale(1.1);
         }
 
         .numero-acerto {
@@ -216,6 +272,73 @@
             gap: 6px;
             max-width: 280px;
             margin: 0 auto;
+        }
+
+        /* Novos estilos para melhorar clareza dos resultados */
+        .resultado-vencedor {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: 2px solid #10b981;
+            color: white;
+        }
+
+        .resultado-perdedor {
+            background: linear-gradient(135deg, #d4af37, #fbbf24);
+            border: 2px solid #d4af37;
+            color: #1e293b;
+        }
+
+        .mensagem-vencedor {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            color: white;
+        }
+
+        .mensagem-perdedor {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            color: white;
+        }
+
+        .bilhete-acertou {
+            border: 2px solid #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Estilo para o vídeo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Melhorias para mobile */
+        @media (max-width: 768px) {
+            .ticket {
+                max-width: 100%;
+                margin: 15px 0;
+            }
+            
+            .numeros-container {
+                max-width: 100%;
+            }
+            
+            .numero-sorteio {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
         }
 
         /* Estilo específico para o design elegante de ticket */
@@ -324,42 +447,6 @@
             transform: rotate(-15deg);
             pointer-events: none;
         }
-
-        .footer {
-            background: rgba(23, 23, 23, 0.95);
-            border-top: 1px solid #374151;
-        }
-
-        /* Estilos para o menu mobile */
-        .mobile-menu {
-            transition: all 0.3s ease-in-out;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-
-        .mobile-menu.active {
-            max-height: 300px;
-            opacity: 1;
-        }
-
-        /* Melhorias para mobile */
-        @media (max-width: 768px) {
-            .ticket {
-                max-width: 100%;
-                margin: 15px 0;
-            }
-            
-            .numeros-container {
-                max-width: 100%;
-            }
-            
-            .numero-sorteio {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
-            }
-        }
     </style>
 </head>
 <body class="text-white">
@@ -373,6 +460,9 @@
             <!-- Menu Desktop -->
             <nav class="hidden md:flex space-x-6">
                 <a href="#inicio" class="hover:text-[#d4af37] transition font-medium">Início</a>
+                <a href="#resultado" class="hover:text-[#d4af37] transition font-medium">Resultado</a>
+                <a href="#video" class="hover:text-[#d4af37] transition font-medium">Vídeo</a>
+                <a href="#regras" class="hover:text-[#d4af37] transition font-medium">Regras</a>
                 <a href="#bilhetes" class="hover:text-[#d4af37] transition font-medium">Bilhetes</a>
                 <a href="#contato" class="hover:text-[#d4af37] transition font-medium">Contato</a>
             </nav>
@@ -387,6 +477,9 @@
         <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-[#171717] py-4 px-6 md:hidden border-b border-gray-700">
             <nav class="flex flex-col space-y-4">
                 <a href="#inicio" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Início</a>
+                <a href="#resultado" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Resultado</a>
+                <a href="#video" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Vídeo</a>
+                <a href="#regras" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Regras</a>
                 <a href="#bilhetes" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Bilhetes</a>
                 <a href="#contato" class="hover:text-[#d4af37] transition py-2 font-medium">Contato</a>
             </nav>
@@ -394,7 +487,7 @@
     </header>
 
     <section id="inicio" class="py-16 px-4">
-        <div class="container mx-auto max-w-4xl bg-[#171717] p-8 rounded-xl border border-gray-700">
+        <div class="container mx-auto max-w-4xl hero-section p-8">
             <div class="text-center">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">Bolão Mega<span class="text-[#d4af37]">TIP</span></h2>
                 <p class="text-xl mb-8">Participe do nosso bolão exclusivo com cotas a partir de <span class="text-[#d4af37] font-bold">R$ 5,00</span></p>
@@ -419,43 +512,108 @@
                     </div>
                 </div>
 
-                <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block">
+                <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
                     Participar Agora
                 </a>
             </div>
         </div>
     </section>
 
+    <!-- Seção: Resultado da Mega da Virada -->
+    <section id="resultado" class="py-16 px-4 bg-[#171717]">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Resultado Mega da Virada 2025</h2>
+            
+            <div class="bg-[#262626] rounded-xl p-8 mb-8 border border-gray-700">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
+                    
+                    <!-- Números oficiais fixos -->
+                    <div class="flex justify-center flex-wrap gap-3 mb-6" id="numeros-oficiais">
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                    </div>
+                    
+                    <div class="flex justify-center mb-6">
+                        <button id="btn-verificar-bilhetes" class="bg-[#10b981] hover:bg-[#059669] text-white font-bold py-3 px-8 rounded-lg transition text-lg">
+                            <i class="fas fa-search mr-2"></i>Verificar Bilhetes
+                        </button>
+                    </div>
+                    
+                    <div id="status-sorteio" class="text-lg">
+                        <p class="text-[#d4af37]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>
+                    </div>
+                </div>
+                
+                <div id="resultado-verificacao" class="mt-6 hidden">
+                    <h4 class="text-xl font-bold mb-4 text-center" id="titulo-resultado">🎉 Resultado da Verificação 🎉</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="resultado-cards">
+                        <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
+                            <p class="font-bold">Bilhete Vencedor:</p>
+                            <p id="bilhete-vencedor" class="text-2xl text-[#10b981]">Não identificado</p>
+                        </div>
+                        <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
+                            <p class="font-bold">Total de Acertos:</p>
+                            <p id="total-acertos" class="text-2xl text-[#d4af37]">0 acertos</p>
+                        </div>
+                        <div class="bg-[#374151] p-4 rounded-lg border border-gray-600">
+                            <p class="font-bold">Status do Grupo:</p>
+                            <p id="status-grupo" class="text-2xl text-[#3b82f6]">Aguardando</p>
+                        </div>
+                    </div>
+                    <div id="mensagem-resultado" class="mt-4 bg-[#374151] p-6 rounded-lg border border-gray-600">
+                        <p class="text-center font-bold text-lg">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
+                        <p class="text-center mt-2">Um bilhete ganhou? O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
+                    </div>
+                    
+                    <!-- Seção para mostrar detalhes dos acertos -->
+                    <div id="detalhes-acertos" class="mt-6 hidden">
+                        <h5 class="text-lg font-bold mb-3 text-center">📊 Detalhes dos Acertos</h5>
+                        <div id="lista-bilhetes-acertos" class="space-y-3">
+                            <!-- Lista de bilhetes com acertos será preenchida aqui -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção: Vídeo do Sorteio -->
+    <section id="video" class="py-16 px-4 bg-[#171717]">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Vídeo do Sorteio</h2>
+            
+            <div class="bg-[#262626] rounded-xl p-6 border border-gray-700">
+                <div class="video-container">
+                    <!-- Substitua o ID do vídeo pelo ID real do YouTube quando tiver -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            title="Sorteio Mega da Virada" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="text-center mt-4 text-gray-300">Assista ao sorteio oficial da Mega da Virada 2025</p>
+            </div>
+        </div>
+    </section>
+
     <section id="bilhetes" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl font-bold text-center mb-12">Bilhetes dos Participantes</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
 
-            <div class="grid grid-cols-6 gap-4 justify-items-center overflow-x-auto" id="tickets-gallery">
-    <!-- Os bilhetes -->
-</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center" id="tickets-gallery">
+                <!-- Os bilhetes serão carregados aqui -->
+            </div>
 
             <div class="flex justify-center mt-12">
                 <button id="load-more" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-lg transition">
                     Carregar Mais Bilhetes
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="contato" class="py-16 px-4 bg-[#171717]">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-12">Contato</h2>
-            
-            <div class="bg-[#262626] rounded-xl p-8 border border-gray-700">
-                <div class="text-center">
-                    <h3 class="text-2xl font-bold mb-4">Entre em Contato Conosco</h3>
-                    <p class="mb-6">Para participar do bolão ou tirar dúvidas, entre em contato pelo WhatsApp:</p>
-                    
-                    <a href="https://wa.me/5531982042552?text=Oi!%20%F0%9F%91%8B%0ATenho%20interesse%20em%20participar%20do%20bol%C3%A3o%20da%20MegaTIP.%0AMe%20conta%20como%20fa%C3%A7o%20para%20garantir%20meu%20bilhete!%20%F0%9F%8E%9F%EF%B8%8F%F0%9F%92%B0" 
-                       class="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-8 rounded-lg transition text-lg inline-flex items-center">
-                        <i class="fab fa-whatsapp mr-2 text-xl"></i> WhatsApp
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -466,7 +624,7 @@
                 <a href="#" class="text-white hover:text-[#d4af37] transition">
                     <i class="fab fa-instagram text-2xl"></i>
                 </a>
-                <a href="https://wa.me/5531982042552" class="text-white hover:text-[#d4af37] transition">
+                <a href="#" class="text-white hover:text-[#d4af37] transition">
                     <i class="fab fa-whatsapp text-2xl"></i>
                 </a>
             </div>
@@ -480,6 +638,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // ========== VARIÁVEIS GLOBAIS ==========
+            // Números oficiais da Mega da Virada - serão atualizados após o sorteio
+            let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
+            let bilheteVencedor = null;
+            let grupoGanhou = false;
+
             // ========== MENU MOBILE ==========
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -524,6 +688,175 @@
             const year = new Date().getFullYear();
             document.getElementById('copyright').innerHTML = `&copy; ${year} MegaTIP. Não somos filiados à Caixa Econômica Federal.`;
 
+            // ========== SISTEMA DE VERIFICAÇÃO ==========
+            const btnVerificarBilhetes = document.getElementById('btn-verificar-bilhetes');
+            const statusSorteio = document.getElementById('status-sorteio');
+            const resultadoVerificacao = document.getElementById('resultado-verificacao');
+            const bilheteVencedorElement = document.getElementById('bilhete-vencedor');
+            const totalAcertosElement = document.getElementById('total-acertos');
+            const statusGrupoElement = document.getElementById('status-grupo');
+            const tituloResultado = document.getElementById('titulo-resultado');
+            const mensagemResultado = document.getElementById('mensagem-resultado');
+            const resultadoCards = document.getElementById('resultado-cards');
+            const detalhesAcertos = document.getElementById('detalhes-acertos');
+            const listaBilhetesAcertos = document.getElementById('lista-bilhetes-acertos');
+
+            // Função para verificar se há números válidos (acima de 0)
+            function temNumerosValidos(numeros) {
+                return numeros.some(num => num > 0);
+            }
+
+            // Função para atualizar números oficiais (será chamada após o sorteio)
+            function atualizarNumerosOficiais(novosNumeros) {
+                numerosSorteados = novosNumeros;
+                const numerosElementos = document.querySelectorAll('.numero-oficial');
+                
+                numerosElementos.forEach((elemento, index) => {
+                    if (index < novosNumeros.length) {
+                        elemento.textContent = novosNumeros[index].toString().padStart(2, '0');
+                        // Só adiciona a classe "sorteado" se o número for maior que 0
+                        if (novosNumeros[index] > 0) {
+                            elemento.classList.add('sorteado');
+                        } else {
+                            elemento.classList.remove('sorteado');
+                        }
+                    }
+                });
+                
+                // Atualiza mensagem de status baseado nos números
+                if (temNumerosValidos(novosNumeros)) {
+                    statusSorteio.innerHTML = '<p class="text-[#10b981]"><i class="fas fa-check mr-2"></i>Sorteio oficial realizado!</p>';
+                } else {
+                    statusSorteio.innerHTML = '<p class="text-[#d4af37]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>';
+                }
+            }
+
+            // Função para verificar se um bilhete é vencedor (6 acertos)
+            function verificarVencedor(bilheteNumeros) {
+                if (!temNumerosValidos(numerosSorteados)) return 0;
+                
+                const numerosBilhete = bilheteNumeros.split(',').map(num => parseInt(num.trim()));
+                return numerosBilhete.filter(num => numerosSorteados.includes(num)).length;
+            }
+
+            // Função para atualizar a interface com os resultados
+            function atualizarInterfaceResultados(grupoGanhou, bilheteVencedor, maxAcertos, bilhetesComAcertos) {
+                // Limpar detalhes anteriores
+                listaBilhetesAcertos.innerHTML = '';
+                
+                if (grupoGanhou && bilheteVencedor) {
+                    // Caso de vitória
+                    tituloResultado.innerHTML = '🎉 PARABÉNS! VOCÊS GANHARAM! 🎉';
+                    tituloResultado.className = 'text-xl font-bold mb-4 text-center text-[#10b981]';
+                    
+                    bilheteVencedorElement.textContent = `#${bilheteVencedor.id.toString().padStart(4, '0')} - ${bilheteVencedor.assignedName}`;
+                    totalAcertosElement.textContent = "6 ACERTOS!";
+                    statusGrupoElement.textContent = "VENCEDOR!";
+                    statusGrupoElement.className = "text-2xl text-[#10b981]";
+                    
+                    // Atualizar cards com estilo de vencedor
+                    resultadoCards.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 resultado-vencedor p-4 rounded-lg';
+                    
+                    // Atualizar mensagem
+                    mensagemResultado.innerHTML = `
+                        <p class="text-center font-bold text-2xl text-[#10b981]">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
+                        <p class="text-center mt-4 text-lg">🎯 <strong>${bilheteVencedor.assignedName}</strong> acertou os 6 números!</p>
+                        <p class="text-center mt-2">🎉 O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
+                        <p class="text-center mt-4 text-[#d4af37] font-bold">💰 PRÊMIO GARANTIDO! 💰</p>
+                    `;
+                    mensagemResultado.className = 'mt-4 p-6 rounded-lg mensagem-vencedor';
+                    
+                    // Esconder detalhes de acertos parciais
+                    detalhesAcertos.classList.add('hidden');
+                } else {
+                    // Caso de não vitória
+                    tituloResultado.innerHTML = '📊 RESULTADO DA VERIFICAÇÃO';
+                    tituloResultado.className = 'text-xl font-bold mb-4 text-center text-[#d4af37]';
+                    
+                    bilheteVencedorElement.textContent = "Nenhum bilhete com 6 acertos";
+                    totalAcertosElement.textContent = `${maxAcertos} acertos (máximo)`;
+                    statusGrupoElement.textContent = "Aguardando próximo sorteio";
+                    statusGrupoElement.className = "text-2xl text-[#d4af37]";
+                    
+                    // Atualizar cards com estilo de não vencedor
+                    resultadoCards.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 resultado-perdedor p-4 rounded-lg';
+                    
+                    // Atualizar mensagem
+                    mensagemResultado.innerHTML = `
+                        <p class="text-center font-bold text-xl text-[#d4af37]">😔 INFELIZMENTE NÃO FOI DESSA VEZ</p>
+                        <p class="text-center mt-2">Nenhum bilhete acertou os 6 números sorteados.</p>
+                        <p class="text-center mt-4 text-[#10b981]">📈 Continue participando para aumentar suas chances!</p>
+                    `;
+                    mensagemResultado.className = 'mt-4 p-6 rounded-lg mensagem-perdedor';
+                    
+                    // Mostrar detalhes de acertos parciais
+                    if (bilhetesComAcertos.length > 0) {
+                        detalhesAcertos.classList.remove('hidden');
+                        
+                        // Adicionar bilhetes com acertos à lista
+                        bilhetesComAcertos.forEach(bilhete => {
+                            const bilheteItem = document.createElement('div');
+                            bilheteItem.className = 'bg-[#374151] p-4 rounded-lg bilhete-acertou border border-gray-600';
+                            bilheteItem.innerHTML = `
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="font-bold">${bilhete.assignedName}</p>
+                                        <p class="text-sm">Bilhete #${bilhete.id.toString().padStart(4, '0')}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-[#10b981] font-bold text-lg">${bilhete.acertos} acerto(s)</p>
+                                        <p class="text-xs">Números: ${bilhete.numbers}</p>
+                                    </div>
+                                </div>
+                            `;
+                            listaBilhetesAcertos.appendChild(bilheteItem);
+                        });
+                    } else {
+                        detalhesAcertos.classList.add('hidden');
+                    }
+                }
+            }
+
+            // Função para verificar todos os bilhetes
+            btnVerificarBilhetes.addEventListener('click', function() {
+                if (!temNumerosValidos(numerosSorteados)) {
+                    statusSorteio.innerHTML = '<p class="text-[#dc2626]"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando sorteio oficial da Caixa!</p>';
+                    return;
+                }
+
+                bilheteVencedor = null;
+                grupoGanhou = false;
+                let maxAcertos = 0;
+                let bilhetesComAcertos = [];
+
+                // Verificar cada bilhete
+                sampleTickets.forEach(ticket => {
+                    const acertos = verificarVencedor(ticket.numbers);
+                    if (acertos > maxAcertos) {
+                        maxAcertos = acertos;
+                    }
+                    if (acertos === 6) {
+                        bilheteVencedor = ticket;
+                        grupoGanhou = true;
+                    }
+                    if (acertos > 0) {
+                        bilhetesComAcertos.push({
+                            ...ticket,
+                            acertos: acertos
+                        });
+                    }
+                });
+
+                // Ordenar bilhetes por número de acertos (maior primeiro)
+                bilhetesComAcertos.sort((a, b) => b.acertos - a.acertos);
+
+                // Atualizar interface com resultados
+                atualizarInterfaceResultados(grupoGanhou, bilheteVencedor, maxAcertos, bilhetesComAcertos);
+
+                resultadoVerificacao.classList.remove('hidden');
+                atualizarBilhetes();
+            });
+
             // ========== GALERIA DE BILHETES ==========
             const ticketsGallery = document.getElementById('tickets-gallery');
             const loadMoreButton = document.getElementById('load-more');
@@ -547,24 +880,12 @@
 
             const uniqueRandomNames = shuffleArray([...participantNames]);
 
-            // Função para gerar números aleatórios para a Mega-Sena (1-60)
-            function gerarNumerosMegaSena() {
-                const numeros = [];
-                while (numeros.length < 6) {
-                    const numero = Math.floor(Math.random() * 60) + 1;
-                    if (!numeros.includes(numero)) {
-                        numeros.push(numero);
-                    }
-                }
-                return numeros.sort((a, b) => a - b);
-            }
-
             // Criar 14 bilhetes (número atual de participantes)
             const sampleTickets = Array.from({length: 14}, (_, i) => ({
                 id: i + 1,
                 event: "Mega da Virada",
                 date: "31/12/2025",
-                numbers: gerarNumerosMegaSena().join(', '),
+                numbers: "00, 00, 00, 00, 00, 00", // Todos com 00 para serem preenchidos depois
                 assignedName: ""
             }));
 
@@ -580,13 +901,18 @@
 
                 for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
                     const ticket = sampleTickets[i];
+                    const acertos = verificarVencedor(ticket.numbers);
+                    const isVencedor = grupoGanhou && bilheteVencedor && bilheteVencedor.id === ticket.id;
+                    const isGrupoVencedor = grupoGanhou;
 
                     const ticketElement = document.createElement('div');
-                    ticketElement.className = `ticket card-hover`;
+                    ticketElement.className = `ticket card-hover ${isGrupoVencedor ? 'premiado' : ''}`;
                     
                     const numerosArray = ticket.numbers.split(', ');
                     const numerosHTML = numerosArray.map(num => {
-                        return `<span class="numero-sorteio">${num.padStart(2, '0')}</span>`;
+                        const numero = parseInt(num);
+                        const isAcerto = temNumerosValidos(numerosSorteados) && numerosSorteados.includes(numero);
+                        return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
                     }).join('');
 
                     // Gerar um código aleatório para o ticket
@@ -594,6 +920,8 @@
 
                     ticketElement.innerHTML = `
                         <div class="ticket-stripes"></div>
+                        ${isVencedor ? '<div class="badge-vencedor">🎯 BILHETE VENCEDOR</div>' : ''}
+                        ${isGrupoVencedor && !isVencedor ? '<div class="badge-premiado">🏆 GRUPO VENCEDOR</div>' : ''}
                         
                         <div class="ticket-header">
                             <div class="ticket-logo">
@@ -616,6 +944,8 @@
                             <div class="numeros-container">
                                 ${numerosHTML}
                             </div>
+                            
+                            ${acertos > 0 ? `<p class="text-center mt-4 text-green-600 font-bold text-lg">${acertos} ACERTO(S)!</p>` : ''}
                             
                             <div class="ticket-divider"></div>
                             
@@ -673,6 +1003,10 @@
                     }
                 });
             });
+
+            // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
+            // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
+            // atualizarNumerosOficiais([5, 12, 23, 34, 45, 56]);
         });
     </script>
 </body>
