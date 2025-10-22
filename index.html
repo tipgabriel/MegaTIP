@@ -890,11 +890,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     font-weight: 600;
 }
 
-.ticket-numeros-title {
-    color: #2d3748;
-    font-weight: 700;
-}
-
 .ticket-data {
     color: #4a5568;
 }
@@ -915,6 +910,69 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     background: linear-gradient(135deg, #f7fafc, #edf2f7);
     border: 1px solid #e2e8f0;
     font-weight: 700;
+}
+
+
+
+        /* UNIFORMIZAÇÃO DE CORES - DESKTOP = MOBILE */
+.ticket-body {
+    color: #1a202c !important;
+}
+
+.ticket-participante {
+    color: #2d3748 !important;
+    font-weight: 600;
+}
+
+.ticket-body .ticket-numeros-title {
+    color: #d4af37 !important;
+    font-weight: 600;
+}
+
+.ticket-data {
+    color: #4a5568 !important;
+}
+
+.ticket-valor {
+    color: #b7791f !important;
+    font-weight: 700;
+}
+
+.ticket-codigo {
+    color: #2d3748 !important;
+    background: #f7fafc !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.numero-sorteio {
+    color: #1a202c !important;
+    background: linear-gradient(135deg, #f7fafc, #edf2f7) !important;
+    border: 1px solid #e2e8f0 !important;
+    font-weight: 700;
+}
+
+/* SOBRESCREVER QUALQUER MEDIA QUERY QUE ALTERE CORES NO MOBILE */
+@media (max-width: 768px) {
+    .ticket-body {
+        color: #1a202c !important;
+    }
+    
+    .ticket-participante {
+        color: #2d3748 !important;
+    }
+    
+    .ticket-numeros-title {
+        color: #d4af37 !important;
+    }
+    
+    .ticket-data {
+        color: #4a5568 !important;
+    }
+    
+    .numero-sorteio {
+        color: #1a202c !important;
+        background: linear-gradient(135deg, #f7fafc, #edf2f7) !important;
+    }
 }
     </style>
 </head>
