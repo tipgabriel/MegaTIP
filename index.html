@@ -18,11 +18,24 @@
             --color-highlight: #dc2626;
         }
 
+        /* CORREÇÃO: EVITAR SCROLL HORIZONTAL */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
             min-height: 100vh;
             color: var(--color-text);
+            margin: 0;
+            padding: 0;
         }
 
         .card-hover {
@@ -39,7 +52,7 @@
             background: linear-gradient(145deg, #f0f8ff, #e6f2ff);
             border-radius: 16px;
             padding: 0;
-            margin: 0;
+            margin: 0 auto; /* CENTRALIZADO */
             box-shadow: 
                 0 10px 25px rgba(0,0,0,0.15),
                 0 5px 10px rgba(0,0,0,0.05),
@@ -47,7 +60,8 @@
             color: #1e293b;
             position: relative;
             overflow: hidden;
-            border: 2px solid #c5d9f1; /* Borda mais espessa e sutil */
+            border: 2px solid #c5d9f1;
+            width: 100%; /* LARGURA TOTAL DO CONTAINER */
             max-width: 320px;
             min-height: 440px;
             display: flex;
@@ -287,7 +301,7 @@
         @media (max-width: 767px) {
             .numeros-container {
                 flex-wrap: wrap;
-                max-width: 180px; /* Ajuste para caber 3 números por linha */
+                max-width: 180px;
             }
             
             .numero-sorteio {
@@ -330,7 +344,7 @@
         /* Estilo para o vídeo */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 12px;
@@ -346,11 +360,12 @@
             border: 0;
         }
 
-        /* Melhorias para mobile - ESPAÇAMENTO CORRIGIDO */
+        /* CORREÇÃO: MELHORIAS PARA MOBILE */
         @media (max-width: 768px) {
             .ticket {
                 max-width: 100%;
-                margin: 0 auto; /* CORREÇÃO: Alterado de margin: 15px 0 */
+                margin: 0 auto;
+                width: 90%; /* LARGURA RESPONSIVA */
             }
             
             .hero-text {
@@ -361,6 +376,26 @@
             .feature-text {
                 font-size: 0.9rem;
                 line-height: 1.5;
+            }
+
+            /* CORREÇÃO: CONTAINER DA BARRA DE BUSCA */
+            .search-container {
+                padding: 15px;
+                margin: 0 10px 30px 10px; /* MARGENS LATERAIS */
+                width: calc(100% - 20px); /* LARGURA RESPONSIVA */
+            }
+
+            .search-box {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .search-btn {
+                width: 100%;
             }
         }
 
@@ -554,20 +589,24 @@
             font-size: 18px;
         }
 
-        /* Estilos para a barra de busca */
+        /* CORREÇÃO: BARRA DE BUSCA RESPONSIVA */
         .search-container {
             background: #262626;
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 30px;
             border: 1px solid #374151;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .search-box {
             display: flex;
             gap: 10px;
-            max-width: 600px;
+            max-width: 100%;
             margin: 0 auto;
+            flex-wrap: wrap;
         }
 
         .search-input {
@@ -579,6 +618,8 @@
             color: white;
             font-size: 16px;
             transition: all 0.3s ease;
+            min-width: 200px;
+            box-sizing: border-box;
         }
 
         .search-input:focus {
@@ -595,6 +636,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .search-btn:hover {
@@ -607,6 +649,7 @@
             margin-top: 15px;
             color: #d4af37;
             font-weight: 600;
+            width: 100%;
         }
 
         .no-results {
@@ -614,17 +657,38 @@
             padding: 40px;
             color: #94a3b8;
             font-size: 18px;
+            width: 100%;
         }
 
-        /* NOVO: ESPAÇAMENTO ENTRE BILHETES */
+        /* CORREÇÃO: ESPAÇAMENTO ENTRE BILHETES */
         #tickets-gallery {
-            gap: 2rem !important;
+            gap: 2rem;
+            justify-content: center;
+            padding: 0 10px;
         }
 
         @media (max-width: 768px) {
             #tickets-gallery {
-                gap: 1.5rem !important;
+                gap: 1.5rem;
+                padding: 0 5px;
             }
+        }
+
+        /* CORREÇÃO: CONTAINER PRINCIPAL */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+        }
+
+        /* CORREÇÃO: SEÇÕES PRINCIPAIS */
+        section {
+            width: 100%;
+            overflow: hidden;
         }
     </style>
 </head>
