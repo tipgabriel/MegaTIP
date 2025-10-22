@@ -34,9 +34,9 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* NOVO ESTILO ELEGANTE DE TICKET */
+        /* NOVO ESTILO ELEGANTE DE TICKET COM COR AZUL */
         .ticket {
-            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            background: linear-gradient(145deg, #f0f8ff, #e6f2ff);
             border-radius: 16px;
             padding: 0;
             margin: 20px;
@@ -47,7 +47,7 @@
             color: #1e293b;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 2px solid #c5d9f1; /* Borda mais espessa e sutil */
             max-width: 320px;
             min-height: 440px;
             display: flex;
@@ -108,11 +108,11 @@
         }
 
         .ticket-footer {
-            background: #f8fafc;
+            background: #e6f2ff;
             padding: 15px 20px;
             text-align: center;
             font-weight: 600;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #d1e0f0;
             color: #475569;
             font-size: 0.9rem;
         }
@@ -265,6 +265,7 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
+        /* NOVO LAYOUT RESPONSIVO PARA OS NÚMEROS */
         .numeros-container {
             display: flex;
             justify-content: center;
@@ -272,6 +273,28 @@
             gap: 6px;
             max-width: 280px;
             margin: 0 auto;
+        }
+
+        /* Desktop: 6 números em uma única linha */
+        @media (min-width: 768px) {
+            .numeros-container {
+                flex-wrap: nowrap;
+                max-width: 100%;
+            }
+        }
+
+        /* Mobile: 6 números em 2 linhas (3x3) */
+        @media (max-width: 767px) {
+            .numeros-container {
+                flex-wrap: wrap;
+                max-width: 180px; /* Ajuste para caber 3 números por linha */
+            }
+            
+            .numero-sorteio {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
         }
 
         /* Novos estilos para melhorar clareza dos resultados */
@@ -328,16 +351,6 @@
             .ticket {
                 max-width: 100%;
                 margin: 15px 0;
-            }
-            
-            .numeros-container {
-                max-width: 100%;
-            }
-            
-            .numero-sorteio {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
             }
             
             .hero-text {
@@ -538,6 +551,68 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Estilos para a barra de busca */
+        .search-container {
+            background: #262626;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #374151;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 2px solid #d4af37;
+            background: #1e293b;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+        }
+
+        .search-btn {
+            background: #d4af37;
+            color: #1e293b;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #fbbf24;
+            transform: translateY(-2px);
+        }
+
+        .search-results-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
             font-size: 18px;
         }
     </style>
@@ -783,6 +858,17 @@
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
 
+            <!-- Barra de busca -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" class="search-input" placeholder="Buscar por nome, número do bilhete ou código...">
+                    <button id="search-btn" class="search-btn">
+                        <i class="fas fa-search mr-2"></i>Buscar
+                    </button>
+                </div>
+                <div id="search-results-info" class="search-results-info"></div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center" id="tickets-gallery">
                 <!-- Os bilhetes serão carregados aqui -->
             </div>
@@ -997,7 +1083,7 @@
                     
                     // Atualizar mensagem
                     mensagemResultado.innerHTML = `
-                        <p class="text-center font-bold text-2xl text-[#10b981]">🏆 PARABÉNS A TODOS DO GRUPO! 🏆</p>
+                        <p class="text-center font-bold text-2xl text-[#10b981]">🏆 PARABÉNS A TODOS DO GRUPO! 🎉</p>
                         <p class="text-center mt-4 text-lg">🎯 <strong>${bilheteVencedor.assignedName}</strong> acertou os 6 números!</p>
                         <p class="text-center mt-2">🎉 O grupo inteiro comemora! Cada participante recebe seu prêmio individual!</p>
                         <p class="text-center mt-4 text-[#d4af37] font-bold">💰 PRÊMIO GARANTIDO! 💰</p>
@@ -1136,12 +1222,57 @@
             ];
 
             let displayedTickets = 8;
+            let filteredTickets = [...sampleTickets]; // Cópia para filtragem
 
+            // ========== SISTEMA DE BUSCA ==========
+            const searchInput = document.getElementById('search-input');
+            const searchBtn = document.getElementById('search-btn');
+            const searchResultsInfo = document.getElementById('search-results-info');
+
+            // Função para filtrar bilhetes
+            function filtrarBilhetes(termo) {
+                if (!termo) {
+                    return [...sampleTickets];
+                }
+                
+                const termoLower = termo.toLowerCase();
+                return sampleTickets.filter(ticket => {
+                    // Buscar por nome do participante
+                    if (ticket.assignedName.toLowerCase().includes(termoLower)) {
+                        return true;
+                    }
+                    
+                    // Buscar por número do bilhete
+                    if (ticket.id.toString().includes(termo)) {
+                        return true;
+                    }
+                    
+                    // Buscar por números da sorte
+                    if (ticket.numbers.includes(termo)) {
+                        return true;
+                    }
+                    
+                    return false;
+                });
+            }
+
+            // Função para atualizar a exibição dos bilhetes com base no filtro
             function atualizarBilhetes() {
                 ticketsGallery.innerHTML = '';
 
-                for (let i = 0; i < displayedTickets && i < sampleTickets.length; i++) {
-                    const ticket = sampleTickets[i];
+                if (filteredTickets.length === 0) {
+                    ticketsGallery.innerHTML = `
+                        <div class="no-results col-span-full">
+                            <i class="fas fa-search text-4xl mb-4"></i>
+                            <p>Nenhum bilhete encontrado para sua busca.</p>
+                            <p class="text-sm mt-2">Tente buscar por nome, número do bilhete ou números da sorte.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                for (let i = 0; i < displayedTickets && i < filteredTickets.length; i++) {
+                    const ticket = filteredTickets[i];
                     const acertos = verificarVencedor(ticket.numbers);
                     const isVencedor = grupoGanhou && bilheteVencedor && bilheteVencedor.id === ticket.id;
                     const isGrupoVencedor = grupoGanhou;
@@ -1212,19 +1343,55 @@
                     ticketsGallery.appendChild(ticketElement);
                 }
 
-                if (displayedTickets >= sampleTickets.length) {
+                // Atualizar informações de resultados da busca
+                if (searchInput.value.trim() !== '') {
+                    searchResultsInfo.textContent = `${filteredTickets.length} bilhete(s) encontrado(s) para "${searchInput.value}"`;
+                } else {
+                    searchResultsInfo.textContent = '';
+                }
+
+                // Mostrar ou esconder botão "Carregar Mais"
+                if (displayedTickets >= filteredTickets.length) {
                     loadMoreButton.style.display = 'none';
                 } else {
                     loadMoreButton.style.display = 'block';
                 }
             }
 
+            // Evento de busca
+            searchBtn.addEventListener('click', function() {
+                const termo = searchInput.value.trim();
+                filteredTickets = filtrarBilhetes(termo);
+                displayedTickets = 8; // Reset para mostrar apenas os primeiros resultados
+                atualizarBilhetes();
+            });
+
+            // Buscar ao pressionar Enter
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    const termo = searchInput.value.trim();
+                    filteredTickets = filtrarBilhetes(termo);
+                    displayedTickets = 8;
+                    atualizarBilhetes();
+                }
+            });
+
+            // Limpar busca quando o campo for limpo
+            searchInput.addEventListener('input', function() {
+                if (this.value.trim() === '') {
+                    filteredTickets = [...sampleTickets];
+                    displayedTickets = 8;
+                    atualizarBilhetes();
+                }
+            });
+
             loadMoreButton.addEventListener('click', function() {
-                displayedTickets = sampleTickets.length;
+                displayedTickets = filteredTickets.length;
                 atualizarBilhetes();
             });
 
             // Exibir bilhetes iniciais
+            filteredTickets = [...sampleTickets];
             atualizarBilhetes();
 
             // ========== SCROLL SUAVE ==========
