@@ -6,7 +6,7 @@
     <title>MegaTIP - Apostas e Bolão</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+       <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
 
         :root {
@@ -188,6 +188,7 @@
             opacity: 1;
         }
 
+        /* CORREÇÃO: NÚMEROS 100% REDONDOS */
         .numero-sorteio {
             display: inline-flex;
             width: 44px;
@@ -195,7 +196,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-radius: 12px;
+            border-radius: 50%; /* ALTERADO: de 12px para 50% */
             margin: 4px;
             font-weight: bold;
             font-size: 16px;
@@ -241,6 +242,7 @@
             animation: bounce 0.5s;
             color: #1e293b;
             border-color: #d4af37;
+            border-radius: 50%; /* GARANTINDO QUE OS ACERTOS TAMBÉM SEJAM REDONDOS */
         }
 
         @keyframes bounce {
@@ -308,6 +310,7 @@
                 width: 40px;
                 height: 40px;
                 font-size: 14px;
+                border-radius: 50%; /* GARANTINDO REDONDEZ NO MOBILE */
             }
         }
 
@@ -1279,30 +1282,33 @@
             ];
 
             const sampleTickets = [
-                { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Gabriel" },
-                { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Melissa" },
-                { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Beatriz" },
-                { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Bryan" },
-                { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Guedes" },
-                { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "John" },
-                { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Kimyo" },
-                { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
-                { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
-                { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
-                { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" },
-                { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
-                { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
-                { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "TH Romerito" }, 
-                { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Ana Paula" } 
+                { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 12, 23, 34, 45, 56", assignedName: "Gabriel" },
+                { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 15, 22, 31, 44, 58", assignedName: "Melissa" },
+                { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 11, 25, 33, 47, 59", assignedName: "Beatriz" },
+                { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 18, 27, 36, 42, 53", assignedName: "Bryan" },
+                { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 14, 26, 35, 48, 60", assignedName: "Guedes" },
+                { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "08, 17, 29, 37, 46, 55", assignedName: "John" },
+                { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 13, 21, 38, 49, 57", assignedName: "Kimyo" },
+                { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 16, 24, 32, 43, 54", assignedName: "Mufasa Empório" },
+                { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 28, 39, 41, 52", assignedName: "Olivier" },
+                { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 20, 30, 40, 50, 60", assignedName: "Paloma" },
+                { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 22, 33, 44, 55, 60", assignedName: "Willian" },
+                { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 15, 25, 35, 45, 55", assignedName: "Vitória Mandy" },
+                { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 14, 21, 28, 35, 42", assignedName: "Tiago" },
+                { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 12, 21, 30, 39, 48", assignedName: "TH Romerito" }, 
+                { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 18, 27, 36, 45, 54", assignedName: "Ana Paula" } 
             ];
 
             let displayedTickets = 8;
             let filteredTickets = [...sampleTickets]; // Cópia para filtragem
 
-            // ========== SISTEMA DE BUSCA ==========
+            // ========== SISTEMA DE BUSCA EM TEMPO REAL ==========
             const searchInput = document.getElementById('search-input');
             const searchBtn = document.getElementById('search-btn');
             const searchResultsInfo = document.getElementById('search-results-info');
+
+            // Variável para controlar o timeout da busca
+            let searchTimeout;
 
             // Função para filtrar bilhetes
             function filtrarBilhetes(termo) {
@@ -1331,6 +1337,14 @@
                 });
             }
 
+            // Função para executar a busca
+            function executarBusca() {
+                const termo = searchInput.value.trim();
+                filteredTickets = filtrarBilhetes(termo);
+                displayedTickets = filteredTickets.length; // Mostrar todos os resultados da busca
+                atualizarBilhetes();
+            }
+
             // Função para atualizar a exibição dos bilhetes com base no filtro
             function atualizarBilhetes() {
                 ticketsGallery.innerHTML = '';
@@ -1343,6 +1357,7 @@
                             <p class="text-sm mt-2">Tente buscar por nome, número do bilhete ou números da sorte.</p>
                         </div>
                     `;
+                    loadMoreButton.style.display = 'none';
                     return;
                 }
 
@@ -1425,43 +1440,49 @@
                     searchResultsInfo.textContent = '';
                 }
 
-                // Mostrar ou esconder botão "Carregar Mais"
-                if (displayedTickets >= filteredTickets.length) {
-                    loadMoreButton.style.display = 'none';
-                } else {
+                // Mostrar ou esconder botão "Carregar Mais" (só mostra quando não está buscando)
+                if (searchInput.value.trim() === '' && displayedTickets < sampleTickets.length) {
                     loadMoreButton.style.display = 'block';
+                } else {
+                    loadMoreButton.style.display = 'none';
                 }
             }
 
-            // Evento de busca
+            // Evento de busca em tempo real
+            searchInput.addEventListener('input', function() {
+                const termo = this.value.trim();
+                
+                // Limpar timeout anterior
+                clearTimeout(searchTimeout);
+                
+                // Se o campo estiver vazio, mostrar todos os bilhetes
+                if (termo === '') {
+                    filteredTickets = [...sampleTickets];
+                    displayedTickets = 8;
+                    atualizarBilhetes();
+                    return;
+                }
+                
+                // Aguardar 300ms após a última digitação para executar a busca
+                searchTimeout = setTimeout(() => {
+                    executarBusca();
+                }, 300);
+            });
+
+            // Evento de busca ao clicar no botão
             searchBtn.addEventListener('click', function() {
-                const termo = searchInput.value.trim();
-                filteredTickets = filtrarBilhetes(termo);
-                displayedTickets = 8; // Reset para mostrar apenas os primeiros resultados
-                atualizarBilhetes();
+                executarBusca();
             });
 
             // Buscar ao pressionar Enter
             searchInput.addEventListener('keyup', function(event) {
                 if (event.key === 'Enter') {
-                    const termo = searchInput.value.trim();
-                    filteredTickets = filtrarBilhetes(termo);
-                    displayedTickets = 8;
-                    atualizarBilhetes();
-                }
-            });
-
-            // Limpar busca quando o campo for limpo
-            searchInput.addEventListener('input', function() {
-                if (this.value.trim() === '') {
-                    filteredTickets = [...sampleTickets];
-                    displayedTickets = 8;
-                    atualizarBilhetes();
+                    executarBusca();
                 }
             });
 
             loadMoreButton.addEventListener('click', function() {
-                displayedTickets = filteredTickets.length;
+                displayedTickets = sampleTickets.length;
                 atualizarBilhetes();
             });
 
