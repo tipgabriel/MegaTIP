@@ -1264,44 +1264,47 @@
             const ticketsGallery = document.getElementById('tickets-gallery');
             const loadMoreButton = document.getElementById('load-more');
 
-            const participantNames = [
-                "Gabriel",     // ← Bilhete 1
-                "Melissa",     // ← Bilhete 2  
-                "Beatriz",     // ← Bilhete 3
-                "Bryan",       // ← Bilhete 4
-                "Guedes",      // ← Bilhete 5
-                "John",        // ← Bilhete 6
-                "Kimyo",       // ← Bilhete 7
-                "Mufasa Empório", // ← Bilhete 8
-                "Olivier",     // ← Bilhete 9
-                "Paloma",      // ← Bilhete 10
-                "Willian",     // ← Bilhete 11
-                "Vitória Mandy", // ← Bilhete 12
-                "Tiago",       // ← Bilhete 13
-                "TH Romerito",  // ← Bilhete 14
-                "Ana Paula"  // ← Bilhete 15 
-            ];
+const participantNames = [
+    "Ana Paula",      // ← Bilhete 1
+    "Beatriz",        // ← Bilhete 2
+    "Bryan",          // ← Bilhete 3
+    "Elton",          // ← Bilhete 4
+    "Gabriel",        // ← Bilhete 5
+    "Guedes",         // ← Bilhete 6
+    "John",           // ← Bilhete 7
+    "Kimyo",          // ← Bilhete 8
+    "Melissa",        // ← Bilhete 9
+    "Mufasa Empório", // ← Bilhete 10
+    "Olivier",        // ← Bilhete 11
+    "Paloma",         // ← Bilhete 12
+    "TH Romerito",    // ← Bilhete 13
+    "Tiago",          // ← Bilhete 14
+    "Vitória Mandy",  // ← Bilhete 15
+    "Willian"         // ← Bilhete 16
+];
+
 
             // ATUALIZAÇÃO: Todos os números iniciais são 00
-            const sampleTickets = [
-                { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Gabriel" },
-                { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Melissa" },
-                { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Beatriz" },
-                { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Bryan" },
-                { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Guedes" },
-                { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "John" },
-                { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Kimyo" },
-                { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
-                { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
-                { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
-                { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" },
-                { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
-                { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
-                { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "TH Romerito" }, 
-                { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Ana Paula" } 
-            ];
+const sampleTickets = [
+    { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Ana Paula" },
+    { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Beatriz" },
+    { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Bryan" },
+    { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Elton" },
+    { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Gabriel" },
+    { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Guedes" },
+    { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "John" },
+    { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Kimyo" },
+    { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Melissa" },
+    { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
+    { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
+    { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
+    { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "TH Romerito" },
+    { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
+    { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
+    { id: 16, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" }
+];
 
-            let displayedTickets = 8;
+            let displayedTickets = window.innerWidth < 768 ? 6 : 8;
             let filteredTickets = [...sampleTickets]; // Cópia para filtragem
 
             // ========== SISTEMA DE BUSCA EM TEMPO REAL ==========
