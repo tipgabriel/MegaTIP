@@ -6,7 +6,7 @@
     <title>MegaTIP - Apostas e Bolão</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-       <style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
 
         :root {
@@ -190,7 +190,7 @@
 
         /* CORREÇÃO: NÚMEROS 100% REDONDOS */
         .numero-sorteio {
-            display: inline-flex;
+            display: flex;
             width: 44px;
             height: 44px;
             align-items: center;
@@ -206,6 +206,7 @@
             color: white;
             border: 1px solid rgba(255,255,255,0.1);
             transition: all 0.3s ease;
+            flex-shrink: 0; /* impede de esticar ou achatar */
         }
 
         .numero-sorteio:hover {
@@ -869,23 +870,23 @@
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold text-center mb-12">Pagamento PIX</h2>
             
- <div class="pix-container">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- QR Code -->
-        <div class="text-center">
-            <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Escaneie o QR Code</h3>
-            <div class="qrcode-container">
-                <!-- SUBSTITUA o src pela URL da imagem do QR Code do seu banco -->
-                <img src="qr-code.png" alt="QR CODE Pix" class="w-64 h-64 object-contain">
-                <!-- Fallback caso a imagem não carregue -->
-                <div class="bg-gray-200 w-64 h-64 rounded-lg flex items-center justify-center text-gray-500 hidden">
+            <div class="pix-container">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- QR Code -->
                     <div class="text-center">
-                        <i class="fas fa-qrcode text-6xl mb-2"></i>
-                        <p class="text-sm">QR Code PIX</p>
-                        <p class="text-xs">(Imagem do banco)</p>
-                    </div>
-                </div>
-            </div> 
+                        <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Escaneie o QR Code</h3>
+                        <div class="qrcode-container">
+                            <!-- SUBSTITUA o src pela URL da imagem do QR Code do seu banco -->
+                            <img src="qr-code.png" alt="QR CODE Pix" class="w-64 h-64 object-contain">
+                            <!-- Fallback caso a imagem não carregue -->
+                            <div class="bg-gray-200 w-64 h-64 rounded-lg flex items-center justify-center text-gray-500 hidden">
+                                <div class="text-center">
+                                    <i class="fas fa-qrcode text-6xl mb-2"></i>
+                                    <p class="text-sm">QR Code PIX</p>
+                                    <p class="text-xs">(Imagem do banco)</p>
+                                </div>
+                            </div>
+                        </div> 
                         <p class="text-sm text-gray-300 mt-4">
                             Use o app do seu banco para escanear o código
                         </p>
@@ -1281,22 +1282,23 @@
                 "Ana Paula"  // ← Bilhete 15 
             ];
 
+            // ATUALIZAÇÃO: Todos os números iniciais são 00
             const sampleTickets = [
-                { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 12, 23, 34, 45, 56", assignedName: "Gabriel" },
-                { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 15, 22, 31, 44, 58", assignedName: "Melissa" },
-                { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 11, 25, 33, 47, 59", assignedName: "Beatriz" },
-                { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 18, 27, 36, 42, 53", assignedName: "Bryan" },
-                { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 14, 26, 35, 48, 60", assignedName: "Guedes" },
-                { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "08, 17, 29, 37, 46, 55", assignedName: "John" },
-                { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 13, 21, 38, 49, 57", assignedName: "Kimyo" },
-                { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 16, 24, 32, 43, 54", assignedName: "Mufasa Empório" },
-                { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 28, 39, 41, 52", assignedName: "Olivier" },
-                { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 20, 30, 40, 50, 60", assignedName: "Paloma" },
-                { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 22, 33, 44, 55, 60", assignedName: "Willian" },
-                { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 15, 25, 35, 45, 55", assignedName: "Vitória Mandy" },
-                { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 14, 21, 28, 35, 42", assignedName: "Tiago" },
-                { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 12, 21, 30, 39, 48", assignedName: "TH Romerito" }, 
-                { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 18, 27, 36, 45, 54", assignedName: "Ana Paula" } 
+                { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Gabriel" },
+                { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Melissa" },
+                { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Beatriz" },
+                { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Bryan" },
+                { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Guedes" },
+                { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "John" },
+                { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Kimyo" },
+                { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
+                { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
+                { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
+                { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" },
+                { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
+                { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
+                { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "TH Romerito" }, 
+                { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Ana Paula" } 
             ];
 
             let displayedTickets = 8;
