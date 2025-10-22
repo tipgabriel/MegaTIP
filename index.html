@@ -555,15 +555,23 @@
             transform: scale(1.05);
         }
 
-        .qrcode-container {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid #d4af37;
-        }
+.qrcode-container {
+    background: white;
+    border-radius: 8px;
+    padding: 3px;                /* ⬅️ Espaço mínimo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #d4af37;
+    margin: 0 auto;              /* ⬅️ Centraliza se necessário */
+    max-width: 260px;            /* ⬅️ Controla tamanho máximo */
+}
+
+        .qrcode-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
         .payment-steps {
             counter-reset: step;
