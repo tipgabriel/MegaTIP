@@ -39,7 +39,7 @@
             background: linear-gradient(145deg, #f0f8ff, #e6f2ff);
             border-radius: 16px;
             padding: 0;
-            margin: 20px;
+            margin: 0;
             box-shadow: 
                 0 10px 25px rgba(0,0,0,0.15),
                 0 5px 10px rgba(0,0,0,0.05),
@@ -346,11 +346,11 @@
             border: 0;
         }
 
-        /* Melhorias para mobile */
+        /* Melhorias para mobile - ESPAÇAMENTO CORRIGIDO */
         @media (max-width: 768px) {
             .ticket {
                 max-width: 100%;
-                margin: 15px 0;
+                margin: 0 auto; /* CORREÇÃO: Alterado de margin: 15px 0 */
             }
             
             .hero-text {
@@ -615,6 +615,17 @@
             color: #94a3b8;
             font-size: 18px;
         }
+
+        /* NOVO: ESPAÇAMENTO ENTRE BILHETES */
+        #tickets-gallery {
+            gap: 2rem !important;
+        }
+
+        @media (max-width: 768px) {
+            #tickets-gallery {
+                gap: 1.5rem !important;
+            }
+        }
     </style>
 </head>
 <body class="text-white">
@@ -845,7 +856,7 @@
                         <div class="mt-6 p-4 bg-yellow-900 bg-opacity-20 rounded-lg border border-yellow-700">
                             <p class="text-yellow-200 text-sm">
                                 <i class="fas fa-exclamation-circle mr-2"></i>
-                                <strong>Importante:</strong> O prazo final para pagamento é até às 23h59 do dia 25/12/2025
+                                <strong>Importante:</strong> O prazo final para pagamento é até o dia 20/12/2025
                             </p>
                         </div>
                     </div>
