@@ -844,6 +844,35 @@
 .ticket-body {
     z-index: 2;
 }
+
+
+        /* CORREÇÃO DEFINITIVA: VÍDEO GRANDE NO MOBILE */
+@media (max-width: 768px) {
+    #video .container {
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    #video .bg-\[\#262626\] {
+        background: transparent !important; /* ⬅️ Remove fundo cinza */
+        border: none !important;            /* ⬅️ Remove bordas */
+        padding: 10px 15px;                 /* ⬅️ Padding mínimo */
+        border-radius: 0;
+    }
+    
+    .video-container {
+        border-radius: 12px;     /* ⬅️ Mantém bordas apenas no vídeo */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        margin: 0;
+    }
+    
+    /* Ajuste o texto abaixo do vídeo */
+    #video .bg-\[\#262626\] p {
+        padding: 0 15px;         /* ⬅️ Texto com padding normal */
+        margin-top: 15px;
+    }
+}
     </style>
 </head>
 <body class="text-white">
