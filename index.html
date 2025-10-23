@@ -1021,7 +1021,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                     Participe do MegaTIP — o bolão para quem sabe que juntos vamos mais longe.  
                     <span class="text-white">Se um acerta, todo o grupo ganha.</span> 
                     <span class="text-white"> Cada bilhete tem 6 números e custa só </span> 
-                    <span class="text-[#d4af37] font-bold">R$ 6,00.</span>
+                    <span class="text-[#d4af37] font-bold">R$ 6.</span>
                 </p>
 
                 <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-10">
@@ -1553,14 +1553,16 @@ const participantNames = [
     "Guedes",         // ← Bilhete 6
     "John",           // ← Bilhete 7
     "Kimyo",          // ← Bilhete 8
-    "Melissa",        // ← Bilhete 9
-    "Mufasa Empório", // ← Bilhete 10
-    "Olivier",        // ← Bilhete 11
-    "Paloma",         // ← Bilhete 12
-    "TH Romerito",    // ← Bilhete 13
-    "Tiago",          // ← Bilhete 14
-    "Vitória Mandy",  // ← Bilhete 15
-    "Willian"         // ← Bilhete 16
+    "Lora",           // ← Bilhete 9
+    "Melissa",        // ← Bilhete 10
+    "Mufasa Empório", // ← Bilhete 11
+    "Olivier",        // ← Bilhete 12
+    "Paloma",         // ← Bilhete 13
+    "Ronaldo"         // ← Bilhete 14
+    "TH Romerito",    // ← Bilhete 15
+    "Tiago",          // ← Bilhete 16
+    "Vitória Mandy",  // ← Bilhete 17
+    "Willian"         // ← Bilhete 18
 ];
 
 
@@ -1574,14 +1576,16 @@ const sampleTickets = [
     { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Guedes" },
     { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "John" },
     { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Kimyo" },
-    { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "45, 30, 21, 40, 60, 10", assignedName: "Melissa" },
-    { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
-    { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
-    { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
-    { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 05, 34, 27, 25", assignedName: "TH Romerito" },
-    { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
-    { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
-    { id: 16, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" }
+    { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Lora" },
+    { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "45, 30, 21, 40, 60, 10", assignedName: "Melissa" },
+    { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Mufasa Empório" },
+    { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Olivier" },
+    { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Paloma" },
+    { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Ronaldo" },
+    { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 05, 34, 27, 25", assignedName: "TH Romerito" },
+    { id: 16, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Tiago" },
+    { id: 17, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Vitória Mandy" },
+    { id: 18, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Willian" }
 ];
 
             let displayedTickets = window.innerWidth < 768 ? 6 : 8;
