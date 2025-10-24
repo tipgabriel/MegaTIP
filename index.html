@@ -190,27 +190,29 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             opacity: 1;
         }
 
-        /* CORREÇÃO: NÚMEROS 100% REDONDOS */
-        .numero-sorteio {
-            display: flex;
-            width: 44px;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(31, 35, 39, 0.6), rgba(31, 35, 39, 0.4)) !important;
-            border-radius: 50%; /* ALTERADO: de 12px para 50% */
-            margin: 4px;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 
-                0 4px 6px rgba(0,0,0,0.1),
-                inset 0 1px 0 rgba(255,255,255,0.2);
-            color: #f1f5f9 !important;
-            border: 1px solid rgba(255,255,255,0.2) !important;
-            transition: all 0.3s ease;
-            flex-shrink: 0; /* impede de esticar ou achatar */
-            backdrop-filter: blur(5px);
-        }
+/* CORREÇÃO: NÚMEROS 100% REDONDOS */
+.numero-sorteio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(31, 35, 39, 0.6), rgba(31, 35, 39, 0.4)) !important;
+    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    color: #f1f5f9 !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* ← IMPEDE DE ESPREMER */
+    backdrop-filter: blur(5px);
+    
+    /* Tamanhos base */
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+    margin: 4px;
+}
 
         .numero-sorteio:hover {
             transform: translateY(-2px);
@@ -298,35 +300,49 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 /* Desktop: 6 números em uma única linha */
 @media (min-width: 768px) {
     .numeros-container {
+        display: flex;
         flex-wrap: nowrap;
-        max-width: 100%;
-        gap: 6px;
+        justify-content: space-between;
         width: 100%;
-        justify-content: space-between;  /* ← DISTRIBUIR MELHOR */
+        max-width: 320px;
+        margin: 0 auto;
+        gap: 8px;
     }
     
     .numero-sorteio {
-        flex: 1;  /* ← FAZER OS NÚMEROS SE AJUSTAREM */
-        max-width: 44px;
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+        margin: 0;
+        border-radius: 50%;
+        flex: 0 0 auto; /* Impede que os círculos fiquem espremidos */
     }
 }
 
 /* Mobile: 6 números em 2 linhas (3x3) */
 @media (max-width: 767px) {
     .numeros-container {
+        display: flex;
         flex-wrap: wrap;
-        max-width: none;
-        width: fit-content;
-        gap: 6px;
+        justify-content: center;
+        width: 100%;
+        max-width: 140px; /* Para 3 números por linha */
         margin: 0 auto;
+        gap: 8px;
     }
     
     .numero-sorteio {
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         font-size: 14px;
         margin: 0;
         border-radius: 50%;
+        flex-shrink: 0;
+    }
+    
+    /* Forçar 3 por linha */
+    .numero-sorteio:nth-child(3n+1) {
+        margin-left: 0;
     }
 }
 
