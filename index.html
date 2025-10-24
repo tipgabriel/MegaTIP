@@ -190,15 +190,15 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             opacity: 1;
         }
 
-        /* NÚMEROS OFICIAIS - 3 por linha */
-        #numeros-oficiais {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            max-width: 150px;
-            margin: 0 auto;
-        }
+/* NÚMEROS OFICIAIS - 1 linha no desktop, 2 linhas no mobile */
+#numeros-oficiais {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 150px;
+    margin: 0 auto 20px auto; /* ← ADICIONADO margin-bottom */
+}
 
         .numero-oficial {
             display: inline-flex;
@@ -306,55 +306,58 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* DESKTOP - Mantém 3 por linha */
-        @media (min-width: 768px) {
-            #numeros-oficiais {
-                max-width: 150px;
-                gap: 10px;
-            }
+/* DESKTOP - Números oficiais em 1 linha */
+@media (min-width: 768px) {
+    #numeros-oficiais {
+        flex-wrap: nowrap; /* ← MUDEI: agora não quebra linha */
+        max-width: 400px; /* ← AUMENTADO para caber 6 números em linha */
+        gap: 12px;
+        margin: 0 auto 25px auto; /* ← MAIS ESPAÇO com o botão */
+    }
             
-            .numero-oficial {
-                width: 48px;
-                height: 48px;
-                font-size: 17px;
-            }
+    .numero-oficial {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
             
-            .numeros-container {
-                max-width: 150px;
-                gap: 10px;
-            }
-            
-            .numero-sorteio {
-                width: 42px;
-                height: 42px;
-                font-size: 16px;
-            }
-        }
+    .numeros-container {
+        max-width: 150px;
+        gap: 10px;
+    }
+    
+    .numero-sorteio {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+}
 
-        /* MOBILE - Mantém 3 por linha */
-        @media (max-width: 767px) {
-            #numeros-oficiais {
-                max-width: 150px;
-                gap: 8px;
-            }
-            
-            .numero-oficial {
-                width: 42px;
-                height: 42px;
-                font-size: 15px;
-            }
-            
-            .numeros-container {
-                max-width: 150px;
-                gap: 8px;
-            }
-            
-            .numero-sorteio {
-                width: 38px;
-                height: 38px;
-                font-size: 14px;
-            }
-        }
+/* MOBILE - Mantém 3 por linha */
+@media (max-width: 767px) {
+    #numeros-oficiais {
+        max-width: 150px;
+        gap: 8px;
+        margin: 0 auto 20px auto; /* ← ESPAÇO no mobile também */
+    }
+    
+    .numero-oficial {
+        width: 42px;
+        height: 42px;
+        font-size: 15px;
+    }
+    
+    .numeros-container {
+        max-width: 150px;
+        gap: 8px;
+    }
+    
+    .numero-sorteio {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+}
 
         /* Novos estilos para melhorar clareza dos resultados */
         .resultado-vencedor {
