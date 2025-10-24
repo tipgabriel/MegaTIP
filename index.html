@@ -299,8 +299,15 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 @media (min-width: 768px) {
     .numeros-container {
         flex-wrap: nowrap;
-        max-width: none;  /* ← REMOVER LIMITAÇÃO */
+        max-width: 100%;
         gap: 6px;
+        width: 100%;
+        justify-content: space-between;  /* ← DISTRIBUIR MELHOR */
+    }
+    
+    .numero-sorteio {
+        flex: 1;  /* ← FAZER OS NÚMEROS SE AJUSTAREM */
+        max-width: 44px;
     }
 }
 
@@ -308,15 +315,18 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 @media (max-width: 767px) {
     .numeros-container {
         flex-wrap: wrap;
-        max-width: none;  /* ← REMOVIDA A LIMITAÇÃO */
-        gap: 4px;
+        max-width: none;
+        width: fit-content;
+        gap: 6px;
+        margin: 0 auto;
     }
     
     .numero-sorteio {
         width: 38px;
         height: 38px;
         font-size: 14px;
-        margin: 3px;
+        margin: 0;
+        border-radius: 50%;
     }
 }
 
