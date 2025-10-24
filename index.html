@@ -6,7 +6,7 @@
     <title>MegaTIP - Apostas e Bolão</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
 
         :root {
@@ -123,12 +123,13 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         }
 
         .ticket-footer {
-            background: #e6f2ff;
+            background: rgba(31, 35, 39, 0.7) !important;
+            backdrop-filter: blur(8px);
             padding: 15px 20px;
             text-align: center;
             font-weight: 600;
-            border-top: 1px solid #d1e0f0;
-            color: #475569;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: #d4af37 !important;
             font-size: 0.9rem;
         }
 
@@ -196,7 +197,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             height: 44px;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: linear-gradient(135deg, rgba(31, 35, 39, 0.6), rgba(31, 35, 39, 0.4)) !important;
             border-radius: 50%; /* ALTERADO: de 12px para 50% */
             margin: 4px;
             font-weight: bold;
@@ -204,10 +205,11 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             box-shadow: 
                 0 4px 6px rgba(0,0,0,0.1),
                 inset 0 1px 0 rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.1);
+            color: #f1f5f9 !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
             transition: all 0.3s ease;
             flex-shrink: 0; /* impede de esticar ou achatar */
+            backdrop-filter: blur(5px);
         }
 
         .numero-sorteio:hover {
@@ -438,20 +440,22 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         }
 
         .ticket-participante {
-            background: white;
+            background: rgba(31, 35, 39, 0.4) !important;
+            backdrop-filter: blur(10px);
+            color: #e2e8f0 !important;
             padding: 16px;
             border-radius: 12px;
             margin: 20px 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
-            border: 1px solid #f1f5f9;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .ticket-numeros-title {
             font-weight: 600;
             text-align: center;
             margin-bottom: 16px;
-            color: #d4af37; !important;
+            color: #d4af37 !important;
             font-size: 16px;
             letter-spacing: 0.5px;
         }
@@ -473,13 +477,14 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         .ticket-codigo {
             font-family: 'Courier New', monospace;
             font-size: 11px;
-            background: #f8fafc;
+            background: rgba(31, 35, 39, 0.5) !important;
+            backdrop-filter: blur(5px);
             padding: 8px 12px;
             border-radius: 8px;
             margin-top: 16px;
             text-align: center;
-            color: #475569;
-            border: 1px solid #e2e8f0;
+            color: #cbd5e1 !important;
+            border: 1px solid rgba(255,255,255,0.15) !important;
             letter-spacing: 0.5px;
         }
 
@@ -875,82 +880,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     }
 }
 
-
-
-
-        /* COLE ISSO NO FINAL DO SEU <style> */
-
-/* Cores otimizadas para contraste */
-.ticket-body {
-    color: #1a202c;
-}
-
-.ticket-participante {
-    color: #2d3748;
-    font-weight: 600;
-}
-
-.ticket-data {
-    color: #4a5568;
-}
-
-.ticket-valor {
-    color: #b7791f;
-    font-weight: 700;
-}
-
-.ticket-codigo {
-    color: #2d3748;
-    background: #f7fafc;
-    border: 1px solid #e2e8f0;
-}
-
-.numero-sorteio {
-    color: #1a202c;
-    background: linear-gradient(135deg, #f7fafc, #edf2f7);
-    border: 1px solid #e2e8f0;
-    font-weight: 700;
-}
-
-
-
-        /* UNIFORMIZAÇÃO DE CORES - DESKTOP = MOBILE */
-.ticket-body {
-    color: #1a202c !important;
-}
-
-.ticket-participante {
-    color: #2d3748 !important;
-    font-weight: 600;
-}
-
-.ticket-body .ticket-numeros-title {
-    color: #d4af37 !important;
-    font-weight: 600;
-}
-
-.ticket-data {
-    color: #4a5568 !important;
-}
-
-.ticket-valor {
-    color: #b7791f !important;
-    font-weight: 700;
-}
-
-.ticket-codigo {
-    color: #2d3748 !important;
-    background: #f7fafc !important;
-    border: 1px solid #e2e8f0 !important;
-}
-
-.numero-sorteio {
-    color: #1a202c !important;
-    background: linear-gradient(135deg, #f7fafc, #edf2f7) !important;
-    border: 1px solid #e2e8f0 !important;
-    font-weight: 700;
-}
-
 /* SOBRESCREVER QUALQUER MEDIA QUERY QUE ALTERE CORES NO MOBILE */
 @media (max-width: 768px) {
     .ticket-body {
@@ -958,7 +887,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     }
     
     .ticket-participante {
-        color: #2d3748 !important;
+        color: #e2e8f0 !important;
     }
     
     .ticket-numeros-title {
@@ -970,11 +899,21 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     }
     
     .numero-sorteio {
-        color: #1a202c !important;
-        background: linear-gradient(135deg, #f7fafc, #edf2f7) !important;
+        color: #f1f5f9 !important;
+        background: linear-gradient(135deg, rgba(31, 35, 39, 0.6), rgba(31, 35, 39, 0.4)) !important;
+    }
+    
+    .ticket-codigo {
+        color: #cbd5e1 !important;
+        background: rgba(31, 35, 39, 0.5) !important;
+    }
+    
+    .ticket-footer {
+        color: #d4af37 !important;
+        background: rgba(31, 35, 39, 0.7) !important;
     }
 }
-    </style>
+</style>
 </head>
 <body class="text-white">
     <header class="sticky top-0 z-50 bg-[#171717] py-4 px-6 border-b border-gray-700">
