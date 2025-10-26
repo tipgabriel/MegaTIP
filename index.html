@@ -1224,22 +1224,31 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                     </div>
                 </div>
 
-                <div class="bg-[#262626] p-6 rounded-lg border border-gray-700">
-                    <h3 class="text-xl font-bold mb-4">Formas de Pagamento</h3>
-                    <div class="flex flex-wrap gap-4 mb-4">
-                        <div class="bg-white p-2 rounded">
-                            <i class="fas fa-mobile-alt text-[#10b981] text-2xl"></i>
-                        </div>
-                        <div class="bg-white p-2 rounded">
-                            <i class="fas fa-university text-[#3b82f6] text-2xl"></i>
-                        </div>
-                    </div>
-                    <p>Aceitamos PIX e transferência bancária.</p>
-                    <br>
-                    <p><strong>Chave Pix:</strong> 00020126870014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654046.005802BR5924Gabriel da Paz Silva San6009Sao Paulo610901227-20062240520daqr12907710421070486304A68C</p>
-                </div>
-            </div>
+<div class="bg-[#262626] p-6 rounded-lg border border-gray-700">
+    <h3 class="text-xl font-bold mb-4">Formas de Pagamento</h3>
+    <div class="flex flex-wrap gap-4 mb-4">
+        <div class="bg-white p-2 rounded">
+            <i class="fas fa-mobile-alt text-[#10b981] text-2xl"></i>
         </div>
+        <div class="bg-white p-2 rounded">
+            <i class="fas fa-university text-[#3b82f6] text-2xl"></i>
+        </div>
+    </div>
+    <p>Aceitamos PIX e transferência bancária.</p>
+    <br>
+    <div class="relative">
+        <p class="mb-2"><strong>Chave Pix:</strong></p>
+        <div class="pix-code bg-[#0f172a] border border-dashed border-[#d4af37] rounded-lg p-3 relative">
+            <button class="copy-btn absolute top-2 right-2 bg-[#d4af37] text-[#1e293b] border-none py-1 px-3 rounded text-xs font-bold cursor-pointer transition-all hover:bg-[#fbbf24] hover:scale-105" onclick="copiarPixContato()">
+                <i class="fas fa-copy mr-1"></i>Copiar
+            </button>
+            <p class="text-white text-sm break-all pr-16">
+                00020126870014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654046.005802BR5924Gabriel da Paz Silva San6009Sao Paulo610901227-20062240520daqr12907710421070486304A68C
+            </p>
+        </div>
+    </div>
+</div>
+</div>
     </section>
 
     <footer class="footer py-8 px-4">
@@ -1360,6 +1369,75 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         }
     `;
     document.head.appendChild(style);
+        // Função para copiar chave PIX da seção de contato
+function copiarPixContato() {
+    const pixKey = "00020126870014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654046.005802BR5924Gabriel da Paz Silva San6009Sao Paulo610901227-20062240520daqr12907710421070486304A68C";
+    
+    navigator.clipboard.writeText(pixKey).then(() => {
+        const btn = event.target.closest('.copy-btn');
+        const originalText = btn.innerHTML;
+        const originalBackground = btn.style.background;
+        
+        btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copiado!';
+        btn.style.background = '#10b981';
+        btn.style.transform = 'scale(1.05)';
+        
+        // Feedback visual no container
+        const pixContainer = event.target.closest('.pix-code');
+        pixContainer.style.border = '2px solid #10b981';
+        pixContainer.style.background = '#1a472a';
+        
+        // Mensagem flutuante
+        const floatingMessage = document.createElement('div');
+        floatingMessage.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Chave PIX copiada com sucesso!';
+        floatingMessage.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        `;
+        
+        document.body.appendChild(floatingMessage);
+        
+        setTimeout(() => {
+            floatingMessage.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                if (floatingMessage.parentNode) {
+                    floatingMessage.parentNode.removeChild(floatingMessage);
+                }
+            }, 300);
+        }, 3000);
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = originalBackground;
+            btn.style.transform = 'scale(1)';
+            
+            pixContainer.style.border = '1px dashed #d4af37';
+            pixContainer.style.background = '#0f172a';
+        }, 2000);
+        
+    }).catch(err => {
+        console.error('Erro ao copiar: ', err);
+        const btn = event.target.closest('.copy-btn');
+        const originalText = btn.innerHTML;
+        
+        btn.innerHTML = '<i class="fas fa-times mr-1"></i>Erro!';
+        btn.style.background = '#dc2626';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = '#d4af37';
+        }, 2000);
+    });
+}
 
         document.addEventListener('DOMContentLoaded', function() {
             // ========== VARIÁVEIS GLOBAIS ==========
