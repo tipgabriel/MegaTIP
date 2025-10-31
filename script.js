@@ -150,96 +150,75 @@ function copiarPixContato(event) {
     });
 }
 
-// Adicionar event listeners para os botões de cópia quando o DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
-    // Adicionar event listeners para os botões de cópia
-    const copyBtns = document.querySelectorAll('.copy-btn');
-    copyBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Identificar qual botão foi clicado
-            const container = this.closest('.pix-code');
-            if (container.id === 'pix-code-contato') {
-                copiarPixContato(e);
-            } else {
-                copiarPix(e);
-            }
-        });
-    });
-
-    // Fechar menu ao pressionar ESC
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && isMenuOpen) {
-        mobileMenu.classList.remove('active');
-        mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-        mobileMenuButton.classList.remove('active');
-        isMenuOpen = false;
-        document.body.style.overflow = '';
-    }
-});
-
-// ========== VÍDEO IMERSIVO ==========
-const videoIframe = document.querySelector('.video-wrapper iframe');
-const videoWrapper = document.querySelector('.video-wrapper');
-
-// Simular loading do vídeo
-setTimeout(() => {
-    videoWrapper.classList.add('loaded');
-}, 2000);
-
-// Adicionar evento de clique para controle de tela cheia
-videoIframe.addEventListener('load', function() {
-    videoWrapper.classList.add('loaded');
-});
-
     // ========== VARIÁVEIS GLOBAIS ==========
     // Números oficiais da Mega da Virada - serão atualizados após o sorteio
     let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
     let bilheteVencedor = null;
     let grupoGanhou = false;
 
-    // ========== MENU MOBILE ==========
+    // ========== MENU MOBILE ELEGANTE ==========
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
     let isMenuOpen = false;
 
-function toggleMobileMenu() {
-    isMenuOpen = !isMenuOpen;
-    
-    if (isMenuOpen) {
-        mobileMenu.classList.add('active');
-        mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
-        mobileMenuButton.classList.add('active');
-        // Prevenir scroll do body quando menu está aberto
-        document.body.style.overflow = 'hidden';
-    } else {
-        mobileMenu.classList.remove('active');
-        mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-        mobileMenuButton.classList.remove('active');
-        // Restaurar scroll do body
-        document.body.style.overflow = '';
+    function toggleMobileMenu() {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            mobileMenu.classList.add('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
+            mobileMenuButton.classList.add('active');
+            // Prevenir scroll do body quando menu está aberto
+            document.body.style.overflow = 'hidden';
+        } else {
+            mobileMenu.classList.remove('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileMenuButton.classList.remove('active');
+            // Restaurar scroll do body
+            document.body.style.overflow = '';
+        }
     }
-}
 
-    mobileMenuButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMobileMenu();
-    });
-
-    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-            isMenuOpen = false;
+    // Só adicionar event listeners se estiver no mobile
+    if (window.innerWidth < 768) {
+        mobileMenuButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileMenu();
         });
-    });
 
-    document.addEventListener('click', function(e) {
-        if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-            isMenuOpen = false;
+        mobileMenuClose.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleMobileMenu();
+        });
+
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Fechar menu ao pressionar ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+    }
+
+    // Fechar menu ao redimensionar para desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && isMenuOpen) {
+            toggleMobileMenu();
         }
     });
 
@@ -635,6 +614,20 @@ function toggleMobileMenu() {
                 });
             }
         });
+    });
+
+    // ========== VÍDEO IMERSIVO ==========
+    const videoIframe = document.querySelector('.video-wrapper iframe');
+    const videoWrapper = document.querySelector('.video-wrapper');
+
+    // Simular loading do vídeo
+    setTimeout(() => {
+        videoWrapper.classList.add('loaded');
+    }, 2000);
+
+    // Adicionar evento de clique para controle de tela cheia
+    videoIframe.addEventListener('load', function() {
+        videoWrapper.classList.add('loaded');
     });
 
     // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
