@@ -202,17 +202,23 @@ videoIframe.addEventListener('load', function() {
     const mobileMenu = document.getElementById('mobile-menu');
     let isMenuOpen = false;
 
-    function toggleMobileMenu() {
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-            mobileMenu.classList.add('active');
-            mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
-        } else {
-            mobileMenu.classList.remove('active');
-            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-        }
+function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+        mobileMenu.classList.add('active');
+        mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
+        mobileMenuButton.classList.add('active');
+        // Prevenir scroll do body quando menu está aberto
+        document.body.style.overflow = 'hidden';
+    } else {
+        mobileMenu.classList.remove('active');
+        mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileMenuButton.classList.remove('active');
+        // Restaurar scroll do body
+        document.body.style.overflow = '';
     }
+}
 
     mobileMenuButton.addEventListener('click', function(e) {
         e.preventDefault();
