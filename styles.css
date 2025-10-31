@@ -1345,3 +1345,55 @@ section {
         margin: 0 15px;
     }
 }
+
+/* ========== CORREÇÃO DEFINITIVA MENU MOBILE ========== */
+/* Garantir que o scroll seja bloqueado quando menu está aberto */
+body.menu-open {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* Menu mobile - escondido por padrão */
+.mobile-menu {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Menu mobile - visível quando ativo */
+.mobile-menu.active {
+    transform: translateY(0);
+}
+
+/* Botão do menu mobile */
+#mobile-menu-button {
+    transition: all 0.3s ease;
+}
+
+#mobile-menu-button.active {
+    transform: rotate(90deg);
+}
+
+/* Garantir que o menu mobile não apareça no desktop */
+@media (min-width: 768px) {
+    #mobile-menu-button {
+        display: none !important;
+    }
+    
+    .mobile-menu {
+        display: none !important;
+    }
+}
+
+/* Overlay para fechar o menu ao clicar fora */
+.mobile-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: -1;
+}
