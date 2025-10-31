@@ -157,70 +157,73 @@ document.addEventListener('DOMContentLoaded', function() {
     let bilheteVencedor = null;
     let grupoGanhou = false;
 
-    // ========== MENU MOBILE ELEGANTE ==========
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    let isMenuOpen = false;
+// ========== MENU MOBILE ELEGANTE ==========
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuClose = document.getElementById('mobile-menu-close');
+const menuIcon = document.getElementById('menu-icon');
+let isMenuOpen = false;
 
-    function toggleMobileMenu() {
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-            mobileMenu.classList.add('active');
-            mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
-            mobileMenuButton.classList.add('active');
-            // Prevenir scroll do body quando menu está aberto
-            document.body.style.overflow = 'hidden';
-        } else {
-            mobileMenu.classList.remove('active');
-            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
-            mobileMenuButton.classList.remove('active');
-            // Restaurar scroll do body
-            document.body.style.overflow = '';
-        }
+function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+        mobileMenu.classList.add('active');
+        mobileMenuButton.classList.add('active');
+        // Mudar ícone para X
+        menuIcon.className = 'fas fa-times';
+        // Prevenir scroll do body quando menu está aberto
+        document.body.style.overflow = 'hidden';
+    } else {
+        mobileMenu.classList.remove('active');
+        mobileMenuButton.classList.remove('active');
+        // Mudar ícone para hamburger
+        menuIcon.className = 'fas fa-bars';
+        // Restaurar scroll do body
+        document.body.style.overflow = '';
     }
+}
 
-    // Só adicionar event listeners se estiver no mobile
-    if (window.innerWidth < 768) {
-        mobileMenuButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+// Só adicionar event listeners se estiver no mobile
+if (window.innerWidth < 768) {
+    mobileMenuButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMobileMenu();
+    });
+
+    mobileMenuClose.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleMobileMenu();
+    });
+
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
             toggleMobileMenu();
         });
+    });
 
-        mobileMenuClose.addEventListener('click', function(e) {
-            e.preventDefault();
-            toggleMobileMenu();
-        });
-
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                toggleMobileMenu();
-            });
-        });
-
-        document.addEventListener('click', function(e) {
-            if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-                toggleMobileMenu();
-            }
-        });
-
-        // Fechar menu ao pressionar ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && isMenuOpen) {
-                toggleMobileMenu();
-            }
-        });
-    }
-
-    // Fechar menu ao redimensionar para desktop
-    window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768 && isMenuOpen) {
+    document.addEventListener('click', function(e) {
+        if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
             toggleMobileMenu();
         }
     });
+
+    // Fechar menu ao pressionar ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isMenuOpen) {
+            toggleMobileMenu();
+        }
+    });
+}
+
+// Fechar menu ao redimensionar para desktop
+window.addEventListener('resize', function() {
+    if (window.innerWidth >= 768 && isMenuOpen) {
+        toggleMobileMenu();
+    }
+});
 
     // ========== COPYRIGHT ==========
     const year = new Date().getFullYear();
@@ -616,19 +619,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ========== VÍDEO IMERSIVO ==========
-    const videoIframe = document.querySelector('.video-wrapper iframe');
-    const videoWrapper = document.querySelector('.video-wrapper');
+// ========== VÍDEO CONFORTÁVEL ==========
+const videoIframe = document.querySelector('.video-wrapper-comfortable iframe');
+const videoWrapper = document.querySelector('.video-wrapper-comfortable');
 
-    // Simular loading do vídeo
-    setTimeout(() => {
+// Simular loading do vídeo
+setTimeout(() => {
+    if (videoWrapper) {
         videoWrapper.classList.add('loaded');
-    }, 2000);
+    }
+}, 1500);
 
-    // Adicionar evento de clique para controle de tela cheia
+// Adicionar evento de load para o vídeo
+if (videoIframe) {
     videoIframe.addEventListener('load', function() {
-        videoWrapper.classList.add('loaded');
+        if (videoWrapper) {
+            videoWrapper.classList.add('loaded');
+        }
     });
+}
 
     // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
     // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
