@@ -26,24 +26,21 @@
             <a href="#contato" class="nav-link hover:text-[#d4af37] transition font-medium">Contato</a>
         </nav>
 
-        <!-- Botão Menu Mobile -->
+        <!-- Botão Menu Mobile - CORRIGIDO -->
         <button id="mobile-menu-button" class="md:hidden text-xl z-50 flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300">
-            <i class="fas fa-bars" id="menu-icon"></i>
+            <i class="fas fa-bars"></i>
         </button>
     </div>
 
-    <!-- Menu Mobile Elegante -->
+    <!-- Menu Mobile Elegante - CORRIGIDO -->
     <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-full h-screen bg-[#171717] bg-opacity-95 backdrop-blur-md z-40 transform transition-transform duration-300 ease-in-out -translate-y-full">
         <div class="container mx-auto py-6 px-4 h-full flex flex-col">
-            <!-- Cabeçalho do Menu Mobile -->
-            <div class="flex justify-between items-center mb-8">
+            <!-- Cabeçalho do Menu Mobile - SEM BOTÃO X DUPLICADO -->
+            <div class="flex justify-center items-center mb-8">
                 <div class="flex items-center">
                     <i class="fas fa-clover text-[#d4af37] text-2xl mr-2"></i>
                     <h2 class="text-xl font-bold">Mega<span class="text-[#d4af37]">TIP</span></h2>
                 </div>
-                <button id="mobile-menu-close" class="text-2xl text-gray-400 hover:text-white transition">
-                    <i class="fas fa-times"></i>
-                </button>
             </div>
 
             <!-- Navegação Mobile -->
@@ -71,6 +68,7 @@
             <!-- Rodapé do Menu Mobile -->
             <div class="mt-8 text-center">
                 <p class="text-gray-400 text-sm">MegaTIP - Apostas e Bolão</p>
+                <p class="text-gray-500 text-xs mt-2">Toque fora do menu para fechar</p>
             </div>
         </div>
     </div>
