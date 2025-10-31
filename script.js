@@ -607,10 +607,3 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    // ========== INICIALIZAR VÍDEO MOBILE ==========
-    initMobileVideo();
-
-    // Re-inicializar quando a tela for redimensionada
-    window.addEventListener('resize', initMobileVideo);
-});
