@@ -130,6 +130,53 @@ function copiarPixContato(event) {
     });
 }
 
+// ========== CORREÇÃO VÍDEO MOBILE ==========
+function initMobileVideo() {
+    const videoOverlay = document.getElementById('video-overlay');
+    const youtubeIframe = document.getElementById('youtube-video');
+    
+    if (!videoOverlay || !youtubeIframe) return;
+    
+    // Só aplicar correção para mobile
+    if (window.innerWidth < 768) {
+        let videoStarted = false;
+        
+        videoOverlay.addEventListener('click', function() {
+            if (!videoStarted) {
+                // Mostrar mensagem de carregamento
+                videoOverlay.classList.add('active');
+                
+                // Forçar reprodução do vídeo
+                const videoUrl = youtubeIframe.src;
+                
+                // Adicionar autoplay à URL
+                if (videoUrl.indexOf('autoplay=1') === -1) {
+                    const separator = videoUrl.indexOf('?') === -1 ? '?' : '&';
+                    youtubeIframe.src = videoUrl + separator + 'autoplay=1';
+                }
+                
+                // Focar no iframe para habilitar controles
+                youtubeIframe.focus();
+                
+                // Esconder overlay após um tempo
+                setTimeout(() => {
+                    videoOverlay.style.display = 'none';
+                    videoStarted = true;
+                }, 2000);
+            }
+        });
+        
+        // Também permitir clique direto no iframe
+        youtubeIframe.addEventListener('click', function() {
+            videoOverlay.style.display = 'none';
+            videoStarted = true;
+        });
+    } else {
+        // No desktop, esconder o overlay
+        videoOverlay.style.display = 'none';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // ========== VARIÁVEIS GLOBAIS ==========
     let numerosSorteados = [0, 0, 0, 0, 0, 0];
@@ -561,21 +608,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ========== VÍDEO ==========
-    const videoIframe = document.querySelector('.video-wrapper-comfortable iframe');
-    const videoWrapper = document.querySelector('.video-wrapper-comfortable');
+    // ========== INICIALIZAR VÍDEO MOBILE ==========
+    initMobileVideo();
 
-    setTimeout(() => {
-        if (videoWrapper) {
-            videoWrapper.classList.add('loaded');
-        }
-    }, 1500);
-
-    if (videoIframe) {
-        videoIframe.addEventListener('load', function() {
-            if (videoWrapper) {
-                videoWrapper.classList.add('loaded');
-            }
-        });
-    }
+    // Re-inicializar quando a tela for redimensionada
+    window.addEventListener('resize', initMobileVideo);
 });
