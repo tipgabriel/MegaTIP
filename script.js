@@ -166,6 +166,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Fechar menu ao pressionar ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isMenuOpen) {
+        mobileMenu.classList.remove('active');
+        mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileMenuButton.classList.remove('active');
+        isMenuOpen = false;
+        document.body.style.overflow = '';
+    }
+});
+
+// ========== VÍDEO IMERSIVO ==========
+const videoIframe = document.querySelector('.video-wrapper iframe');
+const videoWrapper = document.querySelector('.video-wrapper');
+
+// Simular loading do vídeo
+setTimeout(() => {
+    videoWrapper.classList.add('loaded');
+}, 2000);
+
+// Adicionar evento de clique para controle de tela cheia
+videoIframe.addEventListener('load', function() {
+    videoWrapper.classList.add('loaded');
+});
+
     // ========== VARIÁVEIS GLOBAIS ==========
     // Números oficiais da Mega da Virada - serão atualizados após o sorteio
     let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
