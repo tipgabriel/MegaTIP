@@ -1,27 +1,20 @@
-// Função para copiar chave PIX - CORRIGIDA
+// Função para copiar chave PIX
 function copiarPix(event) {
-    // Prevenir comportamento padrão se houver evento
     if (event) event.preventDefault();
     
-    // Manter a chave PIX completa com parâmetros pré-preenchidos (EXATA DO ARQUIVO ORIGINAL)
     const pixKey = "00020126580014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654056.005802BR5924Gabriel da Paz Silva San6009Sao Paulo61080540900062250515MegaTIP2025122152040000530398654046.005802BR5913Gabriel Silva6009Sao Paulo62070503***6304E2CD";
     
     navigator.clipboard.writeText(pixKey).then(() => {
-        // Feedback visual melhorado
         const btn = document.querySelector('#pix-code-container .copy-btn');
         const originalText = btn.innerHTML;
-        const originalBackground = btn.style.background;
         
         btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copiado!';
         btn.style.background = '#10b981';
-        btn.style.transform = 'scale(1.05)';
         
-        // Também dar feedback no próprio campo do PIX
         const pixCodeElement = document.getElementById('pix-code-container');
         pixCodeElement.style.border = '2px solid #10b981';
         pixCodeElement.style.background = '#1a472a';
         
-        // Adicionar mensagem flutuante de confirmação
         const floatingMessage = document.createElement('div');
         floatingMessage.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Chave PIX copiada com sucesso!';
         floatingMessage.style.cssText = `
@@ -40,7 +33,6 @@ function copiarPix(event) {
         
         document.body.appendChild(floatingMessage);
         
-        // Remover mensagem flutuante após 3 segundos
         setTimeout(() => {
             floatingMessage.style.animation = 'slideOut 0.3s ease';
             setTimeout(() => {
@@ -50,21 +42,15 @@ function copiarPix(event) {
             }, 300);
         }, 3000);
         
-        // Restaurar estado original do botão após 2 segundos
         setTimeout(() => {
             btn.innerHTML = originalText;
-            btn.style.background = originalBackground;
-            btn.style.transform = 'scale(1)';
-            
-            // Restaurar campo PIX
+            btn.style.background = '#d4af37';
             pixCodeElement.style.border = '1px dashed #d4af37';
             pixCodeElement.style.background = '#0f172a';
         }, 2000);
         
     }).catch(err => {
         console.error('Erro ao copiar: ', err);
-        
-        // Feedback de erro
         const btn = document.querySelector('#pix-code-container .copy-btn');
         const originalText = btn.innerHTML;
         
@@ -87,18 +73,14 @@ function copiarPixContato(event) {
     navigator.clipboard.writeText(pixKey).then(() => {
         const btn = document.querySelector('#pix-code-contato .copy-btn');
         const originalText = btn.innerHTML;
-        const originalBackground = btn.style.background;
         
         btn.innerHTML = '<i class="fas fa-check mr-1"></i>Copiado!';
         btn.style.background = '#10b981';
-        btn.style.transform = 'scale(1.05)';
         
-        // Feedback visual no container
         const pixContainer = document.getElementById('pix-code-contato');
         pixContainer.style.border = '2px solid #10b981';
         pixContainer.style.background = '#1a472a';
         
-        // Mensagem flutuante
         const floatingMessage = document.createElement('div');
         floatingMessage.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Chave PIX copiada com sucesso!';
         floatingMessage.style.cssText = `
@@ -128,9 +110,7 @@ function copiarPixContato(event) {
         
         setTimeout(() => {
             btn.innerHTML = originalText;
-            btn.style.background = originalBackground;
-            btn.style.transform = 'scale(1)';
-            
+            btn.style.background = '#d4af37';
             pixContainer.style.border = '1px dashed #d4af37';
             pixContainer.style.background = '#0f172a';
         }, 2000);
@@ -152,78 +132,78 @@ function copiarPixContato(event) {
 
 document.addEventListener('DOMContentLoaded', function() {
     // ========== VARIÁVEIS GLOBAIS ==========
-    // Números oficiais da Mega da Virada - serão atualizados após o sorteio
-    let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
+    let numerosSorteados = [0, 0, 0, 0, 0, 0];
     let bilheteVencedor = null;
     let grupoGanhou = false;
 
-// ========== MENU MOBILE ELEGANTE ==========
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileMenuClose = document.getElementById('mobile-menu-close');
-const menuIcon = document.getElementById('menu-icon');
-let isMenuOpen = false;
+    // ========== MENU MOBILE DEFINITIVO ==========
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isMenuOpen = false;
 
-function toggleMobileMenu() {
-    isMenuOpen = !isMenuOpen;
-    
-    if (isMenuOpen) {
-        mobileMenu.classList.add('active');
-        mobileMenuButton.classList.add('active');
-        // Mudar ícone para X
-        menuIcon.className = 'fas fa-times';
-        // Prevenir scroll do body quando menu está aberto
-        document.body.style.overflow = 'hidden';
-    } else {
-        mobileMenu.classList.remove('active');
-        mobileMenuButton.classList.remove('active');
-        // Mudar ícone para hamburger
-        menuIcon.className = 'fas fa-bars';
-        // Restaurar scroll do body
-        document.body.style.overflow = '';
+    function toggleMobileMenu() {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            // Abrir menu
+            mobileMenu.classList.add('active');
+            mobileMenuButton.classList.add('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
+            
+            // Bloquear scroll do body
+            document.body.classList.add('menu-open');
+        } else {
+            // Fechar menu
+            mobileMenu.classList.remove('active');
+            mobileMenuButton.classList.remove('active');
+            mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+            
+            // Restaurar scroll do body
+            document.body.classList.remove('menu-open');
+        }
     }
-}
 
-// Só adicionar event listeners se estiver no mobile
-if (window.innerWidth < 768) {
-    mobileMenuButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMobileMenu();
-    });
+    function closeMobileMenu() {
+        if (isMenuOpen) {
+            toggleMobileMenu();
+        }
+    }
 
-    mobileMenuClose.addEventListener('click', function(e) {
-        e.preventDefault();
-        toggleMobileMenu();
-    });
-
-    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', () => {
+    // Event listeners apenas para mobile
+    if (window.innerWidth < 768) {
+        mobileMenuButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             toggleMobileMenu();
         });
-    });
 
-    document.addEventListener('click', function(e) {
-        if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-            toggleMobileMenu();
-        }
-    });
+        // Fechar menu ao clicar em qualquer link
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
 
-    // Fechar menu ao pressionar ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isMenuOpen) {
-            toggleMobileMenu();
-        }
-    });
-}
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
 
-// Fechar menu ao redimensionar para desktop
-window.addEventListener('resize', function() {
-    if (window.innerWidth >= 768 && isMenuOpen) {
-        toggleMobileMenu();
+        // Fechar menu com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isMenuOpen) {
+                closeMobileMenu();
+            }
+        });
     }
-});
+
+    // Fechar menu ao redimensionar para desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && isMenuOpen) {
+            closeMobileMenu();
+        }
+    });
 
     // ========== COPYRIGHT ==========
     const year = new Date().getFullYear();
@@ -242,12 +222,10 @@ window.addEventListener('resize', function() {
     const detalhesAcertos = document.getElementById('detalhes-acertos');
     const listaBilhetesAcertos = document.getElementById('lista-bilhetes-acertos');
 
-    // Função para verificar se há números válidos (acima de 0)
     function temNumerosValidos(numeros) {
         return numeros.some(num => num > 0);
     }
 
-    // Função para atualizar números oficiais (será chamada após o sorteio)
     function atualizarNumerosOficiais(novosNumeros) {
         numerosSorteados = novosNumeros;
         const numerosElementos = document.querySelectorAll('.numero-oficial');
@@ -255,7 +233,6 @@ window.addEventListener('resize', function() {
         numerosElementos.forEach((elemento, index) => {
             if (index < novosNumeros.length) {
                 elemento.textContent = novosNumeros[index].toString().padStart(2, '0');
-                // Só adiciona a classe "sorteado" se o número for maior que 0
                 if (novosNumeros[index] > 0) {
                     elemento.classList.add('sorteado');
                 } else {
@@ -264,7 +241,6 @@ window.addEventListener('resize', function() {
             }
         });
         
-        // Atualiza mensagem de status baseado nos números
         if (temNumerosValidos(novosNumeros)) {
             statusSorteio.innerHTML = '<p class="text-[#10b981]"><i class="fas fa-check mr-2"></i>Sorteio oficial realizado!</p>';
         } else {
@@ -272,7 +248,6 @@ window.addEventListener('resize', function() {
         }
     }
 
-    // Função para verificar se um bilhete é vencedor (6 acertos)
     function verificarVencedor(bilheteNumeros) {
         if (!temNumerosValidos(numerosSorteados)) return 0;
         
@@ -280,13 +255,10 @@ window.addEventListener('resize', function() {
         return numerosBilhete.filter(num => numerosSorteados.includes(num)).length;
     }
 
-    // Função para atualizar a interface com os resultados
     function atualizarInterfaceResultados(grupoGanhou, bilheteVencedor, maxAcertos, bilhetesComAcertos) {
-        // Limpar detalhes anteriores
         listaBilhetesAcertos.innerHTML = '';
         
         if (grupoGanhou && bilheteVencedor) {
-            // Caso de vitória
             tituloResultado.innerHTML = '🎉 PARABÉNS! VOCÊS GANHARAM! 🎉';
             tituloResultado.className = 'text-xl font-bold mb-4 text-center text-[#10b981]';
             
@@ -295,10 +267,8 @@ window.addEventListener('resize', function() {
             statusGrupoElement.textContent = "VENCEDOR!";
             statusGrupoElement.className = "text-2xl text-[#10b981]";
             
-            // Atualizar cards com estilo de vencedor
             resultadoCards.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 resultado-vencedor p-4 rounded-lg';
             
-            // Atualizar mensagem
             mensagemResultado.innerHTML = `
                 <p class="text-center font-bold text-2xl text-[#10b981]">🏆 PARABÉNS A TODOS DO GRUPO! 🎉</p>
                 <p class="text-center mt-4 text-lg">🎯 <strong>${bilheteVencedor.assignedName}</strong> acertou os 6 números!</p>
@@ -307,10 +277,8 @@ window.addEventListener('resize', function() {
             `;
             mensagemResultado.className = 'mt-4 p-6 rounded-lg mensagem-vencedor';
             
-            // Esconder detalhes de acertos parciais
             detalhesAcertos.classList.add('hidden');
         } else {
-            // Caso de não vitória
             tituloResultado.innerHTML = '📊 RESULTADO DA VERIFICAÇÃO';
             tituloResultado.className = 'text-xl font-bold mb-4 text-center text-[#d4af37]';
             
@@ -319,10 +287,8 @@ window.addEventListener('resize', function() {
             statusGrupoElement.textContent = "Aguardando próximo sorteio";
             statusGrupoElement.className = "text-2xl text-[#d4af37]";
             
-            // Atualizar cards com estilo de não vencedor
             resultadoCards.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 resultado-perdedor p-4 rounded-lg';
             
-            // Atualizar mensagem
             mensagemResultado.innerHTML = `
                 <p class="text-center font-bold text-xl text-[#d4af37]">😔 INFELIZMENTE NÃO FOI DESSA VEZ</p>
                 <p class="text-center mt-2">Nenhum bilhete acertou os 6 números sorteados.</p>
@@ -330,11 +296,9 @@ window.addEventListener('resize', function() {
             `;
             mensagemResultado.className = 'mt-4 p-6 rounded-lg mensagem-perdedor';
             
-            // Mostrar detalhes de acertos parciais
             if (bilhetesComAcertos.length > 0) {
                 detalhesAcertos.classList.remove('hidden');
                 
-                // Adicionar bilhetes com acertos à lista
                 bilhetesComAcertos.forEach(bilhete => {
                     const bilheteItem = document.createElement('div');
                     bilheteItem.className = 'bg-[#374151] p-4 rounded-lg bilhete-acertou border border-gray-600';
@@ -358,7 +322,6 @@ window.addEventListener('resize', function() {
         }
     }
 
-    // Função para verificar todos os bilhetes
     btnVerificarBilhetes.addEventListener('click', function() {
         if (!temNumerosValidos(numerosSorteados)) {
             statusSorteio.innerHTML = '<p class="text-[#dc2626]"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando sorteio oficial da Caixa!</p>';
@@ -370,7 +333,6 @@ window.addEventListener('resize', function() {
         let maxAcertos = 0;
         let bilhetesComAcertos = [];
 
-        // Verificar cada bilhete
         sampleTickets.forEach(ticket => {
             const acertos = verificarVencedor(ticket.numbers);
             if (acertos > maxAcertos) {
@@ -388,12 +350,8 @@ window.addEventListener('resize', function() {
             }
         });
 
-        // Ordenar bilhetes por número de acertos (maior primeiro)
         bilhetesComAcertos.sort((a, b) => b.acertos - a.acertos);
-
-        // Atualizar interface com resultados
         atualizarInterfaceResultados(grupoGanhou, bilheteVencedor, maxAcertos, bilhetesComAcertos);
-
         resultadoVerificacao.classList.remove('hidden');
         atualizarBilhetes();
     });
@@ -425,17 +383,14 @@ window.addEventListener('resize', function() {
     ];
 
     let displayedTickets = window.innerWidth < 768 ? 6 : 8;
-    let filteredTickets = [...sampleTickets]; // Cópia para filtragem
+    let filteredTickets = [...sampleTickets];
 
-    // ========== SISTEMA DE BUSCA EM TEMPO REAL ==========
+    // ========== SISTEMA DE BUSCA ==========
     const searchInput = document.getElementById('search-input');
     const searchBtn = document.getElementById('search-btn');
     const searchResultsInfo = document.getElementById('search-results-info');
-
-    // Variável para controlar o timeout da busca
     let searchTimeout;
 
-    // Função para filtrar bilhetes - AGORA APENAS POR NOME
     function filtrarBilhetes(termo) {
         if (!termo) {
             return [...sampleTickets];
@@ -443,20 +398,17 @@ window.addEventListener('resize', function() {
         
         const termoLower = termo.toLowerCase();
         return sampleTickets.filter(ticket => {
-            // Buscar apenas por nome do participante
             return ticket.assignedName.toLowerCase().includes(termoLower);
         });
     }
 
-    // Função para executar a busca
     function executarBusca() {
         const termo = searchInput.value.trim();
         filteredTickets = filtrarBilhetes(termo);
-        displayedTickets = filteredTickets.length; // Mostrar todos os resultados da busca
+        displayedTickets = filteredTickets.length;
         atualizarBilhetes();
     }
 
-    // Função para atualizar a exibição dos bilhetes com base no filtro
     function atualizarBilhetes() {
         ticketsGallery.innerHTML = '';
 
@@ -488,7 +440,6 @@ window.addEventListener('resize', function() {
                 return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
             }).join('');
 
-            // Gerar um código aleatório para o ticket
             const ticketCode = Math.random().toString(36).substring(2, 10).toUpperCase();
 
             ticketElement.innerHTML = `
@@ -544,14 +495,12 @@ window.addEventListener('resize', function() {
             ticketsGallery.appendChild(ticketElement);
         }
 
-        // Atualizar informações de resultados da busca
         if (searchInput.value.trim() !== '') {
             searchResultsInfo.textContent = `${filteredTickets.length} bilhete(s) encontrado(s) para "${searchInput.value}"`;
         } else {
             searchResultsInfo.textContent = '';
         }
 
-        // Mostrar ou esconder botão "Carregar Mais" (só mostra quando não está buscando)
         if (searchInput.value.trim() === '' && displayedTickets < sampleTickets.length) {
             loadMoreButton.style.display = 'block';
         } else {
@@ -559,14 +508,11 @@ window.addEventListener('resize', function() {
         }
     }
 
-    // Evento de busca em tempo real
     searchInput.addEventListener('input', function() {
         const termo = this.value.trim();
         
-        // Limpar timeout anterior
         clearTimeout(searchTimeout);
         
-        // Se o campo estiver vazio, mostrar todos os bilhetes
         if (termo === '') {
             filteredTickets = [...sampleTickets];
             displayedTickets = 8;
@@ -574,18 +520,15 @@ window.addEventListener('resize', function() {
             return;
         }
         
-        // Aguardar 300ms após a última digitação para executar a busca
         searchTimeout = setTimeout(() => {
             executarBusca();
         }, 300);
     });
 
-    // Evento de busca ao clicar no botão
     searchBtn.addEventListener('click', function() {
         executarBusca();
     });
 
-    // Buscar ao pressionar Enter
     searchInput.addEventListener('keyup', function(event) {
         if (event.key === 'Enter') {
             executarBusca();
@@ -597,7 +540,6 @@ window.addEventListener('resize', function() {
         atualizarBilhetes();
     });
 
-    // Exibir bilhetes iniciais
     filteredTickets = [...sampleTickets];
     atualizarBilhetes();
 
@@ -619,27 +561,21 @@ window.addEventListener('resize', function() {
         });
     });
 
-// ========== VÍDEO CONFORTÁVEL ==========
-const videoIframe = document.querySelector('.video-wrapper-comfortable iframe');
-const videoWrapper = document.querySelector('.video-wrapper-comfortable');
+    // ========== VÍDEO ==========
+    const videoIframe = document.querySelector('.video-wrapper-comfortable iframe');
+    const videoWrapper = document.querySelector('.video-wrapper-comfortable');
 
-// Simular loading do vídeo
-setTimeout(() => {
-    if (videoWrapper) {
-        videoWrapper.classList.add('loaded');
-    }
-}, 1500);
-
-// Adicionar evento de load para o vídeo
-if (videoIframe) {
-    videoIframe.addEventListener('load', function() {
+    setTimeout(() => {
         if (videoWrapper) {
             videoWrapper.classList.add('loaded');
         }
-    });
-}
+    }, 1500);
 
-    // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
-    // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
-    // atualizarNumerosOficiais([5, 12, 23, 34, 45, 56]);
+    if (videoIframe) {
+        videoIframe.addEventListener('load', function() {
+            if (videoWrapper) {
+                videoWrapper.classList.add('loaded');
+            }
+        });
+    }
 });
