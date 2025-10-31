@@ -32,17 +32,29 @@
             </button>
         </div>
 
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-[#171717] py-4 px-6 md:hidden border-b border-gray-700">
-            <nav class="flex flex-col space-y-4">
-                <a href="#inicio" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Início</a>
-                <a href="#resultado" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Resultado</a>
-                <a href="#video" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Ao Vivo</a>
-                <a href="#pagamento" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Pagamento</a>
-                <a href="#bilhetes" class="hover:text-[#d4af37] transition py-2 border-b border-gray-700 font-medium">Bilhetes</a>
-                <a href="#contato" class="hover:text-[#d4af37] transition py-2 font-medium">Contato</a>
-            </nav>
-        </div>
+<!-- Menu Mobile Elegante -->
+<div id="mobile-menu" class="mobile-menu absolute top-full left-0 w-full bg-[#171717] py-6 px-6 md:hidden border-b border-gray-700 shadow-2xl">
+    <nav class="flex flex-col space-y-5">
+        <a href="#inicio" class="nav-link-mobile hover:text-[#d4af37] transition py-3 border-b border-gray-700 font-medium flex items-center">
+            <i class="fas fa-home mr-3 text-[#d4af37] w-5 text-center"></i>Início
+        </a>
+        <a href="#resultado" class="nav-link-mobile hover:text-[#d4af37] transition py-3 border-b border-gray-700 font-medium flex items-center">
+            <i class="fas fa-trophy mr-3 text-[#d4af37] w-5 text-center"></i>Resultado
+        </a>
+        <a href="#video" class="nav-link-mobile hover:text-[#d4af37] transition py-3 border-b border-gray-700 font-medium flex items-center">
+            <i class="fas fa-play-circle mr-3 text-[#d4af37] w-5 text-center"></i>Ao Vivo
+        </a>
+        <a href="#pagamento" class="nav-link-mobile hover:text-[#d4af37] transition py-3 border-b border-gray-700 font-medium flex items-center">
+            <i class="fas fa-qrcode mr-3 text-[#d4af37] w-5 text-center"></i>Pagamento
+        </a>
+        <a href="#bilhetes" class="nav-link-mobile hover:text-[#d4af37] transition py-3 border-b border-gray-700 font-medium flex items-center">
+            <i class="fas fa-ticket-alt mr-3 text-[#d4af37] w-5 text-center"></i>Bilhetes
+        </a>
+        <a href="#contato" class="nav-link-mobile hover:text-[#d4af37] transition py-3 font-medium flex items-center">
+            <i class="fas fa-phone mr-3 text-[#d4af37] w-5 text-center"></i>Contato
+        </a>
+    </nav>
+</div>
     </header>
 
     <section id="inicio" class="py-16 px-4">
@@ -155,27 +167,66 @@
         </div>
     </section>
 
-    <!-- Seção: Vídeo do Sorteio -->
-    <section id="video" class="py-16 px-4 bg-[#171717]">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-12">Sorteio ao vivo</h2>
+<!-- Seção: Vídeo do Sorteio - ATUALIZADA -->
+<section id="video" class="py-12 md:py-16 px-0 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] relative overflow-hidden">
+    <!-- Elementos decorativos de fundo -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 left-10 w-20 h-20 bg-[#d4af37] rounded-full blur-xl"></div>
+        <div class="absolute bottom-10 right-10 w-32 h-32 bg-[#10b981] rounded-full blur-2xl"></div>
+        <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-[#dc2626] rounded-full blur-lg"></div>
+    </div>
+    
+    <div class="container mx-auto max-w-7xl relative z-10">
+        <div class="text-center mb-8 md:mb-12 px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Sorteio ao Vivo</h2>
+            <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                Acompanhe o sorteio oficial da Mega da Virada 2025 em tempo real
+                <span class="block text-[#d4af37] font-semibold mt-2">Não perca essa emoção!</span>
+            </p>
+        </div>
+        
+        <!-- Container do Vídeo Imersivo -->
+        <div class="video-immersive-container mx-0 md:mx-4">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/R5XIjk79jos?si=hUfw6bzpklRlpSg3" 
+                        title="Sorteio Mega da Virada" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        class="w-full h-full">
+                </iframe>
+            </div>
             
-            <div class="bg-[#262626] rounded-xl p-6 border border-gray-700">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/R5XIjk79jos?si=hUfw6bzpklRlpSg3" 
-                            title="Sorteio Mega da Virada" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                    </iframe>
+            <!-- Informações abaixo do vídeo -->
+            <div class="video-info bg-[#171717] bg-opacity-90 backdrop-blur-sm p-6 md:p-8 border-t border-gray-700">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+                    <div class="flex flex-col items-center md:items-start">
+                        <i class="fas fa-calendar-alt text-[#d4af37] text-2xl mb-2"></i>
+                        <h3 class="font-bold text-white mb-1">Data do Sorteio</h3>
+                        <p class="text-gray-300">31 de Dezembro de 2025</p>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start">
+                        <i class="fas fa-clock text-[#10b981] text-2xl mb-2"></i>
+                        <h3 class="font-bold text-white mb-1">Horário</h3>
+                        <p class="text-gray-300">20:00 Horas (Brasília)</p>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start">
+                        <i class="fas fa-trophy text-[#dc2626] text-2xl mb-2"></i>
+                        <h3 class="font-bold text-white mb-1">Prêmio Estimado</h3>
+                        <p class="text-[#d4af37] font-bold">R$ 300.000.000,00</p>
+                    </div>
                 </div>
-                <p class="text-center mt-4 text-gray-300 text-sm md:text-base">
-                    <span class="font-bold">Assista ao sorteio oficial da Mega da Virada 2025.</span><br class="hidden md:block">
-                    Acompanhe o resultado em tempo real e veja se o nosso grupo leva o grande prêmio!
-                </p>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-gray-300 text-sm md:text-base">
+                        <span class="font-bold text-white">Assista ao sorteio oficial da Mega da Virada 2025.</span><br class="hidden md:block">
+                        Acompanhe o resultado em tempo real e veja se o nosso grupo leva o grande prêmio!
+                    </p>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Nova Seção: Pagamento -->
     <section id="pagamento" class="py-16 px-4 bg-[#171717]">
