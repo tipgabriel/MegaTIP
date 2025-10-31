@@ -1,11 +1,14 @@
-// Função para copiar chave PIX - CORRIGIDA mantendo a chave completa
-function copiarPix() {
-    // Manter a chave PIX completa com parâmetros pré-preenchidos
-    const pixKey = "00020126870014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654046.005802BR5924Gabriel da Paz Silva San6009Sao Paulo610901227-20062240520daqr12907710421070486304A68C";
+// Função para copiar chave PIX - CORRIGIDA
+function copiarPix(event) {
+    // Prevenir comportamento padrão se houver evento
+    if (event) event.preventDefault();
+    
+    // Manter a chave PIX completa com parâmetros pré-preenchidos (EXATA DO ARQUIVO ORIGINAL)
+    const pixKey = "00020126580014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654056.005802BR5924Gabriel da Paz Silva San6009Sao Paulo61080540900062250515MegaTIP2025122152040000530398654046.005802BR5913Gabriel Silva6009Sao Paulo62070503***6304E2CD";
     
     navigator.clipboard.writeText(pixKey).then(() => {
         // Feedback visual melhorado
-        const btn = event.target.closest('.copy-btn');
+        const btn = document.querySelector('#pix-code-container .copy-btn');
         const originalText = btn.innerHTML;
         const originalBackground = btn.style.background;
         
@@ -14,7 +17,7 @@ function copiarPix() {
         btn.style.transform = 'scale(1.05)';
         
         // Também dar feedback no próprio campo do PIX
-        const pixCodeElement = document.querySelector('.pix-code');
+        const pixCodeElement = document.getElementById('pix-code-container');
         pixCodeElement.style.border = '2px solid #10b981';
         pixCodeElement.style.background = '#1a472a';
         
@@ -62,7 +65,7 @@ function copiarPix() {
         console.error('Erro ao copiar: ', err);
         
         // Feedback de erro
-        const btn = event.target.closest('.copy-btn');
+        const btn = document.querySelector('#pix-code-container .copy-btn');
         const originalText = btn.innerHTML;
         
         btn.innerHTML = '<i class="fas fa-times mr-1"></i>Erro!';
@@ -76,11 +79,13 @@ function copiarPix() {
 }
 
 // Função para copiar chave PIX da seção de contato
-function copiarPixContato() {
-    const pixKey = "00020126870014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654046.005802BR5924Gabriel da Paz Silva San6009Sao Paulo610901227-20062240520daqr12907710421070486304A68C";
+function copiarPixContato(event) {
+    if (event) event.preventDefault();
+    
+    const pixKey = "00020126580014br.gov.bcb.pix01365ba9125c-f301-48ef-9f7f-d4508777bd830225MegaTIP - Mega da Virada 52040000530398654056.005802BR5924Gabriel da Paz Silva San6009Sao Paulo61080540900062250515MegaTIP2025122152040000530398654046.005802BR5913Gabriel Silva6009Sao Paulo62070503***6304E2CD";
     
     navigator.clipboard.writeText(pixKey).then(() => {
-        const btn = event.target.closest('.copy-btn');
+        const btn = document.querySelector('#pix-code-contato .copy-btn');
         const originalText = btn.innerHTML;
         const originalBackground = btn.style.background;
         
@@ -89,7 +94,7 @@ function copiarPixContato() {
         btn.style.transform = 'scale(1.05)';
         
         // Feedback visual no container
-        const pixContainer = event.target.closest('.pix-code');
+        const pixContainer = document.getElementById('pix-code-contato');
         pixContainer.style.border = '2px solid #10b981';
         pixContainer.style.background = '#1a472a';
         
@@ -132,7 +137,7 @@ function copiarPixContato() {
         
     }).catch(err => {
         console.error('Erro ao copiar: ', err);
-        const btn = event.target.closest('.copy-btn');
+        const btn = document.querySelector('#pix-code-contato .copy-btn');
         const originalText = btn.innerHTML;
         
         btn.innerHTML = '<i class="fas fa-times mr-1"></i>Erro!';
@@ -145,7 +150,22 @@ function copiarPixContato() {
     });
 }
 
+// Adicionar event listeners para os botões de cópia quando o DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
+    // Adicionar event listeners para os botões de cópia
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    copyBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Identificar qual botão foi clicado
+            const container = this.closest('.pix-code');
+            if (container.id === 'pix-code-contato') {
+                copiarPixContato(e);
+            } else {
+                copiarPix(e);
+            }
+        });
+    });
+
     // ========== VARIÁVEIS GLOBAIS ==========
     // Números oficiais da Mega da Virada - serão atualizados após o sorteio
     let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
