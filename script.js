@@ -130,54 +130,75 @@ function copiarPixContato(event) {
     });
 }
 
-// ========== CORREÇÃO VÍDEO MOBILE ==========
+// ========== CONFIGURAÇÃO SIMPLES DO VÍDEO MOBILE ==========
 function initMobileVideo() {
-    const videoOverlay = document.getElementById('video-overlay');
+    const videoContainer = document.querySelector('.video-container');
     const youtubeIframe = document.getElementById('youtube-video');
     
-    if (!videoOverlay || !youtubeIframe) return;
+    if (!videoContainer || !youtubeIframe) return;
     
-    // Só aplicar correção para mobile
-    if (window.innerWidth < 768) {
-        let videoStarted = false;
-        
-        videoOverlay.addEventListener('click', function() {
-            if (!videoStarted) {
-                // Mostrar mensagem de carregamento
-                videoOverlay.classList.add('active');
-                
-                // Forçar reprodução do vídeo
-                const videoUrl = youtubeIframe.src;
-                
-                // Adicionar autoplay à URL
-                if (videoUrl.indexOf('autoplay=1') === -1) {
-                    const separator = videoUrl.indexOf('?') === -1 ? '?' : '&';
-                    youtubeIframe.src = videoUrl + separator + 'autoplay=1';
-                }
-                
-                // Focar no iframe para habilitar controles
-                youtubeIframe.focus();
-                
-                // Esconder overlay após um tempo
-                setTimeout(() => {
-                    videoOverlay.style.display = 'none';
-                    videoStarted = true;
-                }, 2000);
-            }
-        });
-        
-        // Também permitir clique direto no iframe
-        youtubeIframe.addEventListener('click', function() {
-            videoOverlay.style.display = 'none';
-            videoStarted = true;
-        });
-    } else {
-        // No desktop, esconder o overlay
+    // Remover completamente qualquer overlay
+    const videoOverlay = document.getElementById('video-overlay');
+    if (videoOverlay) {
         videoOverlay.style.display = 'none';
+    }
+    
+    // Aplicar estilos responsivos
+    if (window.innerWidth < 768) {
+        // Configurar container do vídeo para mobile
+        videoContainer.style.cssText = `
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 12px;
+            box-sizing: border-box;
+        `;
+        
+        // Configurar iframe para mobile - perfeito para a tela
+        youtubeIframe.style.cssText = `
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            display: block;
+        `;
+        
+        // Ajustar altura em diferentes orientações
+        function adjustVideoHeight() {
+            const isLandscape = window.innerWidth > window.innerHeight;
+            youtubeIframe.style.height = isLandscape ? '200px' : '220px';
+        }
+        
+        window.addEventListener('resize', adjustVideoHeight);
+        adjustVideoHeight();
+        
+    } else {
+        // Estilos para desktop
+        videoContainer.style.cssText = `
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        `;
+        
+        youtubeIframe.style.cssText = `
+            width: 100%;
+            height: 360px;
+            border: none;
+            border-radius: 16px;
+            display: block;
+        `;
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // ========== INICIALIZAR VÍDEO ==========
+    initMobileVideo();
+
     // ========== VARIÁVEIS GLOBAIS ==========
     let numerosSorteados = [0, 0, 0, 0, 0, 0];
     let bilheteVencedor = null;
@@ -250,6 +271,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth >= 768 && isMenuOpen) {
             closeMobileMenu();
         }
+        
+        // Re-aplicar estilos do vídeo ao redimensionar
+        initMobileVideo();
     });
 
     // ========== COPYRIGHT ==========
@@ -607,3 +631,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
