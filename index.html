@@ -178,7 +178,7 @@
         </div>
     </section>
 
-<!-- Seção: Vídeo do Sorteio - CORRIGIDO PARA MOBILE -->
+<!-- Seção: Vídeo do Sorteio - PLAYER NORMAL -->
 <section id="video" class="py-8 md:py-12 px-4 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] relative overflow-hidden">
     <!-- Elementos decorativos de fundo -->
     <div class="absolute inset-0 opacity-10">
@@ -196,26 +196,21 @@
             </p>
         </div>
         
-        <!-- Container do Vídeo Corrigido para Mobile -->
-        <div class="video-mobile-fixed bg-[#171717] rounded-xl overflow-hidden shadow-2xl">
-            <div class="video-container-mobile relative">
-                <!-- Overlay clickável para mobile -->
-                <div class="video-overlay-mobile absolute inset-0 z-10 md:hidden" id="video-overlay"></div>
-                
+        <!-- Container do Vídeo Normal -->
+        <div class="bg-[#171717] rounded-xl overflow-hidden shadow-2xl mx-auto max-w-3xl">
+            <div class="video-container-normal">
                 <iframe 
-                    src="https://www.youtube.com/embed/R5XIjk79jos?si=hUfw6bzpklRlpSg3&enablejsapi=1" 
+                    src="https://www.youtube.com/embed/R5XIjk79jos?si=hUfw6bzpklRlpSg3" 
                     title="Sorteio Mega da Virada" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen
-                    class="w-full h-full"
-                    id="youtube-video"
-                    allow="autoplay">
+                    class="w-full h-full">
                 </iframe>
             </div>
             
             <!-- Informações abaixo do vídeo -->
-            <div class="video-info-mobile bg-[#171717] bg-opacity-90 backdrop-blur-sm p-4 md:p-6 border-t border-gray-700">
+            <div class="video-info-normal bg-[#171717] bg-opacity-90 backdrop-blur-sm p-4 md:p-6 border-t border-gray-700">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-center md:text-left">
                     <div class="flex flex-col items-center md:items-start">
                         <i class="fas fa-calendar-alt text-[#d4af37] text-xl md:text-2xl mb-2"></i>
